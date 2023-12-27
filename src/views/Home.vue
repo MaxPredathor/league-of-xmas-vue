@@ -16,9 +16,4 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
-
-header {
-  background-color: $color-prussian-blue;
-  color: $color-sky-blue;
-}
 </style>
