@@ -1,9 +1,17 @@
 <template>
-  <div>Ciao</div>
+  <HomeRoute />
 </template>
 
 <script>
-export default {};
+import HomeRoute from "./view/HomeRoute.vue";
+export default {
+  name: "App",
+  components: {
+    HomeRoute,
+  },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "./assets/style/partials/variables" as *;
+</style>
