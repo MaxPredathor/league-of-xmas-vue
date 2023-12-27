@@ -1,23 +1,17 @@
 <template>
-  <header>
-    <HeaderComponent />
-  </header>
+  <HomeRoute />
 </template>
 
 <script>
-import HeaderComponent from "./partials/HeaderComponent.vue";
+import HomeRoute from "./view/HomeRoute.vue";
 export default {
   name: "App",
   components: {
-    HeaderComponent,
+    HomeRoute,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @use "./assets/style/partials/variables" as *;
-header {
-  background-color: $color-prussian-blue;
-  color: $color-sky-blue;
-}
 </style>

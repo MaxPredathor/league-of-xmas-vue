@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HeaderComponent from "../../partials/HeaderComponent.vue";
+import HeaderComponent from "../partials/HeaderComponent.vue";
 export default {
   name: "HomeRoute",
   components: {
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "./assets/style/partials/variables" as *;
+@use "../assets/style/partials/variables" as *;
 header {
   background-color: $color-prussian-blue;
   color: $color-sky-blue;
