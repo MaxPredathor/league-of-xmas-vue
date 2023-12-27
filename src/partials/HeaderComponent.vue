@@ -11,8 +11,8 @@
       <!-- Start Navbar routes -->
       <div class="col-4 text-center">
         <ul class="d-flex align-items-center m-0">
-          <li v-for="(el, id) in navItems" :key="id" class="mx-2 px-1">
-            <a href="#">{{ el.name }}</a>
+          <li v-for="(el, id) in  navItems " :key="id" class="mx-2 px-1">
+            <router-link :to="el.route">{{ el.name }}</router-link>
           </li>
         </ul>
       </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { RouterLink } from "vue-router";
 export default {
   name: "HeaderComponent",
   data() {
@@ -37,14 +38,17 @@ export default {
         {
           navId: 1,
           name: "Home",
+          route: "/",
         },
         {
           navId: 2,
           name: "Champions",
+          route: "/champions",
         },
         {
           navId: 3,
           name: "Items",
+          route: "/items",
         },
       ],
     };
@@ -54,6 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/_variables.scss" as *;
+
 div {
   nav {
     ul {
