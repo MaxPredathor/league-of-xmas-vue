@@ -1,13 +1,13 @@
 <template>
-  <HomeRoute />
+  <Home />
 </template>
 
 <script>
-import HomeRoute from "./view/HomeRoute.vue";
+import Home from "./view/Home.vue";
 export default {
   name: "App",
   components: {
-    HomeRoute,
+    Home,
   },
 };
 </script>
