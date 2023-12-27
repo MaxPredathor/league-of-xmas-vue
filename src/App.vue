@@ -1,9 +1,23 @@
 <template>
-  <div>Ciao</div>
+  <header>
+    <HeaderComponent />
+  </header>
 </template>
 
 <script>
-export default {};
+import HeaderComponent from "./partials/HeaderComponent.vue";
+export default {
+  name: "App",
+  components: {
+    HeaderComponent,
+  },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "./assets/style/partials/variables" as *;
+header {
+  background-color: $color-prussian-blue;
+  color: $color-sky-blue;
+}
+</style>
