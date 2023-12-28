@@ -69,17 +69,20 @@
                 </div>
             </div>
         </nav>
-        <div class="row" :class="{ 'opacited': loading }">
+        <div v-if="noData" class="row" :class="{ 'opacited': loading }">
             <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag" :champId="champsId"
                 :filteredChamp="diff" />
+        </div>
+        <div v-else class="col-12">
+            <h6 class="text-center">No match found for your parameters.</h6>
         </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import { store } from "../assets/data/store.js";
-import ChampionsCard from "../partials/ChampionCard.vue";
+import { store } from "../data/store";
+import ChampionsCard from "../components/partials/ChampionCard.vue";
 export default {
     name: "Champions",
     components: {
@@ -96,6 +99,7 @@ export default {
             search: false,
             searchValue: "",
             champsId: "",
+            noData: false,
         };
     },
     methods: {

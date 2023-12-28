@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { store } from "../assets/data/store.js";
+import { store } from "../../data/store";
 export default {
     name: "ChampionCard",
     props: {
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../assets/style/partials/variables' as *;
+@use '../../assets/style/partials/variables' as *;
 
 .card-div {
     position: relative;

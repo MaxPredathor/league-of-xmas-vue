@@ -10,7 +10,7 @@
 <script>
 import Home from "./views/Home.vue";
 import Champion from "./views/Champions.vue";
-import HeaderComponent from "./partials/HeaderComponent.vue";
+import HeaderComponent from "./components/HeaderComponent.vue";
 export default {
   name: "App",
   components: {
