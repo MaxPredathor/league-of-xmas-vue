@@ -73,8 +73,6 @@ export default {
           class: "facebook",
         },
       ],
-      copyright:
-        "™ &amp; © 2023 Riot Games, Inc.  League of Legends and all related logos, characters, names and distinctive likenesses thereof are exclusive property of Riot Games, Inc.  All Rights Reserved.",
       pegi: [
         {
           pegiId: 1,
@@ -89,6 +87,8 @@ export default {
           link: "https://usk.de/en/",
         },
       ],
+      copyright:
+        "™ &amp; © 2023 Riot Games, Inc.  League of Legends and all related logos, characters, names and distinctive likenesses thereof are exclusive property of Riot Games, Inc.  All Rights Reserved.",
     };
   },
 };
