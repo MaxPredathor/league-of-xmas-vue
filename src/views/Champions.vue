@@ -17,8 +17,7 @@
                     </div>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <button class="nav-link" :class="{ active: tag === '' }" aria-current="page"
-                                @click="filterChamps('', null, null)">
+                            <button class="nav-link" :class="{ active: tag === ' ' }" @click="filterChamps('', null, null)">
                                 All
                             </button>
                         </li>
@@ -89,7 +88,7 @@ export default {
     data() {
         return {
             champions: [],
-            tag: "",
+            tag: ' ',
             store,
             bgImg: "",
             loading: false,
@@ -121,8 +120,10 @@ export default {
         filterChamps(tag, select, id) {
             this.loading = true;
             setTimeout(() => {
-                if (tag) {
+                if (tag !== null && tag !== '') {
                     this.tag = tag
+                } else if (tag === '') {
+                    this.tag = ' '
                 }
                 if (select) {
                     this.diff = select
