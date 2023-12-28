@@ -90,9 +90,9 @@ export default {
                 });
         },
         coolTrans() {
-            loading = true;
+            this.loading = true;
             setTimeout(() => {
-                loading = false;
+                this.loading = false;
             }, 3000);
         },
     },
