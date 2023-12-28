@@ -1,56 +1,66 @@
-<template>
-    <div>
+<template >
+    <div @click="search = false">
         <h1>This is the Champions page</h1>
         <nav class="navbar navbar-expand-lg py-3">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                    <div class="search">Search</div>
+                    <div class="search" @click.stop="search = true">
+                        <h4 v-if="!search">Search</h4>
+                        <input v-else type="text" v-model="searchValue">
+                        <div class="search-dropdown" :class="{ 'd-block': search }">
+                            <div class="search-option" v-for="champs in champions"
+                                @click="filterChamps(null, null, champs.id)"
+                                v-show="champs.id.toLowerCase().includes(searchValue.toLowerCase()) || searchValue === ''">
+                                {{ champs.name }}
+                            </div>
+                        </div>
+                    </div>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <button class="nav-link" :class="{ active: tag === '' }" aria-current="page"
-                                @click="filterChamps('', null)">
+                                @click="filterChamps('', null, null)">
                                 All
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Assassin', null)"
+                            <button class="nav-link" @click="filterChamps('Assassin', null, null)"
                                 :class="{ active: tag === 'Assassin' }">
                                 Assassins
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Fighter', null)"
+                            <button class="nav-link" @click="filterChamps('Fighter', null, null)"
                                 :class="{ active: tag === 'Fighter' }">
                                 Fighters
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Mage', null)"
+                            <button class="nav-link" @click="filterChamps('Mage', null, null)"
                                 :class="{ active: tag === 'Mage' }">
                                 Mages
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Marksman', null)"
+                            <button class="nav-link" @click="filterChamps('Marksman', null, null)"
                                 :class="{ active: tag === 'Marksman' }">
                                 Marksmen
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Support', null)"
+                            <button class="nav-link" @click="filterChamps('Support', null, null)"
                                 :class="{ active: tag === 'Support' }">
                                 Supports
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Tank', null)"
+                            <button class="nav-link" @click="filterChamps('Tank', null, null)"
                                 :class="{ active: tag === 'Tank' }">
                                 Tanks
                             </button>
                         </li>
                     </ul>
                     <div class="difficulty">
-                        <select @change="filterChamps(null, $event.target.value)" name="difficulty" id="">
+                        <select @change="filterChamps(null, $event.target.value, null)" name="difficulty" id="">
                             <option value="/">All</option>
                             <option value="3">Easy</option>
                             <option value="7">Medium</option>
@@ -61,7 +71,7 @@
             </div>
         </nav>
         <div class="row" :class="{ 'opacited': loading }">
-            <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag"
+            <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag" :champId="champsId"
                 :filteredChamp="diff" />
         </div>
     </div>
@@ -84,6 +94,9 @@ export default {
             bgImg: "",
             loading: false,
             diff: "/",
+            search: false,
+            searchValue: "",
+            champsId: "",
         };
     },
     methods: {
@@ -105,7 +118,7 @@ export default {
                     // always executed
                 });
         },
-        filterChamps(tag, select) {
+        filterChamps(tag, select, id) {
             this.loading = true;
             setTimeout(() => {
                 if (tag) {
@@ -113,6 +126,10 @@ export default {
                 }
                 if (select) {
                     this.diff = select
+                }
+                if (id) {
+                    this.champsId = id
+                    this.search = false
                 }
             }, 400)
             setTimeout(() => {
@@ -167,6 +184,29 @@ nav {
 
     &.opacited {
         opacity: 0;
+    }
+}
+
+.search {
+    position: relative;
+
+    .search-dropdown {
+        display: none;
+        height: 200px;
+        overflow-y: scroll;
+        position: absolute;
+        z-index: 100;
+        background-color: white;
+        width: 250px;
+
+        .search-option {
+            z-index: 101;
+            width: 100%;
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
     }
 }
 </style>
