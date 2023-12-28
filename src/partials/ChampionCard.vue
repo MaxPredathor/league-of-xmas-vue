@@ -1,5 +1,6 @@
 <template>
-    <div class="col-4" v-if="champ.tags.includes(activeTag) || activeTag == ''">
+    <div class="col-4"
+        v-if="(champ.tags.includes(activeTag) || activeTag == '') && (filteredChamp === '/' || (filteredChamp <= 3 && champ.info.difficulty <= 3) || (filteredChamp <= 7 && champ.info.difficulty > 3 && champ.info.difficulty <= filteredChamp) || (filteredChamp <= 10 && champ.info.difficulty > 7 && champ.info.difficulty <= filteredChamp))">
         <div class="card-div">
             <div>
                 <img :src="store.ChampionsUrls.champImage + champ.id + '_' + skin + '.jpg'" :alt="champ.name" />
@@ -18,6 +19,7 @@ export default {
     props: {
         champ: Object,
         activeTag: String,
+        filteredChamp: String,
     },
     data() {
         return {

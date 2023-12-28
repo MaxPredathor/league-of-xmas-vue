@@ -3,54 +3,66 @@
         <h1>This is the Champions page</h1>
         <nav class="navbar navbar-expand-lg py-3">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <div class="search">Search</div>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <button class="nav-link" :class="{ active: tag === '' }" aria-current="page"
-                                @click="filterChamps('')">
+                                @click="filterChamps('', null)">
                                 All
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Assassin')"
+                            <button class="nav-link" @click="filterChamps('Assassin', null)"
                                 :class="{ active: tag === 'Assassin' }">
                                 Assassins
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Fighter')"
+                            <button class="nav-link" @click="filterChamps('Fighter', null)"
                                 :class="{ active: tag === 'Fighter' }">
                                 Fighters
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Mage')" :class="{ active: tag === 'Mage' }">
+                            <button class="nav-link" @click="filterChamps('Mage', null)"
+                                :class="{ active: tag === 'Mage' }">
                                 Mages
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Marksman')"
+                            <button class="nav-link" @click="filterChamps('Marksman', null)"
                                 :class="{ active: tag === 'Marksman' }">
                                 Marksmen
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Support')"
+                            <button class="nav-link" @click="filterChamps('Support', null)"
                                 :class="{ active: tag === 'Support' }">
                                 Supports
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="filterChamps('Tank')" :class="{ active: tag === 'Tank' }">
+                            <button class="nav-link" @click="filterChamps('Tank', null)"
+                                :class="{ active: tag === 'Tank' }">
                                 Tanks
                             </button>
                         </li>
                     </ul>
+                    <div class="difficulty">
+                        <select @change="filterChamps(null, $event.target.value)" name="difficulty" id="">
+                            <option value="/">All</option>
+                            <option value="3">Easy</option>
+                            <option value="7">Medium</option>
+                            <option value="10">Hard</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </nav>
         <div class="row" :class="{ 'opacited': loading }">
-            <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag" />
+            <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag"
+                :filteredChamp="diff" />
         </div>
     </div>
 </template>
@@ -71,6 +83,7 @@ export default {
             store,
             bgImg: "",
             loading: false,
+            diff: "/",
         };
     },
     methods: {
@@ -92,10 +105,15 @@ export default {
                     // always executed
                 });
         },
-        filterChamps(tag) {
+        filterChamps(tag, select) {
             this.loading = true;
             setTimeout(() => {
-                this.tag = tag
+                if (tag) {
+                    this.tag = tag
+                }
+                if (select) {
+                    this.diff = select
+                }
             }, 400)
             setTimeout(() => {
                 this.loading = false;
