@@ -29,9 +29,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '../assets/style/partials/variables' as *;
+
 .card-div {
     position: relative;
     margin-bottom: 20px;
+    cursor: pointer;
 
     div {
         overflow: hidden;
@@ -56,6 +59,13 @@ export default {
     }
 
     span {
+        transition: all 0.1s linear;
+    }
+
+    &:hover {
+        -webkit-box-shadow: 1px 3.5px 9px 2px $color-sky-blue;
+        -moz-box-shadow: 1px 3.5px 9px 2px $color-sky-blue;
+        box-shadow: 1px 3.5px 9px 2px $color-sky-blue;
         transition: all 0.1s linear;
     }
 
