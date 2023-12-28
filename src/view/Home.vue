@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import HeaderComponent from "../partials/HeaderComponent.vue";
-import FooterComponent from "../partials/FooterComponent.vue";
+import HeaderComponent from "../components/HeaderComponent.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 export default {
   name: "HomeRoute",
   components: {
@@ -21,10 +21,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
+
 header {
   background-color: $color-prussian-blue;
   color: $color-sky-blue;
 }
+
 footer {
   background-color: $color-prussian-blue;
   color: $color-sky-blue;
