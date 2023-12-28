@@ -69,12 +69,9 @@
                 </div>
             </div>
         </nav>
-        <div v-if="noData" class="row" :class="{ 'opacited': loading }">
+        <div class="row" :class="{ 'opacited': loading }">
             <ChampionsCard v-for="champ in champions" :key="champ.key" :champ="champ" :activeTag="tag" :champId="champsId"
                 :filteredChamp="diff" />
-        </div>
-        <div v-else class="col-12">
-            <h6 class="text-center">No match found for your parameters.</h6>
         </div>
     </div>
 </template>
@@ -99,7 +96,6 @@ export default {
             search: false,
             searchValue: "",
             champsId: "",
-            noData: false,
         };
     },
     methods: {

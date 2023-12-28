@@ -1,12 +1,18 @@
 <template>
-    <div class="col-4"
-        v-if="(champ.tags.includes(activeTag) || activeTag === ' ') && (filteredChamp === '/' || (filteredChamp <= 3 && champ.info.difficulty <= 3) || (filteredChamp <= 7 && champ.info.difficulty > 3 && champ.info.difficulty <= filteredChamp) || (filteredChamp <= 10 && champ.info.difficulty > 7 && champ.info.difficulty <= filteredChamp)) && (champ.id === champId || champId == '')">
+    <div class="col-4" v-show="(champ.tags.includes(activeTag) || activeTag === ' ') &&
+        (filteredChamp === '/' ||
+            (filteredChamp <= 3 && champ.info.difficulty <= 3) ||
+            (filteredChamp <= 7 && champ.info.difficulty > 3 && champ.info.difficulty <= filteredChamp) ||
+            (filteredChamp <= 10 && champ.info.difficulty > 7 && champ.info.difficulty <= filteredChamp)) &&
+        (champ.id === champId || champId == '')
+        ">
         <div class="card-div">
             <div>
                 <img :src="store.ChampionsUrls.champImage + champ.id + '_' + skin + '.jpg'" :alt="champ.name" />
             </div>
             <h3>
-                <span>{{ champ.name }} - <em class="fw-regular">{{ champ.title }}</em></span>
+                <span>{{ champ.name }} -
+                    <em class="fw-regular">{{ champ.title }}</em></span>
             </h3>
         </div>
     </div>
@@ -32,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '../../assets/style/partials/variables' as *;
+@use "../../assets/style/partials/variables" as *;
 
 .card-div {
     position: relative;
