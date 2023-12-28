@@ -7,38 +7,41 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <button class="nav-link" :class="{ active: tag === '' }" aria-current="page"
-                                @click="(tag = ''), coolTrans()">
+                                @click="filterChamps('')">
                                 All
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="(tag = 'Assassin'), coolTrans()"
+                            <button class="nav-link" @click="filterChamps('Assassin')"
                                 :class="{ active: tag === 'Assassin' }">
                                 Assassins
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="tag = 'Fighter'" :class="{ active: tag === 'Fighter' }">
+                            <button class="nav-link" @click="filterChamps('Fighter')"
+                                :class="{ active: tag === 'Fighter' }">
                                 Fighters
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="tag = 'Mage'" :class="{ active: tag === 'Mage' }">
+                            <button class="nav-link" @click="filterChamps('Mage')" :class="{ active: tag === 'Mage' }">
                                 Mages
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="tag = 'Marksman'" :class="{ active: tag === 'Marksman' }">
+                            <button class="nav-link" @click="filterChamps('Marksman')"
+                                :class="{ active: tag === 'Marksman' }">
                                 Marksmen
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="tag = 'Support'" :class="{ active: tag === 'Support' }">
+                            <button class="nav-link" @click="filterChamps('Support')"
+                                :class="{ active: tag === 'Support' }">
                                 Supports
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link" @click="tag = 'Tank'" :class="{ active: tag === 'Tank' }">
+                            <button class="nav-link" @click="filterChamps('Tank')" :class="{ active: tag === 'Tank' }">
                                 Tanks
                             </button>
                         </li>
@@ -89,11 +92,14 @@ export default {
                     // always executed
                 });
         },
-        coolTrans() {
+        filterChamps(tag) {
             this.loading = true;
             setTimeout(() => {
+                this.tag = tag
+            }, 400)
+            setTimeout(() => {
                 this.loading = false;
-            }, 3000);
+            }, 700);
         },
     },
     mounted() {
