@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav justify-content-center">
             <li class="nav-item">
               <button
                 class="nav-link active"
@@ -68,6 +68,8 @@ export default {
     return {
       champions: [],
       tag: "",
+      store,
+      bgImg: "",
     };
   },
   methods: {
