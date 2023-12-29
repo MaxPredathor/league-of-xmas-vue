@@ -4,18 +4,18 @@
       <div class="row">
         <div class="col-4">
           <ul class="m-0 p-0">
-            <li class="my-icon-cont">
-              <a href=""
-                ><img
-                  :src="store.ChampionsUrls.champIcon + 'Aatrox.png'"
-                  :key="id"
+            <li v-for="(el, key) in champs" :key="key" class="my-icon-cont">
+              <a href="">
+                {{ key }}
+                <img
+                  :src="store.ChampionsUrls.champIcon + el.id + '.png'"
                   alt=""
               /></a>
             </li>
           </ul>
         </div>
         <div class="col-4">
-          <p @click="getRandomChamps()">Ciao</p>
+          <p>Ciao</p>
         </div>
         <div class="col-4">
           <img :src="store.ChampionsUrls.champIcon + 'Hwei.png'" alt="" />
@@ -36,27 +36,28 @@ export default {
     return {
       store,
       champs: [],
+      champsName: [],
       champRand: "",
       randNumb: [],
     };
   },
   methods: {
-    // getImg() {
-    //   axios.get(store.ChampionsUrls.champIcon + "Hwei.png").then((res) => {
-    //     console.log(res.data);
-    //     this.void = res.data;
-    //   });
-    // },
     getChamps() {
       axios.get(store.ChampionsUrls.allChamps).then((res) => {
         console.log(res.data.data);
         this.champs = res.data.data;
       });
     },
-    getRandomChamps() {
+    getNames() {
+      // this.champs.foreach((el) => {
+      //   console.log(el);
+      // });
+      console.log(this.champs);
+    },
+    getRandomNumbs() {
       for (let i = 0; i < 10; i++) {
-        const rand = Math.random() * 163;
-        // console.log(Math.round(rand));
+        const rand = Math.floor(Math.random() * this.champs.lenght - 1);
+        console.log(rand);
         if (!this.randNumb.includes(Math.round(rand))) {
           this.randNumb.push(Math.round(rand));
         }
@@ -66,6 +67,8 @@ export default {
   },
   mounted() {
     this.getChamps();
+    this.getRandomNumbs();
+    this.getNames();
   },
 };
 </script>
