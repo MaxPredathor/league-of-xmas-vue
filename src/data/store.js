@@ -72,4 +72,6 @@ export const store = reactive({
     "https://cdn.lolrift.com/images/rrunes/splash/icon-" /*+ iniziale in minuscolo + -36x36.png*/,
   runeImages:
     "https://cdn.lolrift.com/images/rrunes/runes/domination/Predator_rune.png" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
+
+  activeChamp: "",
 });
