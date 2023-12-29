@@ -39,4 +39,3 @@ footer {
   color: $color-sky-blue;
 }
 </style>
-
