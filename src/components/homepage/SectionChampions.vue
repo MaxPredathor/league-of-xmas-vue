@@ -3,20 +3,22 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-4">
-          <ul class="m-0">
-            <li>
-              <a href="">1 element list</a>
-            </li>
-            <li>
-              <a href="">2 element list</a>
+          <ul class="m-0 p-0">
+            <li class="my-icon-cont">
+              <a href=""
+                ><img
+                  :src="store.ChampionsUrls.champIcon + 'Aatrox.png'"
+                  :key="id"
+                  alt=""
+              /></a>
             </li>
           </ul>
         </div>
         <div class="col-4">
-          <p>Ciao</p>
+          <p @click="getRandomChamps()">Ciao</p>
         </div>
         <div class="col-4">
-          <img src="/images/ranked-emblem/tier/bronze-plate.png" alt="" />
+          <img :src="store.ChampionsUrls.champIcon + 'Hwei.png'" alt="" />
         </div>
       </div>
     </div>
@@ -33,20 +35,50 @@ export default {
   data() {
     return {
       store,
-      champsImgs: [],
-      test: [
-        "bronze-plate.png",
-        "diamond-plate.png",
-        "gold-plate.png",
-        "iron-plate.png",
-        "platinum-plate.png",
-      ],
+      champs: [],
+      champRand: "",
+      randNumb: [],
     };
   },
   methods: {
-    getImg() {},
+    // getImg() {
+    //   axios.get(store.ChampionsUrls.champIcon + "Hwei.png").then((res) => {
+    //     console.log(res.data);
+    //     this.void = res.data;
+    //   });
+    // },
+    getChamps() {
+      axios.get(store.ChampionsUrls.allChamps).then((res) => {
+        console.log(res.data.data);
+        this.champs = res.data.data;
+      });
+    },
+    getRandomChamps() {
+      for (let i = 0; i < 10; i++) {
+        const rand = Math.random() * 163;
+        // console.log(Math.round(rand));
+        if (!this.randNumb.includes(Math.round(rand))) {
+          this.randNumb.push(Math.round(rand));
+        }
+      }
+      console.log(this.randNumb);
+    },
+  },
+  mounted() {
+    this.getChamps();
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../../assets/style/partials/variables" as *;
+
+.my-icon-cont {
+  width: 40px;
+  height: 40px;
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+</style>
