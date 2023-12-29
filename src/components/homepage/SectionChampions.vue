@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       store,
+      champsImgs: [],
       test: [
         "bronze-plate.png",
         "diamond-plate.png",
@@ -42,6 +43,9 @@ export default {
       ],
     };
     methods: {
+      getImg() {
+
+      },
     }
   },
 };
