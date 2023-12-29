@@ -39,6 +39,10 @@ export const store = reactive({
     champImage:
       "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" /*+ nomeChamp_0 + .jpg*/,
     //^^restituisce l'immagine di un champ cercato per nome^^
+    champIcon:
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/" /*+ nomeChamp + .png*/,
+    //^^restituisce l'icon di un champ cercato per nome^^
+    //es https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/Hwei.png
   },
   //nelle chiamate per i champs non serve la api key
 
