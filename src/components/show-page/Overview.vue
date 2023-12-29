@@ -50,13 +50,21 @@ export default {
                 });
         }
     },
-    created() {
-        console.log(this.item)
-    },
     mounted() {
         this.getSpecificChamp();
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        width: 60%;
+    }
+}
+</style>
