@@ -37,7 +37,7 @@ export default {
             imgUrl: '/images/JumboImages/',
             imgs: [
                 {
-                    title: 'Choose you Champion',
+                    title: 'Choose your Champion',
                     img: 'hwei-lol-splash-art-4k-wallpaper-uhdpaper.com-41@1@n.jpg'
                 },
                 {
