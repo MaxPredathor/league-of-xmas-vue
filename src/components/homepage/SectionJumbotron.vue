@@ -1,5 +1,5 @@
 <template>
-    <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, }" :modules="modules" class="mySwiper">
+    <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true  }" :modules="modules" class="mySwiper">
         <swiper-slide v-for="item in imgs">
             <div>
                 <img :src="imgUrl + item">
@@ -25,7 +25,7 @@ export default {
     },
     setup() {
         return {
-            modules: [Autoplay, Pagination, Navigation],
+            modules: [Autoplay, Pagination],
         };
     },
     data() {
