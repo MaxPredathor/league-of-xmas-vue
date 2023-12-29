@@ -2,7 +2,7 @@
   <header>
     <HeaderComponent />
   </header>
-  <div class="container">
+  <div>
     <router-view></router-view>
   </div>
   <footer>
