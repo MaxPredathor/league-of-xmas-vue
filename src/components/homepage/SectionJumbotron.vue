@@ -1,8 +1,12 @@
 <template>
-    <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true  }" :modules="modules" class="mySwiper">
+    <swiper :autoplay="{ delay: 2500, disableOnInteraction: false, pauseOnMouseEnter: true }" :modules="modules"
+        class="mySwiper">
         <swiper-slide v-for="item in imgs">
-            <div>
-                <img :src="imgUrl + item">
+            <div class="position-relative">
+                <img :src="imgUrl + item.img">
+                <div class="position-absolute title-p display-1 h1">
+                    {{ item.title }}
+                </div>
             </div>
         </swiper-slide>
     </swiper>
@@ -32,14 +36,25 @@ export default {
         return {
             imgUrl: '/images/JumboImages/',
             imgs: [
-                'hwei-lol-splash-art-4k-wallpaper-uhdpaper.com-41@1@n.jpg',
-                'lol-heartsteel-ksante-ezreal-yone-aphelios-sett-kayn-4k-wallpaper-uhdpaper.com-42@1@n.jpg',
+                {
+                    title: 'Choose you Champion',
+                    img: 'hwei-lol-splash-art-4k-wallpaper-uhdpaper.com-41@1@n.jpg'
+                },
+                {
+                    title: 'Play with your friends',
+                    img: 'lol-heartsteel-ksante-ezreal-yone-aphelios-sett-kayn-4k-wallpaper-uhdpaper.com-42@1@n.jpg'
+                },
+                {
+                    title: 'Supercalifragilistichespiralitoso',
+                    img: 'heartsteel-yone-prestige-edition-skin-lol-splash-art-2k-wallpaper-uhdpaper.com-664@1@m.jpg'
+                }
             ]
         };
     }
 };
 </script>
 <style lang="scss" scoped>
+@use '../../assets/style/partials/variables' as *;
 .swiper {
     width: 100%;
     height: 70vh;
@@ -56,5 +71,15 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.title-p {
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    color: rgb(94, 106, 117);
+    font-family: $font-LOL;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
 }
 </style>
