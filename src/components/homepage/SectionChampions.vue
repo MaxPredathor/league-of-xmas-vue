@@ -13,8 +13,8 @@
           </ul>
         </div>
         <div class="col-4">
-          <!-- <p class="m-0">Here will be wrote something</p>
-        </div> -->
+          <p>Ciao</p>
+        </div>
         <div class="col-4">
           <img src="/images/ranked-emblem/tier/bronze-plate.png" alt="" />
         </div>
@@ -42,11 +42,9 @@ export default {
         "platinum-plate.png",
       ],
     };
-    methods: {
-      getImg() {
-
-      },
-    }
+  },
+  methods: {
+    getImg() {},
   },
 };
 </script>
