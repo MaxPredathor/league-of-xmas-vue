@@ -1,14 +1,13 @@
 <template>
-    <div v-if="loaded">
-        <div class="container" v-for="item in champion">
-            <h1>{{ item.name }}</h1>
-            <img :src="store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg'" :alt="item.name" />
-            <h3>
-                <span>{{ item.name }} -
-                    <em class="fw-regular">{{ item.title }}</em>
-                </span>
-            </h3>
-            <p>{{ item.lore }}</p>
+    <div id="background"
+        :style="{ 'background-image': 'url(' + store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg' + ')' }"
+        v-if="loaded">
+        <div class="blur">
+            <div class="container" v-for="item in champion">
+                <h1>{{ item.name }}</h1>
+                <h4>{{ item.title }}</h4>
+                <img :src="store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg'" :alt="item.name" />
+            </div>
         </div>
     </div>
     <div v-else>
@@ -57,14 +56,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+@use "../../assets/style/partials/variables" as *;
 
-    img {
-        width: 60%;
+#background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 0;
+    color: white;
+
+    .blur {
+        backdrop-filter: blur(6px);
+        backdrop-filter: greyscale(70%);
+        background-color: $color-showpage-opacity;
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1;
+            position: relative;
+
+            h1 {
+                font-size: 120px;
+                position: absolute;
+                top: 600px;
+                font-family: $font-LOL;
+                // margin: 20px 0;
+                text-align: center;
+            }
+
+            h4 {
+                font-family: $font-LOL;
+                font-size: 24px;
+                position: absolute;
+                top: 600px;
+                text-align: center;
+            }
+
+            img {
+                width: 100%;
+            }
+        }
     }
 }
 </style>
