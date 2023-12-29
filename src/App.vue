@@ -2,9 +2,9 @@
   <header>
     <HeaderComponent />
   </header>
-  <div class="container">
+  <main>
     <router-view></router-view>
-  </div>
+  </main>
   <footer>
     <FooterComponent />
   </footer>

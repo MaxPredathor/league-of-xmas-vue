@@ -1,7 +1,7 @@
 <template>
     <div v-if="loaded">
-        <div v-for="item in champion">
-            <h1>This is the Show page!</h1>
+        <div class="container" v-for="item in champion">
+            <h1>{{ item.name }}</h1>
             <img :src="store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg'" :alt="item.name" />
             <h3>
                 <span>{{ item.name }} -

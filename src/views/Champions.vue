@@ -1,5 +1,5 @@
 <template >
-    <div @click="search = false">
+    <div class="container" @click="search = false">
         <h1>This is the Champions page</h1>
         <nav class="navbar navbar-expand-lg py-3">
             <div class="container-fluid">
