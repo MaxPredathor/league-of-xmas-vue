@@ -5,10 +5,31 @@
 $fa-font-path: '../webfonts';
 
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-
 @import '@fortawesome/fontawesome-free/scss/solid.scss'; 
 @import '@fortawesome/fontawesome-free/scss/regular.scss'; 
 @import '@fortawesome/fontawesome-free/scss/brands.scss';
+
+//Beaufort for LOL Bold for titles
+@import url(https://db.onlinewebfonts.com/c/12420e8c141ca7c3dff41de2d59df13e?family=Beaufort+for+LOL+Bold);
+@font-face {
+    font-family: "Beaufort for LOL Bold";
+    src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot");
+    src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.svg#Beaufort for LOL Bold")format("svg");
+}
+
+//spiegelregular for paragraph
+@font-face {
+    font-family: 'spiegelregular';
+    src: url('/public/Fonts/spiegel_regular-webfont.woff') format('woff2'),
+         url('/public/Fonts/spiegel_regular-webfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 ul {
     list-style: none;
