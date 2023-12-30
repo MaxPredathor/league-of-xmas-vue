@@ -1,9 +1,8 @@
 <template>
     <div id="background"
-        :style="{ 'background-image': 'url(' + store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg' + ')' }"
-        v-if="loaded">
+        :style="{ 'background-image': 'url(' + store.ChampionsUrls.champImage + store.activeChamp + '_0.jpg' + ')' }">
         <div class="blur">
-            <div class="container" v-for="item in champion">
+            <div class="container" v-for="item in obj">
                 <h1>{{ item.name.toUpperCase() }}</h1>
                 <h4>{{ item.title }}</h4>
                 <div class="img-cont">
@@ -12,47 +11,27 @@
             </div>
         </div>
     </div>
-    <div v-else>
-        <h2>Loading</h2>
-    </div>
 </template>
 
 <script>
 import { store } from "../../data/store.js";
-import axios from "axios";
 export default {
     name: "Overview",
     data() {
         return {
             store,
-            champion: null,
             champ: store.activeChamp,
             loaded: false,
         }
     },
+    props: {
+        obj: Object
+    },
     methods: {
-        getSpecificChamp() {
-            const apiUrl = store.ChampionsUrls.specificChamp + store.activeChamp + '.json';
-            console.log(apiUrl);
-            axios
-                .get(apiUrl)
-                .then((response) => {
-                    console.log(response.data.data);
-                    this.champion = response.data.data;
-                    console.log(this.champion);
-                    this.loaded = true
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .finally(function () {
-                    // always executed
-                });
-        }
+
     },
     mounted() {
-        this.getSpecificChamp();
+
     }
 }
 </script>
