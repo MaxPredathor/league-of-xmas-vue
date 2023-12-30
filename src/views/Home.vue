@@ -1,9 +1,6 @@
 <template>
   <SectionJumbotron />
   <div>
-    <h1>This is the Home page!</h1>
-
-    <h2>This is the section where swiper will show champions</h2>
     <SectionChampions />
   </div>
 </template>
