@@ -2,6 +2,7 @@
     <Overview :obj="champion" @loaded="loaded = true" />
     <ChampStat />
     <Skins :obj="champion" />
+    <VideoLol />
 </template>
 
 <script>
@@ -9,6 +10,7 @@ import { store } from "../data/store";
 import Overview from "../components/show-page/Overview.vue";
 import ChampStat from "../components/show-page/ChampStat.vue";
 import Skins from "../components/show-page/Skins.vue";
+import VideoLol from "../components/show-page/VideoLol.vue";
 import axios from "axios";
 export default {
     name: "Show",
@@ -23,6 +25,7 @@ export default {
         Overview,
         ChampStat,
         Skins,
+        VideoLol,
     },
     methods: {
         getSpecificChamp() {
