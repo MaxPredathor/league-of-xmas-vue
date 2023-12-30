@@ -1,7 +1,21 @@
 <template>
-    <div>
-        <div v-for="(item,index) in randomItems">
-            <img :src="store.ItemsUrls.itemIcon + item[0] + '.png'" alt="">
+    <div class="container">
+        <div class="d-flex">
+            <div v-show="!randomItems.length<10">
+                <div>
+                    {{ randomItems[activeIndex] }}
+                </div>
+            </div>
+            <div>
+                <div v-for="(item, index) in randomItems" class="d-flex justify-content-end align-items-center my-2" @click="activeIndex=index">
+                    <div class="me-2">
+                        {{ item[1].name }}
+                    </div>
+                    <div class="rounded-circle overflow-hidden">
+                       <img :src="store.ItemsUrls.itemIcon + item[0] + '.png'" :alt="item[1].name"> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -14,7 +28,8 @@ export default {
         return {
             store,
             items: [],
-            randomItems: []
+            randomItems: [],
+            activeIndex:0
         }
     },
     methods: {
