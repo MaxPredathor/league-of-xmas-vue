@@ -2,9 +2,9 @@
   <header>
     <HeaderComponent />
   </header>
-  <div class="container">
+  <main>
     <router-view></router-view>
-  </div>
+  </main>
   <footer>
     <FooterComponent />
   </footer>
@@ -32,6 +32,8 @@ export default {
 header {
   background-color: $color-prussian-blue;
   color: $color-sky-blue;
+  border-top: 1px solid goldenrod;
+  border-bottom: 1px solid goldenrod;
 }
 
 footer {
