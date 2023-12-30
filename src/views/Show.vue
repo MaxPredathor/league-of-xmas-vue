@@ -1,17 +1,14 @@
 <template>
-    <!-- <div v-if="loaded"> -->
-    <div>
-        <Overview @loaded="loaded = true" />
-    </div>
-    <!-- </div> -->
-    <!-- <div v-else>
-        <h2>Loading</h2>
-    </div> -->
+    <Overview @loaded="loaded = true" />
+    <ChampStat />
+    <Skins />
 </template>
 
 <script>
 import { store } from "../data/store";
 import Overview from "../components/show-page/Overview.vue";
+import ChampStat from "../components/show-page/ChampStat.vue";
+import Skins from "../components/show-page/Skins.vue";
 export default {
     name: "Show",
     data() {
@@ -22,6 +19,8 @@ export default {
     },
     components: {
         Overview,
+        ChampStat,
+        Skins,
     },
     methods: {
 
