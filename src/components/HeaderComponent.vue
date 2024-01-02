@@ -2,23 +2,23 @@
   <div class="container">
     <nav class="row justify-content-between align-items-center py-5">
       <!-- Start Logo section -->
-      <div class="col-4 text-start">
+      <div class="col-3 text-start">
         <a href="#">
           <img src="" alt="logo" />
         </a>
       </div>
       <!-- End Logo section -->
       <!-- Start Navbar routes -->
-      <div class="col-4 text-center">
-        <ul class="d-flex align-items-center m-0">
-          <li v-for="(el, id) in  navItems " :key="id" class="mx-2 px-1">
+      <div class="col-6 text-center">
+        <ul class="d-flex align-items-center m-0 justify-content-center">
+          <li v-for="(el, id) in navItems" :key="id" class="mx-2 px-1">
             <router-link :to="el.route">{{ el.name }}</router-link>
           </li>
         </ul>
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-4 text-end">
+      <div class="col-3 text-end">
         <span class="mx-1">Guest/User</span>
         <span class="mx-1">Register</span>
       </div>
@@ -47,8 +47,8 @@ export default {
         },
         {
           navId: 3,
-          name: "Items",
-          route: "/items",
+          name: "Track Players",
+          route: "/players",
         },
       ],
     };

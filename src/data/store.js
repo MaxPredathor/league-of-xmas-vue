@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  apiKey: "RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa",
+  apiKey: "RGAPI-5fd11304-8cc1-492a-b860-6ec81cadee32",
 
   playersUrls: {
     GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
@@ -17,7 +17,7 @@ export const store = reactive({
     //^^dopo lo slash ci va il nome in game e restituisce id (che è l'encrypted summoner id), il PUUID, il livello e l'immagine profilo^^
     //es https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Prædathor?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     profilePicUrl:
-      "https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/" /*+ iconId + .png*/,
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/" /*+ iconId + .png*/,
 
     championMastery:
       "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/",
