@@ -7,7 +7,8 @@
                     <div class="available" ref="skins">
                         <h1> Aveilable Skins</h1>
                         <div class="skins" v-for="item in obj">
-                            <div class="skin-container" v-for="skin in item.skins" @click="scrollSkin(skin.num)">
+                            <div :class="{ 'active': skin.num === skinDisplay }" class="skin-container"
+                                v-for="skin in item.skins" @click="scrollSkin(skin.num)">
                                 <div class="skin-img">
                                     <img :src="store.ChampionsUrls.champImage + store.activeChamp + '_' + skin.num + '.jpg'"
                                         alt="">
@@ -51,12 +52,14 @@ export default {
                     left: 0,
                     behavior: "smooth"
                 });
-            } else {
+            } else if (this.lastSkin < num) {
                 mySkin.scrollBy({
                     top: 80,
                     left: 0,
                     behavior: "smooth"
                 });
+            } else {
+                return
             }
             this.lastSkin = num;
         }
@@ -114,8 +117,22 @@ export default {
                             margin: 20px 0;
                             cursor: pointer;
 
+                            &:hover .skin-img {
+                                filter: brightness(1);
+                                filter: contrast(1.5);
+
+                                img {
+                                    transform: scale(1.2);
+                                }
+                            }
+
+                            &:hover .skin {
+                                color: #13d8f6;
+                                font-size: 1em;
+                            }
+
                             .skin {
-                                width: 85%;
+                                width: 70%;
                                 font-family: $font-spiegel;
                                 font-size: 0.8em;
                                 color: white;
@@ -129,6 +146,7 @@ export default {
                             .skin-img {
                                 width: 15%;
                                 margin-left: 20px;
+                                filter: brightness(0.8);
 
                                 img {
                                     width: 50px;
@@ -138,9 +156,40 @@ export default {
                             }
                         }
 
+                        .active {
+
+                            &:hover .skin-img {
+                                filter: brightness(1);
+                                filter: contrast(1);
+
+                                img {
+                                    transform: scale(1);
+                                }
+                            }
+
+                            .skin {
+                                color: #13d8f6;
+                                font-size: 1em;
+                                padding-left: 20px;
+                                margin-top: 10px;
+                                outline: 2px solid #73828f80;
+                                outline-offset: 5px;
+                                transition: all 0.2s linear;
+                            }
+
+                            .skin-img {
+
+                                img {
+                                    width: 70px;
+                                    height: 70px;
+                                    filter: brightness(1);
+                                    filter: contrast(1.5);
+                                    transition: filter 0.2s linear;
+                                }
+                            }
+                        }
                     }
                 }
-
             }
         }
     }
