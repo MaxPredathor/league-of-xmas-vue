@@ -8,6 +8,9 @@
 import { store } from "../../data/store.js";
 export default {
     name: "ChampStat",
+    props: {
+        obj: Object
+    },
     data() {
         return {
             store,

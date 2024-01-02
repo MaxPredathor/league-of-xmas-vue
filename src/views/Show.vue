@@ -1,6 +1,6 @@
 <template>
-    <Overview :obj="champion" @loaded="loaded = true" />
-    <ChampStat />
+    <Overview :obj="champion" />
+    <ChampStat :obj="champion" />
     <Skins :obj="champion" />
     <VideoLol />
 </template>
@@ -17,7 +17,6 @@ export default {
     data() {
         return {
             store,
-            loaded: false,
             champion: [],
         }
     },

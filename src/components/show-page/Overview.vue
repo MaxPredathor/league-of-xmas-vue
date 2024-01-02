@@ -21,7 +21,6 @@ export default {
         return {
             store,
             champ: store.activeChamp,
-            loaded: false,
         }
     },
     props: {
