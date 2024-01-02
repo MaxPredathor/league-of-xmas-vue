@@ -79,3 +79,6 @@ export const store = reactive({
 
   activeChamp: "",
 });
+
+//https://static.developer.riotgames.com/docs/lol/queues.json
+//^^ QueueId^^
