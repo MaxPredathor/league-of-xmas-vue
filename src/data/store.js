@@ -9,7 +9,7 @@ export const store = reactive({
     //^^dopo lo slash ci va l'id del match e la api_key^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     matchIdByPlayerPUUID:
-      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/",
+      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
     //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     summonerData:
@@ -82,8 +82,11 @@ export const store = reactive({
   imageSpellUrl:
     "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" /*+ key + .png */,
 
+  runes:
+    "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/runesReforged.json",
+
   runeCathegoryImage:
     "https://cdn.lolrift.com/images/rrunes/splash/icon-" /*+ iniziale in minuscolo + -36x36.png*/,
   runeImages:
-    "https://cdn.lolrift.com/images/rrunes/runes/domination/Predator_rune.png" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
+    "https://cdn.lolrift.com/images/rrunes/runes/" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
 });
