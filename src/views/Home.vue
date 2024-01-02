@@ -1,13 +1,24 @@
 <template>
+  <SectionJumbotron />
   <div>
-    <h1>This is the Home page!</h1>
+    <SectionChampions />
+    <SectionItems />
   </div>
 </template>
 
 <script>
+import SectionJumbotron from "../components/homepage/SectionJumbotron.vue";
+import SectionChampions from "../components/homepage/SectionChampions.vue";
+import SectionItems from "@/components/homepage/SectionItems.vue";
 export default {
   name: "HomeRoute",
   components: {
+    SectionJumbotron,
+    SectionChampions,
+    SectionItems
+},
+  data() {
+    return {};
   },
 };
 </script>

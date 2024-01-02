@@ -46,6 +46,16 @@ export const store = reactive({
   },
   //nelle chiamate per i champs non serve la api key
 
+  ItemsUrls: {
+    allItems:
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/en_US/item.json",
+    //^^Restituisce tutti gli Items con alcune specifiche per ognuno^^
+    itemIcon:
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/item/" /* +idItem + .png*/,
+    //^^restituisce l'icon di un'item cercato per id^^
+  },
+  //nelle chiamate per i champs non serve la api key
+
   spells: {
     21: { key: "SummonerBarrier", name: "Barrier" },
     1: { key: "SummonerBoost", name: "Cleanse" },
