@@ -38,6 +38,6 @@ header {
 
 footer {
   background-color: $color-header-footer;
-  color: $color-sky-blue;
+  color: white;
 }
 </style>

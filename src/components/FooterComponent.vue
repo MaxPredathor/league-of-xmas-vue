@@ -21,7 +21,7 @@
       <div class="col-6 text-center">
         <div class="logo-cont">
           <a href="">
-            <img src="" alt="Logo" />
+            <img src="/images/logos/logo-lol.png" alt="Logo" />
           </a>
         </div>
       </div>
@@ -134,8 +134,19 @@ div {
       color: blue;
     }
   }
+  .logo-cont {
+    margin: 0 auto;
+    max-width: 250px;
+    max-height: 300px;
+    img {
+      width: 100%;
+    }
+  }
   .txt-copyright {
-    font-size: 0.8em;
+    font-size: 1em;
+    font-style: italic;
+    // -webkit-text-stroke-width: 0.1px;
+    // -webkit-text-stroke-color: goldenrod;
   }
   .pegi-area {
     margin: 0 2px;
