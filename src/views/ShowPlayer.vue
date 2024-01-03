@@ -180,23 +180,23 @@
               </div>
               <div class="all-players">
                 <div
+                  v-for="player in match.participants"
+                  class="player p-2"
                   :class="{
-                    'bg-win': match.teams[0].win,
-                    'bg-loss': !match.teams[0].win,
+                    'bg-loss': !player.win,
+                    'bg-win': player.win,
                   }"
                 >
-                  <div v-for="n in 5">
-                    {{ match.participants[n - 1].summonerName }}
-                  </div>
-                </div>
-                <div
-                  :class="{
-                    'bg-win': match.teams[1].win,
-                    'bg-loss': !match.teams[1].win,
-                  }"
-                >
-                  <div v-for="n in 5">
-                    {{ match.participants[n - 1 + 5].summonerName }}
+                  <h3 v-if="player.win" class="d-none winners">Winner Team</h3>
+                  <h3 v-else class="d-none losers">Loser Team</h3>
+                  <div
+                    class="border rounded-3 p-2 m-1"
+                    :class="{
+                      'border-danger': !player.win,
+                      'border-primary': player.win,
+                    }"
+                  >
+                    {{ player.summonerName }}
                   </div>
                 </div>
               </div>
@@ -439,6 +439,13 @@ export default {
       .champIcon {
         width: 120px;
         height: 120px;
+      }
+    }
+    .player {
+      &:first-child h3,
+      &:nth-child(6) h3 {
+        display: block !important;
+        font-family: $font-LOL;
       }
     }
   }
