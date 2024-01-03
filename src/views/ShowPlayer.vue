@@ -5,8 +5,12 @@
         <div class="profile d-flex flex-column align-items-center">
           <div id="wings">
             <div v-if="rank" class="rank">
-              <img :src="'/public/images/Ranked Emblems Latest/Wings/' + rank + '.png'
-                " :alt="rank" />
+              <img
+                :src="
+                  '/public/images/Ranked Emblems Latest/Wings/' + rank + '.png'
+                "
+                :alt="rank"
+              />
             </div>
             <div class="profilepic">
               <img :src="profilePic" :alt="summonerName" class="w-100 h-100" />
@@ -27,41 +31,19 @@
                 <div class="category">
                   <h5>Ranked Solo</h5>
                 </div>
-                <div class="rank-queue d-flex justify-content-center align-item-center">
+                <div
+                  class="rank-queue d-flex justify-content-center align-item-center"
+                >
                   <div class="rank-img">
-                    <img class="w-75" :src="'/images/Ranked Emblems Latest/Rank=' +
-                      rank.tier +
-                      '.png'
-                      " :alt="rank.tier" />
-                  </div>
-                  <div class="rank-name-lp">
-                    <h5>{{ rank.tier }} {{ rank.rank }}</h5>
-                    <p>{{ rank.leaguePoints }} lp</p>
-                  </div>
-                  <div class="wins-loss-wr">
-                    <p>
-                      {{ rank.wins }}<span class="text-success">W</span> /
-                      {{ rank.losses }}<span class="text-danger">L</span>
-                    </p>
-                    <p>Win rate: <span :class="{
-                      'text-success': rank.wins > rank.losses,
-                      'text-danger': rank.wins < rank.losses,
-                      'text-warning': rank.wins === rank.losses,
-                    }">{{ getWinRates(rank.wins, rank.losses) }}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div v-show="rank.queueType === 'RANKED_FLEX_SR'" id="flex">
-                <div class="category">
-                  <h5>Ranked Flex</h5>
-                </div>
-                <div class="rank-queue d-flex justify-content-center">
-                  <div class="rank-img">
-                    <img class="w-75" :src="'/images/Ranked Emblems Latest/Rank=' +
-                      rank.tier +
-                      '.png'
-                      " :alt="rank.tier" />
+                    <img
+                      class="w-75"
+                      :src="
+                        '/images/Ranked Emblems Latest/Rank=' +
+                        rank.tier +
+                        '.png'
+                      "
+                      :alt="rank.tier"
+                    />
                   </div>
                   <div class="rank-name-lp">
                     <h5>{{ rank.tier }} {{ rank.rank }}</h5>
@@ -74,11 +56,53 @@
                     </p>
                     <p>
                       Win rate:
-                      <span :class="{
-                        'text-success': rank.wins > rank.losses,
-                        'text-danger': rank.wins < rank.losses,
-                        'text-warning': rank.wins === rank.losses,
-                      }">{{ getWinRates(rank.wins, rank.losses) }}</span>
+                      <span
+                        :class="{
+                          'text-success': rank.wins > rank.losses,
+                          'text-danger': rank.wins < rank.losses,
+                          'text-warning': rank.wins === rank.losses,
+                        }"
+                        >{{ getWinRates(rank.wins, rank.losses) }}</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div v-show="rank.queueType === 'RANKED_FLEX_SR'" id="flex">
+                <div class="category">
+                  <h5>Ranked Flex</h5>
+                </div>
+                <div class="rank-queue d-flex justify-content-center">
+                  <div class="rank-img">
+                    <img
+                      class="w-75"
+                      :src="
+                        '/images/Ranked Emblems Latest/Rank=' +
+                        rank.tier +
+                        '.png'
+                      "
+                      :alt="rank.tier"
+                    />
+                  </div>
+                  <div class="rank-name-lp">
+                    <h5>{{ rank.tier }} {{ rank.rank }}</h5>
+                    <p>{{ rank.leaguePoints }} lp</p>
+                  </div>
+                  <div class="wins-loss-wr">
+                    <p>
+                      {{ rank.wins }}<span class="text-success">W</span> /
+                      {{ rank.losses }}<span class="text-danger">L</span>
+                    </p>
+                    <p>
+                      Win rate:
+                      <span
+                        :class="{
+                          'text-success': rank.wins > rank.losses,
+                          'text-danger': rank.wins < rank.losses,
+                          'text-warning': rank.wins === rank.losses,
+                        }"
+                        >{{ getWinRates(rank.wins, rank.losses) }}</span
+                      >
                     </p>
                   </div>
                 </div>
@@ -88,108 +112,233 @@
         </div>
         <div class="content w-100">
           <h1></h1>
-          <div class="matches container">
-            <div v-for="(match, index) in sorted(matches)" class="alert row w-100" :class="{
-              'bg-win': win(match.participants),
-              'bg-loss': !win(match.participants),
-            }">
-              <div class="col">
-                <h4 v-if="win(match.participants)">WIN</h4>
-                <h4 v-else>LOSS</h4>
-                <div>
-                  <strong>Duration:</strong>
-                  {{ Math.floor(match.gameDuration / 60) }} min.
-                </div>
-                <div>
-                  <strong>{{ gamemode(match.queueId) }}</strong>
-                </div>
-              </div>
-              <div class="col d-flex">
-                <div class="champIcon">
-                  <img class="w-100" :src="store.ChampionsUrls.champIcon +
-                    you(match.participants).championName +
-                    '.png'
-                    " :alt="you(match.participants).championName" />
-                </div>
-                <div class="champIcon d-flex flex-wrap flex-column">
-                  <div class="w-50 p-1">
-                    <img class="w-100" :src="store.imageSpellUrl +
-                      store.spells[you(match.participants).summoner1Id].key +
-                      '.png'
-                      " alt="spell 1" />
+          <div class="matches">
+            <div
+              v-for="(match, index) in sorted(matches)"
+              class="alert w-100 p-0 container border-0"
+              :class="{
+                'bg-win': win(match.participants),
+                'bg-loss': !win(match.participants),
+              }"
+            >
+              <div class="row w-100 p-3 m-0">
+                <div class="col">
+                  <h4 v-if="win(match.participants)">WIN</h4>
+                  <h4 v-else>LOSS</h4>
+                  <div>
+                    <strong>Duration:</strong>
+                    {{ Math.floor(match.gameDuration / 60) }} min.
                   </div>
-                  <div class="w-50 p-1">
-                    <img class="w-100" :src="store.imageSpellUrl +
-                      store.spells[you(match.participants).summoner2Id].key +
-                      '.png'
-                      " alt="spell 2" />
-                  </div>
-                  <div class="w-50" v-if="gamemode(match.queueId) !== 'Arena'">
-                    <img class="w-100" :src="store.runeImage2 + getRunesKey(match)" alt="rune 1" />
-                  </div>
-                  <div class="w-50" v-if="gamemode(match.queueId) !== 'Arena'">
-                    <img class="w-75 m-1 mt-2" :src="store.runeImage2 + getSecondaryRuneStyle(match)" alt="rune 2" />
+                  <div>
+                    <strong>{{ gamemode(match.queueId) }}</strong>
                   </div>
                 </div>
+                <div class="col d-flex">
+                  <div class="champIcon">
+                    <img
+                      class="w-100"
+                      :src="
+                        store.ChampionsUrls.champIcon +
+                        you(match.participants).championName +
+                        '.png'
+                      "
+                      :alt="you(match.participants).championName"
+                    />
+                  </div>
+                  <div class="champIcon d-flex flex-wrap flex-column">
+                    <div class="w-50 p-1">
+                      <img
+                        class="w-100"
+                        :src="
+                          store.imageSpellUrl +
+                          store.spells[you(match.participants).summoner1Id]
+                            .key +
+                          '.png'
+                        "
+                        alt="spell 1"
+                      />
+                    </div>
+                    <div class="w-50 p-1">
+                      <img
+                        class="w-100"
+                        :src="
+                          store.imageSpellUrl +
+                          store.spells[you(match.participants).summoner2Id]
+                            .key +
+                          '.png'
+                        "
+                        alt="spell 2"
+                      />
+                    </div>
+                    <div
+                      class="w-50"
+                      v-if="gamemode(match.queueId) !== 'Arena'"
+                    >
+                      <img
+                        class="w-100"
+                        :src="store.runeImage2 + getRunesKey(match, 'you')"
+                        alt="rune 1"
+                      />
+                    </div>
+                    <div
+                      class="w-50"
+                      v-if="gamemode(match.queueId) !== 'Arena'"
+                    >
+                      <img
+                        class="w-75 m-1 mt-2"
+                        :src="store.runeImage2 + getSecondaryRuneStyle(match)"
+                        alt="rune 2"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <h4>
+                    <span class="text-white"
+                      >{{ you(match.participants).kills }} /
+                    </span>
+                    <span class="text-danger">{{
+                      you(match.participants).deaths
+                    }}</span>
+                    <span class="text-white">
+                      / {{ you(match.participants).assists }}
+                    </span>
+                  </h4>
+                  <div>
+                    <strong>{{
+                      you(match.participants).challenges.kda.toFixed(2)
+                    }}</strong>
+                    KDA
+                  </div>
+                  <div v-if="you(match.participants).visionScore">
+                    {{ you(match.participants).visionScore }} vision
+                  </div>
+                </div>
+                <div
+                  class="col d-flex flex-wrap flex-column items align-items-center p-0"
+                  style="height: 120px"
+                >
+                  <div
+                    style="min-width: 60px"
+                    class="p-1 h-50"
+                    v-for="num in 6"
+                  >
+                    <img
+                      v-if="you(match.participants)['item' + (num - 1)]"
+                      class="h-100"
+                      :src="
+                        store.ItemsUrls.itemIcon +
+                        you(match.participants)['item' + (num - 1)] +
+                        '.png'
+                      "
+                      :alt="'item' + num"
+                    />
+                    <div v-else class="w-100 h-100 obj rounded-2"></div>
+                  </div>
+                  <div style="width: calc(100% / 3)" class="p-1 lume">
+                    <img
+                      class="w-100"
+                      :src="
+                        store.ItemsUrls.itemIcon +
+                        you(match.participants).item6 +
+                        '.png'
+                      "
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="col d-flex justify-content-end align-items-end">
+                  <div
+                    @click="toggleShow(index)"
+                    class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer"
+                  >
+                    <i class="fa-solid fa-chevron-down" ref="chevron"></i>
+                  </div>
+                </div>
               </div>
-              <div class="col">
-                <h4>
-                  <span class="text-white">{{ you(match.participants).kills }} /
-                  </span>
-
-                  <span class="text-danger">{{
-                    you(match.participants).deaths
-                  }}</span>
-
-                  <span class="text-white">
-                    / {{ you(match.participants).assists }}
-                  </span>
-                </h4>
-                <div>
-                  <strong>{{
-                    you(match.participants).challenges.kda.toFixed(2)
-                  }}</strong>
-                  KDA
-                </div>
-                <div v-if="you(match.participants).visionScore">
-                  {{ you(match.participants).visionScore }} vision
-                </div>
-              </div>
-              <div class="col d-flex flex-wrap flex-column items align-items-center p-0" style="height: 120px">
-                <div style="min-width: 60px" class="p-1 h-50" v-for="num in 6">
-                  <img v-if="you(match.participants)['item' + (num - 1)]" class="h-100" :src="store.ItemsUrls.itemIcon +
-                    you(match.participants)['item' + (num - 1)] +
-                    '.png'
-                    " :alt="'item' + num" />
-                  <div v-else class="w-100 h-100 obj rounded-2"></div>
-                </div>
-                <div style="width: calc(100% / 3)" class="p-1 lume">
-                  <img class="w-100" :src="store.ItemsUrls.itemIcon +
-                    you(match.participants).item6 +
-                    '.png'
-                    " alt="" />
-                </div>
-              </div>
-              <div class="col d-flex justify-content-end align-items-end">
-                <div @click="toggleShow(index)"
-                  class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer">
-                  <i class="fa-solid fa-chevron-down" ref="chevron"></i>
-                </div>
-              </div>
-              <div class="all-players" ref="players">
-                <div v-for="player in match.participants" class="player p-1" :class="{
-                  'bg-loss': !player.win,
-                  'bg-win': player.win,
-                }">
+              <div class="all-players p-0 w-100" ref="players">
+                <div
+                  v-for="player in match.participants"
+                  class="player p-1 w-100"
+                  :class="{
+                    'bg-loss': !player.win,
+                    'bg-win': player.win,
+                  }"
+                >
                   <h3 v-if="player.win" class="d-none winners text-primary">
                     Winner Team
                   </h3>
                   <h3 v-else class="d-none losers text-danger">Loser Team</h3>
-                  <div class="border rounded-3 p-2" :class="{
-                    'border-danger': !player.win,
-                    'border-primary': player.win,
-                  }">
-                    {{ player.summonerName }}
+                  <div
+                    class="border rounded-3 p-2"
+                    :class="{
+                      'border-danger': !player.win,
+                      'border-primary': player.win,
+                    }"
+                  >
+                    <div class="d-flex">
+                      <div class="specific-icon">
+                        <img
+                          :src="
+                            store.ChampionsUrls.champIcon +
+                            player.championName +
+                            '.png'
+                          "
+                          :alt="player.championName"
+                          class="h-100"
+                        />
+                        <div class="level">{{ player.champLevel }}</div>
+                      </div>
+                      <div class="specific-icon d-flex flex-wrap">
+                        <div class="w-50 p-1">
+                          <img
+                            class="w-100"
+                            :src="
+                              store.imageSpellUrl +
+                              store.spells[player.summoner1Id].key +
+                              '.png'
+                            "
+                            alt="spell 1"
+                          />
+                        </div>
+                        <div class="w-50 p-1">
+                          <img
+                            class="w-100"
+                            :src="
+                              store.imageSpellUrl +
+                              store.spells[player.summoner2Id].key +
+                              '.png'
+                            "
+                            alt="spell 2"
+                          />
+                        </div>
+                        <div
+                          class="w-50"
+                          v-if="gamemode(match.queueId) !== 'Arena'"
+                        >
+                          <img
+                            class="w-100"
+                            :src="
+                              store.runeImage2 +
+                              getRunesKey(match, player.summonerName)
+                            "
+                            alt="rune 1"
+                          />
+                        </div>
+                        <div
+                          class="w-50"
+                          v-if="gamemode(match.queueId) !== 'Arena'"
+                        >
+                          <img
+                            class="w-75 m-1 mt-2"
+                            :src="
+                              store.runeImage2 + getSecondaryRuneStyle(match)
+                            "
+                            alt="rune 2"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -336,10 +485,22 @@ export default {
       });
     },
 
-    getRunesKey(match) {
-      const style = this.you(match.participants).perks.styles[0].style;
-      const keyStone = this.you(match.participants).perks.styles[0]
-        .selections[0].perk;
+    getRunesKey(match, who) {
+      let style;
+      let keyStone;
+      if (who === "you") {
+        style = this.you(match.participants).perks.styles[0].style;
+        keyStone = this.you(match.participants).perks.styles[0].selections[0]
+          .perk;
+      } else {
+        for (let i = 0; i < match.participants.length; i++) {
+          if (match.participants[i].summonerName === who) {
+            style = match.participants[i].perks.styles[0].style;
+            keyStone = match.participants[i].perks.styles[0].selections[0].perk;
+          }
+        }
+      }
+
       for (let i = 0; i < this.runes.length; i++) {
         if (this.runes[i].id == style) {
           const styleName = this.runes[i].name;
@@ -494,6 +655,25 @@ export default {
           display: block !important;
           font-family: $font-LOL;
           padding: 10px 0;
+        }
+      }
+      .specific-icon {
+        position: relative;
+        max-width: 62px;
+        max-height: 62px;
+        .level {
+          position: absolute;
+          bottom: -3px;
+          left: -3px;
+          background-color: $color-prussian-blue;
+          width: 2em;
+          height: 2em;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          font-size: 0.7em;
         }
       }
     }
