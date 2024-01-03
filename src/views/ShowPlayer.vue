@@ -90,7 +90,6 @@
               <h5>Champion Mastery</h5>
             </div>
             <div v-for="item in 5">
-              <!-- {{ getChampionNameByKey(champMastery[item - 1].championId) }} -->
               <div>
                 <div class="champ d-flex justify-content-center align-item-center">
                   <div class="champ-img">
@@ -105,7 +104,6 @@
                   </div>
                   <div class="champ-mastery">
                     <p>
-                      <!-- {{ champMastery[item - 1].championLevel }} -->
                       <img class="w-50"
                         :src="'/images/Mastery/Champion_Mastery_Level_' + champMastery[item - 1].championLevel + '_Flair.webp'"
                         alt="">
@@ -115,7 +113,7 @@
               </div>
             </div>
           </div>
-          <div v-else>
+          <div class="mt-5" v-else>
             <div class="lds-ring">
               <div></div>
               <div></div>
@@ -769,10 +767,10 @@ export default {
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid #fff;
+    border: 8px solid goldenrod;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #fff transparent transparent transparent;
+    border-color: goldenrod transparent transparent transparent;
   }
 
   .lds-ring div:nth-child(1) {
