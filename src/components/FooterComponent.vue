@@ -31,7 +31,7 @@
     </div>
     <!-- End Brand copyright area -->
     <!-- Start PEGI area -->
-    <div class="row py-2">
+    <div class="row pt-3 pb-2">
       <div class="col-12 text-center">
         <a v-for="(el, id) in pegi" :key="id" class="pegi-area" :href="el.link"
           ><img :src="el.img" alt=""
@@ -105,6 +105,7 @@ div {
     border: 1px solid black;
     text-align: center;
     border-radius: 35%;
+    background-color: rgba(128, 128, 128, 0.205);
   }
   .instagram {
     transition: all 0.4s ease;
@@ -143,7 +144,7 @@ div {
     }
   }
   .txt-copyright {
-    font-size: 1em;
+    font-size: 0.9em;
     font-style: italic;
     // -webkit-text-stroke-width: 0.1px;
     // -webkit-text-stroke-color: goldenrod;
@@ -154,7 +155,7 @@ div {
     img {
       border-radius: 15%;
       padding: 10px 15px;
-      background-color: rgba(0, 0, 0, 0.308);
+      background-color: rgba(128, 128, 128, 0.205);
     }
   }
 }
