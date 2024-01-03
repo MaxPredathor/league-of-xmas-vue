@@ -30,14 +30,14 @@ export default {
 @use "./assets/style/partials/variables" as *;
 
 header {
-  background-color: $color-prussian-blue;
+  background-color: $color-header-footer;
   color: $color-sky-blue;
   border-top: 1px solid goldenrod;
   border-bottom: 1px solid goldenrod;
 }
 
 footer {
-  background-color: $color-prussian-blue;
+  background-color: $color-header-footer;
   color: $color-sky-blue;
 }
 </style>
