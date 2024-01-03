@@ -6,15 +6,17 @@
             (filteredChamp <= 10 && champ.info.difficulty > 7 && champ.info.difficulty <= filteredChamp)) &&
         (champ.id === champId || champId == '')
         ">
-        <div class="card-div">
-            <div>
-                <img :src="store.ChampionsUrls.champImage + champ.id + '_' + skin + '.jpg'" :alt="champ.name" />
+        <router-link @click="store.activeChamp = champ.id" :to="{ name: 'Show', params: { id: champ.id } }">
+            <div class="card-div">
+                <div>
+                    <img :src="store.ChampionsUrls.champImage + champ.id + '_' + skin + '.jpg'" :alt="champ.name" />
+                </div>
+                <h3>
+                    <span>{{ champ.name }} -
+                        <em class="fw-regular">{{ champ.title }}</em></span>
+                </h3>
             </div>
-            <h3>
-                <span>{{ champ.name }} -
-                    <em class="fw-regular">{{ champ.title }}</em></span>
-            </h3>
-        </div>
+        </router-link>
     </div>
 </template>
 
