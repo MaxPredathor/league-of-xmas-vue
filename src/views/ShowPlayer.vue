@@ -31,7 +31,7 @@
           <h1></h1>
           <div class="matches container">
             <div
-              v-for="match in matches"
+              v-for="match in sorted(matches)"
               class="alert row w-100"
               :class="{
                 'bg-win': win(match.participants),
@@ -84,14 +84,14 @@
                       alt="spell 2"
                     />
                   </div>
-                  <div class="w-50">
+                  <div class="w-50" v-if="gamemode(match.queueId) !== 'Arena'">
                     <img
                       class="w-100"
                       :src="store.runeImage2 + getRunesKey(match)"
                       alt="rune 1"
                     />
                   </div>
-                  <div class="w-50">
+                  <div class="w-50" v-if="gamemode(match.queueId) !== 'Arena'">
                     <img
                       class="w-75 m-1 mt-2"
                       :src="store.runeImage2 + getSecondaryRuneStyle(match)"
@@ -335,6 +335,11 @@ export default {
           }
         }
       }
+    },
+    sorted(element) {
+      return element.sort(
+        (a, b) => b.gameStartTimestamp - a.gameStartTimestamp
+      );
     },
   },
   mounted() {
