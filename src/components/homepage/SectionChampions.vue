@@ -113,7 +113,7 @@ export default {
         } else {
           this.selected = 0;
         }
-        console.log(this.selected);
+        // console.log(this.selected);
       }, 4000);
     },
     // Api to get champs infos
@@ -167,8 +167,8 @@ export default {
   }
 }
 .swiper {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   overflow: visible;
   .swiper-slide img {
     width: 100%;
