@@ -2,8 +2,8 @@
   <div class="wrapper w-100 py-5">
     <div class="container py-5">
       <div class="d-flex align-items-start">
-        <div class="profile d-flex">
-          <div>
+        <div class="profile d-flex flex-column align-items-center">
+          <div id="wings">
             <div v-if="rank" class="rank">
               <img
                 :src="
@@ -22,9 +22,13 @@
               {{ summonerLevel }}
             </div>
           </div>
+          <div id="name">
+            <h1>{{ summonerName }}</h1>
+          </div>
+          <div id="rankedSolo"></div>
         </div>
         <div class="content w-100">
-          <h1>{{ summonerName }}</h1>
+          <h1></h1>
           <div class="matches container">
             <div
               v-for="match in matches"
@@ -384,7 +388,20 @@ export default {
 
   .profile {
     position: relative;
-    top: 100px;
+    top: 200px;
+    width: 200px;
+
+    #name {
+      margin-top: 100px;
+      width: 100%;
+
+      h1 {
+        width: 100%;
+        color: #fff;
+        font-family: $font-LOL;
+        font-size: 2em;
+      }
+    }
     div {
       position: relative;
 
