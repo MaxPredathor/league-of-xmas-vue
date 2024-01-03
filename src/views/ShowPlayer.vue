@@ -26,21 +26,58 @@
             <h1>{{ summonerName }}</h1>
           </div>
           <div id="ranked">
-            <div v-for="rank in profileRank">
+            <div class="d-flex flex-column" v-for="rank in profileRank">
               <div v-show="rank.queueType === 'RANKED_SOLO_5x5'" id="solo">
                 <div>
                   <h5>Ranked Solo</h5>
                 </div>
-                {{ rank.tier }} - {{ rank.rank }} - {{ rank.leaguePoints }} lp -
-                {{ rank.wins }}W / {{ rank.losses }}L
-                {{ getWinRates(rank.wins, rank.losses) }}
+                <div class="rank-queue d-flex justify-content-center">
+                  <div class="rank-img">
+                    <img
+                      class="w-75"
+                      :src="
+                        '/images/Ranked Emblems Latest/Rank=' +
+                        rank.tier +
+                        '.png'
+                      "
+                      :alt="rank.tier"
+                    />
+                  </div>
+                  <div class="rank-name-lp">
+                    <h5>{{ rank.tier }} {{ rank.rank }}</h5>
+                    <p>{{ rank.leaguePoints }} lp</p>
+                  </div>
+                  <div class="wins-loss-wr">
+                    <p>{{ rank.wins }}W / {{ rank.losses }}L</p>
+                    <p>Win rate: {{ getWinRates(rank.wins, rank.losses) }}</p>
+                  </div>
+                </div>
               </div>
               <div v-show="rank.queueType === 'RANKED_FLEX_SR'" id="flex">
                 <div>
                   <h5>Ranked Flex</h5>
                 </div>
-                {{ rank.tier }} - {{ rank.rank }} - {{ rank.leaguePoints }} lp -
-                {{ rank.wins }}W / {{ rank.losses }}L
+                <div class="rank-queue d-flex justify-content-center">
+                  <div class="rank-img">
+                    <img
+                      class="w-75"
+                      :src="
+                        '/images/Ranked Emblems Latest/Rank=' +
+                        rank.tier +
+                        '.png'
+                      "
+                      :alt="rank.tier"
+                    />
+                  </div>
+                  <div class="rank-name-lp">
+                    <h5>{{ rank.tier }} {{ rank.rank }}</h5>
+                    <p>{{ rank.leaguePoints }} lp</p>
+                  </div>
+                  <div class="wins-loss-wr">
+                    <p>{{ rank.wins }}W / {{ rank.losses }}L</p>
+                    <p>Win rate: {{ getWinRates(rank.wins, rank.losses) }}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -257,6 +294,14 @@ export default {
         }
       });
     },
+    // getRankImage(rank) {
+    //   console.log(rank);
+    //   return (
+    //     "/images/Ranked Emblems Latest/Rank=" +
+    //     this.capitalizeFirstLetter(rank) +
+    //     ".png"
+    //   );
+    // },
     getWinRates(wins, losses) {
       return Math.round((wins / (wins + losses)) * 100) + "%";
     },
@@ -468,7 +513,7 @@ export default {
       }
     }
     #ranked {
-      width: 300px;
+      width: 400px;
       color: #fff;
 
       #solo,
@@ -478,6 +523,18 @@ export default {
         border-radius: 0.5em;
         padding: 0 20px;
         margin-bottom: 10px;
+
+        .rank-queue {
+          .rank-img {
+            width: 30%;
+          }
+          .rank-name-lp {
+            width: 40%;
+          }
+          .wins-loss-wr {
+            width: 30%;
+          }
+        }
       }
     }
     div {

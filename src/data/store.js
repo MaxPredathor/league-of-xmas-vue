@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  apiKey: "RGAPI-40d9fbf4-d7f5-4af0-a7ae-6592acb33ee0",
+  apiKey: "RGAPI-9a0c4b4e-1dc7-452c-a030-b797e7d0abb5",
   // 'https://developer.riotgames.com/' link per rigenerare la key
 
   playersUrls: {
