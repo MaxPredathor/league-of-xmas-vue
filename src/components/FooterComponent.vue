@@ -20,7 +20,7 @@
     <div class="row flex-column align-items-center justify-content-center g-3">
       <div class="col-6 text-center">
         <div class="logo-cont">
-          <a href="">
+          <a href="#">
             <img src="/images/logos/logo-lol.png" alt="Logo" />
           </a>
         </div>
