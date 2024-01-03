@@ -12,7 +12,7 @@
     <swiper-slide class="position-relative" v-for="item in imgs">
       <img :src="imgUrl + item.img" />
       <div class="position-absolute title-p text-center">
-        <h1 class="display-4 px-1 w-75 m-0 m-auto">{{ item.title }}</h1>
+        <h1 class="display-4 px-1 m-0 w-75 m-auto">{{ item.title }}</h1>
         <p class="fs-3 m-0 w-50 m-auto">{{ item.description }}</p>
       </div>
     </swiper-slide>
