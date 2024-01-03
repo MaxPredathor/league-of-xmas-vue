@@ -83,12 +83,16 @@
                   <div class="w-50">
                     <img
                       class="w-100"
-                      :src="store.runeImages + getRunesKey(match)"
+                      :src="store.runeImage2 + getRunesKey(match)"
                       alt="rune 1"
                     />
                   </div>
                   <div class="w-50">
-                    <img class="w-100" src="" alt="rune 2" />
+                    <img
+                      class="w-75 m-1 mt-2"
+                      :src="store.runeImage2 + getSecondaryRuneStyle(match)"
+                      alt="rune 2"
+                    />
                   </div>
                 </div>
               </div>
@@ -245,6 +249,8 @@ export default {
         return "Bot Game";
       } else if (id === 1700) {
         return "Arena";
+      } else {
+        return "Unknown";
       }
     },
 
@@ -282,14 +288,46 @@ export default {
           for (let j = 0; j < this.runes[i].slots.length; j++) {
             for (let k = 0; k < this.runes[i].slots[j].runes.length; k++) {
               if (this.runes[i].slots[j].runes[k].id == keyStone) {
-                const key =
-                  styleName +
-                  "/" +
-                  this.runes[i].slots[j].runes[k].name +
-                  "_rune.png";
-                return key.replaceAll(" ", "_");
+                if (this.runes[i].slots[j].runes[k].key == "LethalTempo") {
+                  const key =
+                    styleName +
+                    "/" +
+                    this.runes[i].slots[j].runes[k].key +
+                    "/" +
+                    this.runes[i].slots[j].runes[k].key +
+                    "Temp" +
+                    ".png";
+                  return key.replaceAll(" ", "");
+                } else {
+                  const key =
+                    styleName +
+                    "/" +
+                    this.runes[i].slots[j].runes[k].key +
+                    "/" +
+                    this.runes[i].slots[j].runes[k].key +
+                    ".png";
+                  return key.replaceAll(" ", "");
+                }
               }
             }
+          }
+        }
+      }
+    },
+    getSecondaryRuneStyle(match) {
+      const style = this.you(match.participants).perks.styles[1].style;
+      for (let i = 0; i < this.runes.length; i++) {
+        if (this.runes[i].id == style) {
+          if (this.runes[i].name == "Precision") {
+            return "7201_Precision.png";
+          } else if (this.runes[i].name == "Domination") {
+            return "7200_Domination.png";
+          } else if (this.runes[i].name == "Sorcery") {
+            return "7202_Sorcery.png";
+          } else if (this.runes[i].name == "Resolve") {
+            return "7204_Resolve.png";
+          } else if (this.runes[i].name == "Inspiration") {
+            return "7203_Whimsy.png";
           }
         }
       }

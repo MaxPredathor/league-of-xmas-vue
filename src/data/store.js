@@ -89,4 +89,6 @@ export const store = reactive({
     "https://cdn.lolrift.com/images/rrunes/splash/icon-" /*+ iniziale in minuscolo + -36x36.png*/,
   runeImages:
     "https://cdn.lolrift.com/images/rrunes/runes/" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
+  runeImage2:
+    "https://ddragon.canisback.com/img/perk-images/Styles/" /* + idStrano_Name.png */,
 });
