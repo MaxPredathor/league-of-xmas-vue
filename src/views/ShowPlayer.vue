@@ -335,8 +335,8 @@
                   v-for="player in match.participants"
                   class="player p-1 w-100"
                   :class="{
-                    'bg-loss': !player.win,
-                    'bg-win': player.win,
+                    'bg-loss-in': !player.win,
+                    'bg-win-in': player.win,
                   }"
                 >
                   <h3 v-if="player.win" class="d-none winners text-primary">
@@ -445,21 +445,29 @@
                         <h6>KDA: {{ player.challenges.kda.toFixed(2) }}</h6>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol">Damage</h5>
-                        <span>{{ player.totalDamageDealtToChampions }}</span>
+                        <h5 class="text-white font-lol m-0">Damage</h5>
+                        <span class="my-1 d-block">{{
+                          player.totalDamageDealtToChampions
+                        }}</span>
+                        <div class="totalbar w-100 mt-2 rounded-pill">
+                          <div
+                            class="bar h-100 rounded-pill"
+                            :style="{ width: damage(player, match) }"
+                          ></div>
+                        </div>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol">Gold</h5>
+                        <h5 class="text-white font-lol m-0">Gold</h5>
                         <span
                           >{{ (player.goldEarned / 1000).toFixed(1) }}k</span
                         >
                       </div>
                       <div>
-                        <h5 class="text-white font-lol">Minions</h5>
+                        <h5 class="text-white font-lol m-0">Minions</h5>
                         <span>{{ player.totalMinionsKilled }}</span>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol">Vision</h5>
+                        <h5 class="text-white font-lol m-0">Vision</h5>
                         <span>{{ player.visionScore }}</span>
                       </div>
                     </div>
@@ -537,17 +545,22 @@ export default {
     },
     getRank() {
       const rankUrl = store.playersUrls.summonerRank + this.summonerId;
-      axios.get(rankUrl, { params: { api_key: store.apiKey } }).then((res) => {
-        this.profileRank = res.data;
-        console.log(this.profileRank);
-        if (res.data.length > 0) {
-          res.data.forEach((element) => {
-            if (element.queueType == "RANKED_SOLO_5x5") {
-              this.rank = this.capitalizeFirstLetter(element.tier);
-            }
-          });
-        }
-      });
+      axios
+        .get(rankUrl, { params: { api_key: store.apiKey } })
+        .then((res) => {
+          this.profileRank = res.data;
+          console.log(this.profileRank);
+          if (res.data.length > 0) {
+            res.data.forEach((element) => {
+              if (element.queueType == "RANKED_SOLO_5x5") {
+                this.rank = this.capitalizeFirstLetter(element.tier);
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          this.rank = "";
+        });
     },
     // getOtherRanks(player) {
     //   let playerId;
@@ -747,8 +760,28 @@ export default {
     toggleShow(index) {
       const currentMenu = this.$refs.players;
       const currentArrow = this.$refs.chevron;
+      currentMenu.forEach((value) => {
+        if (value !== currentMenu[index]) {
+          value.classList.remove("opened");
+        }
+      });
+      currentArrow.forEach((value) => {
+        if (value !== currentArrow[index]) {
+          value.classList.remove("rotated");
+        }
+      });
       currentMenu[index].classList.toggle("opened");
       currentArrow[index].classList.toggle("rotated");
+    },
+    damage(player, match) {
+      let damage = 0;
+      match.participants.forEach((value) => {
+        if (value.totalDamageDealtToChampions > damage) {
+          damage = value.totalDamageDealtToChampions;
+        }
+      });
+
+      return (player.totalDamageDealtToChampions * 100) / damage + "%";
     },
   },
   mounted() {
@@ -798,6 +831,13 @@ export default {
         .obj {
           background-color: #2a73fa;
         }
+        .totalbar {
+          background-color: #2a4796;
+          height: 5px;
+          .bar {
+            background-color: #2a73fa;
+          }
+        }
       }
 
       .bg-loss {
@@ -811,6 +851,13 @@ export default {
 
         .obj {
           background-color: #ff4e4c;
+        }
+        .totalbar {
+          background-color: #53263e;
+          height: 5px;
+          .bar {
+            background-color: #ff4e4c;
+          }
         }
       }
 
@@ -837,7 +884,47 @@ export default {
         height: 1183px;
         margin-top: 15px;
       }
+      .bg-win-in {
+        background-color: $color-game-win;
 
+        h4 {
+          font-family: $font-LOL;
+          font-weight: bold;
+          color: #2a73fa;
+        }
+
+        .obj {
+          background-color: #2a73fa;
+        }
+        .totalbar {
+          background-color: #2a4796;
+          height: 5px;
+          .bar {
+            background-color: #2a73fa;
+          }
+        }
+      }
+
+      .bg-loss-in {
+        background-color: $color-game-loss;
+
+        h4 {
+          font-family: $font-LOL;
+          font-weight: bold;
+          color: #ff4e4c;
+        }
+
+        .obj {
+          background-color: #ff4e4c;
+        }
+        .totalbar {
+          background-color: #53263e;
+          height: 5px;
+          .bar {
+            background-color: #ff4e4c;
+          }
+        }
+      }
       .player {
         padding: 3px;
 
