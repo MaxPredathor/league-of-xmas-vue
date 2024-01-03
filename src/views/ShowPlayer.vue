@@ -109,6 +109,42 @@
               </div>
             </div>
           </div>
+          <div id="champ-mastery" v-if="masteryReady">
+            <div class="category">
+              <h5>Champion Mastery</h5>
+            </div>
+            <div v-for="item in 5">
+              <div>
+                <div class="champ d-flex justify-content-center align-item-center">
+                  <div class="champ-img">
+                    <img class="w-50" :src="store.ChampionsUrls.champIcon +
+                      getChampionNameByKey(champMastery[item - 1].championId) +
+                      '.png'
+                      " :alt="getChampionNameByKey(champMastery[item - 1].championId)" />
+                  </div>
+                  <div class="champ-name">
+                    <h5>{{ getChampionNameByKey(champMastery[item - 1].championId) }}</h5>
+                    <p>Points: {{ champMastery[item - 1].championPoints }}</p>
+                  </div>
+                  <div class="champ-mastery">
+                    <p>
+                      <img class="w-50"
+                        :src="'/images/Mastery/Champion_Mastery_Level_' + champMastery[item - 1].championLevel + '_Flair.webp'"
+                        alt="">
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5" v-else>
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
         <div class="content w-100">
           <h1></h1>
@@ -369,6 +405,9 @@ export default {
       runes: [],
       profileRank: [],
       show: false,
+      champMastery: [],
+      masteryReady: false,
+      championsArray: [],
     };
   },
   methods: {
@@ -384,6 +423,28 @@ export default {
         this.summonerLevel = res.data.summonerLevel;
         this.getRank();
         this.getLastMatches();
+      });
+    },
+    getChampions() {
+      const url = store.ChampionsUrls.allChamps;
+      axios.get(url).then((res) => {
+        this.championsArray = res.data.data;
+        console.log(this.championsArray);
+      })
+    },
+    getChampionNameByKey(key) {
+      for (let i in this.championsArray) {
+        if (parseInt(this.championsArray[i].key) === key) {
+          return this.championsArray[i].id
+        }
+      }
+    },
+    getChampMastery() {
+      const url = store.playersUrls.championMastery + this.puuid;
+      axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
+        console.log(res.data);
+        this.champMastery = res.data;
+        this.masteryReady = true
       });
     },
     getRank() {
@@ -566,6 +627,10 @@ export default {
   mounted() {
     this.getSummoner();
     this.getRunes();
+    this.getChampions()
+    setTimeout(() => {
+      this.getChampMastery();
+    }, 1500)
   },
 };
 </script>
@@ -697,6 +762,59 @@ export default {
       }
     }
 
+    #champ-mastery {
+      color: #767383;
+      background-color: #31313c;
+      border-radius: 0.5em;
+      margin-bottom: 10px;
+      width: 400px;
+
+      .category {
+        width: 100%;
+        border-bottom: 1px solid $color-showpage;
+        padding: 5px 20px;
+      }
+
+      .champ {
+
+        .champ-img {
+          width: 30%;
+          padding: 5px 10px;
+        }
+
+        .champ-name {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 5px 0;
+          width: 40%;
+          color: white;
+
+          p {
+            margin: 0;
+            color: #767383;
+          }
+
+          h4 {
+            margin: 0;
+          }
+        }
+
+        .champ-mastery {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 5px;
+          padding: 5px 0;
+          width: 30%;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+
     #ranked {
       width: 400px;
       color: #fff;
@@ -814,5 +932,48 @@ export default {
       }
     }
   }
+
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid goldenrod;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: goldenrod transparent transparent transparent;
+  }
+
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
 }
 </style>
