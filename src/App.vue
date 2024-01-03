@@ -31,7 +31,8 @@ export default {
 
 header {
   background-color: $color-header-footer;
-  color: $color-sky-blue;
+  color: white;
+
   border-top: 1px solid goldenrod;
   border-bottom: 1px solid goldenrod;
 }

@@ -14,17 +14,28 @@
       </div>
       <!-- End Logo section -->
       <!-- Start Navbar routes -->
-      <div class="col-6 text-center">
+      <div class="col-8 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
           <li class="pe-2">
             <a href="#">
-              <img src="/images/logos/logo-lol-2.png" alt="logo" />
+              <img
+                v-for="(el, index) in champsPng"
+                v-show="this.selected === index"
+                :key="index"
+                :src="el.img"
+                :alt="el.name"
+              />
             </a>
           </li>
-          <li v-for="(el, id) in navItems" :key="id" class="mx-2 px-1">
+          <li
+            v-for="(el, id) in navItems"
+            :key="id"
+            class="px-3 position-relative"
+          >
             <router-link :to="el.route">{{ el.name }}</router-link>
+            <div class="void position-absolute">{{ el.name }}</div>
           </li>
-          <li v-for="(el, id) in navItemsSecond" :key="id" class="mx-2 px-1">
+          <li v-for="(el, id) in navItemsSecond" :key="id" class="px-3">
             <a :href="el.route" class="position-relative"
               >{{ el.name }}
               <i class="position-absolute fa-solid fa-turn-up"></i
@@ -34,7 +45,7 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-4 text-end">
+      <div class="col-2 text-end">
         <span class="mx-1">Guest/User</span>
         <span class="mx-1">Register</span>
       </div>
@@ -79,7 +90,39 @@ export default {
           route: "https://www.leagueoflegends.com/en-us/news/tags/patch-notes/",
         },
       ],
+      champsPng: [
+        {
+          idImg: 1,
+          name: "Zed",
+          img: "/images/champs/zed.png",
+        },
+        {
+          idImg: 2,
+          name: "Ashe",
+          img: "/images/champs/ashe.png",
+        },
+        {
+          idImg: 3,
+          name: "Yasuo",
+          img: "/images/champs/yasuo.png",
+        },
+      ],
+      selected: 0,
     };
+  },
+  methods: {
+    setActive() {
+      setInterval(() => {
+        if (this.selected < this.champsPng.length - 1) {
+          this.selected++;
+        } else {
+          this.selected = 0;
+        }
+      }, 3000);
+    },
+  },
+  mounted() {
+    this.setActive();
   },
 };
 </script>
@@ -93,19 +136,36 @@ export default {
     width: 100%;
   }
 }
+
 ul {
   li {
     font-size: 1.5rem;
-    text-shadow: 1px 2px 1px $color-selective-yellow;
+    text-shadow: 1px 2px 1px goldenrod;
     font-weight: bold;
     font-style: italic;
+    &:hover {
+      border-bottom: 3px solid goldenrod;
+    }
+
     i {
       top: 5px;
       right: -15px;
       font-size: 0.5em;
     }
     img {
-      width: 40px;
+      width: 50px;
+      height: 50px;
+      transition: 1s all ease;
+    }
+    .void {
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.13);
+        border-radius: 25px;
+      }
     }
   }
 }
