@@ -25,7 +25,25 @@
           <div id="name">
             <h1>{{ summonerName }}</h1>
           </div>
-          <div id="rankedSolo"></div>
+          <div id="ranked">
+            <div v-for="rank in profileRank">
+              <div v-show="rank.queueType === 'RANKED_SOLO_5x5'" id="solo">
+                <div>
+                  <h5>Ranked Solo</h5>
+                </div>
+                {{ rank.tier }} - {{ rank.rank }} - {{ rank.leaguePoints }} lp -
+                {{ rank.wins }}W / {{ rank.losses }}L
+                {{ getWinRates(rank.wins, rank.losses) }}
+              </div>
+              <div v-show="rank.queueType === 'RANKED_FLEX_SR'" id="flex">
+                <div>
+                  <h5>Ranked Flex</h5>
+                </div>
+                {{ rank.tier }} - {{ rank.rank }} - {{ rank.leaguePoints }} lp -
+                {{ rank.wins }}W / {{ rank.losses }}L
+              </div>
+            </div>
+          </div>
         </div>
         <div class="content w-100">
           <h1></h1>
@@ -179,6 +197,7 @@ export default {
       matches: [],
       store,
       runes: [],
+      profileRank: [],
     };
   },
   methods: {
@@ -199,6 +218,8 @@ export default {
     getRank() {
       const rankUrl = store.playersUrls.summonerRank + this.summonerId;
       axios.get(rankUrl, { params: { api_key: store.apiKey } }).then((res) => {
+        this.profileRank = res.data;
+        console.log(this.profileRank);
         if (res.data.length > 0) {
           res.data.forEach((element) => {
             if (element.queueType == "RANKED_SOLO_5x5") {
@@ -207,6 +228,9 @@ export default {
           });
         }
       });
+    },
+    getWinRates(wins, losses) {
+      return Math.round((wins / (wins + losses)) * 100) + "%";
     },
     getLastMatches() {
       const lastMatchesUrl =
@@ -393,13 +417,27 @@ export default {
 
     #name {
       margin-top: 100px;
-      width: 100%;
+      width: 300px;
 
       h1 {
+        text-align: center;
         width: 100%;
         color: #fff;
         font-family: $font-LOL;
-        font-size: 2em;
+        font-size: 3.5em;
+      }
+    }
+    #ranked {
+      width: 300px;
+      color: #fff;
+
+      #solo,
+      #flex {
+        color: #767383;
+        background-color: #31313c;
+        border-radius: 0.5em;
+        padding: 0 20px;
+        margin-bottom: 10px;
       }
     }
     div {
