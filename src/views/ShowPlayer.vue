@@ -208,7 +208,35 @@
                   />
                 </div>
               </div>
-              <div class="col"></div>
+              <div class="col d-flex justify-content-end align-items-end">
+                <div
+                  class="d-flex justify-content-center align-items-center obj p-2 rounded-2"
+                >
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="all-players">
+                <div
+                  :class="{
+                    'bg-win': match.teams[0].win,
+                    'bg-loss': !match.teams[0].win,
+                  }"
+                >
+                  <div v-for="n in 5">
+                    {{ match.participants[n - 1].summonerName }}
+                  </div>
+                </div>
+                <div
+                  :class="{
+                    'bg-win': match.teams[1].win,
+                    'bg-loss': !match.teams[1].win,
+                  }"
+                >
+                  <div v-for="n in 5">
+                    {{ match.participants[n - 1 + 5].summonerName }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
