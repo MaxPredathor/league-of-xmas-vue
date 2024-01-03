@@ -66,7 +66,7 @@
                         store.spells[you(match.participants).summoner1Id].key +
                         '.png'
                       "
-                      alt=""
+                      alt="spell 1"
                     />
                   </div>
                   <div class="w-50 p-1">
@@ -77,15 +77,75 @@
                         store.spells[you(match.participants).summoner2Id].key +
                         '.png'
                       "
-                      alt=""
+                      alt="spell 2"
                     />
                   </div>
                   <div class="w-50">
-                    <img :src="store.runeImages + getRunesKey(match)" alt="" />
+                    <img
+                      class="w-100"
+                      :src="store.runeImages + getRunesKey(match)"
+                      alt="rune 1"
+                    />
                   </div>
-                  <div class="w-50"></div>
+                  <div class="w-50">
+                    <img class="w-100" src="" alt="rune 2" />
+                  </div>
                 </div>
               </div>
+              <div class="col">
+                <h4>
+                  <span class="text-white"
+                    >{{ you(match.participants).kills }} /
+                  </span>
+
+                  <span class="text-danger">{{
+                    you(match.participants).deaths
+                  }}</span>
+
+                  <span class="text-white">
+                    / {{ you(match.participants).assists }}
+                  </span>
+                </h4>
+                <div>
+                  <strong>{{
+                    you(match.participants).challenges.kda.toFixed(2)
+                  }}</strong>
+                  KDA
+                </div>
+                <div v-if="you(match.participants).visionScore">
+                  {{ you(match.participants).visionScore }} vision
+                </div>
+              </div>
+              <div
+                class="col d-flex flex-wrap flex-column items align-items-center p-0"
+                style="height: 120px"
+              >
+                <div style="min-width: 60px" class="p-1 h-50" v-for="num in 6">
+                  <img
+                    v-if="you(match.participants)['item' + (num - 1)]"
+                    class="h-100"
+                    :src="
+                      store.ItemsUrls.itemIcon +
+                      you(match.participants)['item' + (num - 1)] +
+                      '.png'
+                    "
+                    :alt="'item' + num"
+                  />
+                  <div v-else class="w-100 h-100 obj rounded-2"></div>
+                </div>
+                <div style="width: calc(100% / 3)" class="p-1 lume">
+                  <img
+                    class="w-100"
+                    :src="
+                      store.ItemsUrls.itemIcon +
+                      you(match.participants).item6 +
+                      '.png'
+                    "
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="col"></div>
             </div>
           </div>
         </div>
@@ -167,11 +227,7 @@ export default {
     },
 
     win(participants) {
-      for (let i = 0; i < participants.length; i++) {
-        if (participants[i].summonerName === this.summonerName) {
-          return participants[i].win;
-        }
-      }
+      return this.you(participants).win;
     },
 
     gamemode(id) {
@@ -266,6 +322,9 @@ export default {
           font-weight: bold;
           color: #2a73fa;
         }
+        .obj {
+          background-color: #2a73fa;
+        }
       }
       .bg-loss {
         background-color: $color-game-loss;
@@ -273,6 +332,9 @@ export default {
           font-family: $font-LOL;
           font-weight: bold;
           color: #ff4e4c;
+        }
+        .obj {
+          background-color: #ff4e4c;
         }
       }
       .champIcon {
@@ -283,6 +345,8 @@ export default {
   }
 
   .profile {
+    position: relative;
+    top: 100px;
     div {
       position: relative;
 
