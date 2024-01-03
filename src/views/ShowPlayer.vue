@@ -258,7 +258,9 @@
                     >
                       <img
                         class="w-75 m-1 mt-2"
-                        :src="store.runeImage2 + getSecondaryRuneStyle(match)"
+                        :src="
+                          store.runeImage2 + getSecondaryRuneStyle(match, 'you')
+                        "
                         alt="rune 2"
                       />
                     </div>
@@ -372,9 +374,12 @@
                         />
                         <div class="level">{{ player.champLevel }}</div>
                       </div>
-                      <div class="specific-icon d-flex flex-wrap">
-                        <div class="w-50 p-1">
+                      <div
+                        class="specific-icon d-flex flex-wrap align-items-center flex-column g-0"
+                      >
+                        <div class="w-50 h-50 p-1">
                           <img
+                            v-if="store.spells[player.summoner1Id]"
                             class="w-100"
                             :src="
                               store.imageSpellUrl +
@@ -384,8 +389,9 @@
                             alt="spell 1"
                           />
                         </div>
-                        <div class="w-50 p-1">
+                        <div class="w-50 h-50 p-1">
                           <img
+                            v-if="store.spells[player.summoner2Id]"
                             class="w-100"
                             :src="
                               store.imageSpellUrl +
@@ -396,7 +402,7 @@
                           />
                         </div>
                         <div
-                          class="w-50"
+                          class="w-50 h-50"
                           v-if="gamemode(match.queueId) !== 'Arena'"
                         >
                           <img
@@ -409,13 +415,14 @@
                           />
                         </div>
                         <div
-                          class="w-50"
+                          class="w-50 h-50"
                           v-if="gamemode(match.queueId) !== 'Arena'"
                         >
                           <img
                             class="w-75 m-1 mt-2"
                             :src="
-                              store.runeImage2 + getSecondaryRuneStyle(match)
+                              store.runeImage2 +
+                              getSecondaryRuneStyle(match, player.summonerName)
                             "
                             alt="rune 2"
                           />
@@ -654,8 +661,17 @@ export default {
         }
       }
     },
-    getSecondaryRuneStyle(match) {
-      const style = this.you(match.participants).perks.styles[1].style;
+    getSecondaryRuneStyle(match, who) {
+      let style;
+      if (who === "you") {
+        style = this.you(match.participants).perks.styles[1].style;
+      } else {
+        for (let i = 0; i < match.participants.length; i++) {
+          if (match.participants[i].summonerName === who) {
+            style = match.participants[i].perks.styles[1].style;
+          }
+        }
+      }
       for (let i = 0; i < this.runes.length; i++) {
         if (this.runes[i].id == style) {
           if (this.runes[i].name == "Precision") {
@@ -785,8 +801,8 @@ export default {
 
       .specific-icon {
         position: relative;
-        max-width: 62px;
-        max-height: 62px;
+        max-width: 65px;
+        max-height: 65px;
 
         .level {
           position: absolute;
