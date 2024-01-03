@@ -86,7 +86,7 @@
           <h1></h1>
           <div class="matches container">
             <div
-              v-for="match in sorted(matches)"
+              v-for="(match, index) in sorted(matches)"
               class="alert row w-100"
               :class="{
                 'bg-win': win(match.participants),
@@ -210,16 +210,13 @@
               </div>
               <div class="col d-flex justify-content-end align-items-end">
                 <div
-                  @click="show = !show"
-                  class="d-flex justify-content-center align-items-center obj p-2 rounded-2"
+                  @click="toggleShow(index)"
+                  class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer"
                 >
-                  <i
-                    class="fa-solid fa-chevron-down"
-                    :class="{ rotated: show }"
-                  ></i>
+                  <i class="fa-solid fa-chevron-down" ref="chevron"></i>
                 </div>
               </div>
-              <div class="all-players" :class="{ opened: show }">
+              <div class="all-players" ref="players">
                 <div
                   v-for="player in match.participants"
                   class="player p-1"
@@ -445,6 +442,12 @@ export default {
         (a, b) => b.gameStartTimestamp - a.gameStartTimestamp
       );
     },
+    toggleShow(index) {
+      const currentMenu = this.$refs.players;
+      const currentArrow = this.$refs.chevron;
+      currentMenu[index].classList.toggle("opened");
+      currentArrow[index].classList.toggle("rotated");
+    },
   },
   mounted() {
     this.getSummoner();
@@ -456,6 +459,9 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
 .wrapper {
+  .cursor-pointer {
+    cursor: pointer;
+  }
   background-color: $color-prussian-blue;
   .content {
     padding-left: 180px;
