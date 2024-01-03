@@ -210,24 +210,30 @@
               </div>
               <div class="col d-flex justify-content-end align-items-end">
                 <div
+                  @click="show = !show"
                   class="d-flex justify-content-center align-items-center obj p-2 rounded-2"
                 >
-                  <i class="fa-solid fa-chevron-down"></i>
+                  <i
+                    class="fa-solid fa-chevron-down"
+                    :class="{ rotated: show }"
+                  ></i>
                 </div>
               </div>
-              <div class="all-players">
+              <div class="all-players" :class="{ opened: show }">
                 <div
                   v-for="player in match.participants"
-                  class="player p-2"
+                  class="player p-1"
                   :class="{
                     'bg-loss': !player.win,
                     'bg-win': player.win,
                   }"
                 >
-                  <h3 v-if="player.win" class="d-none winners">Winner Team</h3>
-                  <h3 v-else class="d-none losers">Loser Team</h3>
+                  <h3 v-if="player.win" class="d-none winners text-primary">
+                    Winner Team
+                  </h3>
+                  <h3 v-else class="d-none losers text-danger">Loser Team</h3>
                   <div
-                    class="border rounded-3 p-2 m-1"
+                    class="border rounded-3 p-2"
                     :class="{
                       'border-danger': !player.win,
                       'border-primary': player.win,
@@ -263,6 +269,7 @@ export default {
       store,
       runes: [],
       profileRank: [],
+      show: false,
     };
   },
   methods: {
@@ -486,11 +493,34 @@ export default {
         height: 120px;
       }
     }
-    .player {
-      &:first-child h3,
-      &:nth-child(6) h3 {
-        display: block !important;
-        font-family: $font-LOL;
+    i {
+      transition: all 0.5s ease;
+
+      &.rotated {
+        transform: rotate(180deg);
+      }
+    }
+
+    .all-players {
+      height: 0px;
+      overflow: hidden;
+      transition: all 0.7s ease;
+      &.opened {
+        height: 670px;
+        margin-top: 15px;
+      }
+      .player {
+        padding: 3px;
+        &:nth-child(6) {
+          margin-top: 20px;
+        }
+
+        &:first-child h3,
+        &:nth-child(6) h3 {
+          display: block !important;
+          font-family: $font-LOL;
+          padding: 10px 0;
+        }
       }
     }
   }
