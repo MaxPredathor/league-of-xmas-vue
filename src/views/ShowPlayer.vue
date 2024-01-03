@@ -344,14 +344,16 @@
                   </h3>
                   <h3 v-else class="d-none losers text-danger">Loser Team</h3>
                   <div
-                    class="border rounded-3 p-2"
+                    class="border rounded-3 p-2 container"
                     :class="{
                       'border-danger': !player.win,
                       'border-primary': player.win,
                     }"
                   >
-                    <div class="d-flex">
-                      <div class="specific-icon">
+                    <div
+                      class="d-flex justify-content-between align-items-start"
+                    >
+                      <div class="specific-icon col">
                         <img
                           v-if="player.championName !== 'FiddleSticks'"
                           :src="
@@ -360,7 +362,7 @@
                             '.png'
                           "
                           :alt="player.championName"
-                          class="h-100"
+                          class="h-100 w-100"
                         />
                         <img
                           v-else
@@ -370,7 +372,7 @@
                             '.png'
                           "
                           :alt="player.championName"
-                          class="h-100"
+                          class="h-100 w-100"
                         />
                         <div class="level">{{ player.champLevel }}</div>
                       </div>
@@ -419,7 +421,7 @@
                           v-if="gamemode(match.queueId) !== 'Arena'"
                         >
                           <img
-                            class="w-75 m-1 mt-2"
+                            class="w-75 ms-1 mt-1"
                             :src="
                               store.runeImage2 +
                               getSecondaryRuneStyle(match, player.summonerName)
@@ -427,6 +429,38 @@
                             alt="rune 2"
                           />
                         </div>
+                      </div>
+                      <div class="px-2 col-2">
+                        <h5 class="text-white font-lol">
+                          {{ player.summonerName }}
+                        </h5>
+                        <!-- <span>{{ getOtherRanks(player) }}</span> -->
+                      </div>
+                      <div class="px-2 col-2">
+                        <h5 class="text-white font-lol m-0">KDA</h5>
+                        <span
+                          >{{ player.kills }} / {{ player.deaths }} /
+                          {{ player.assists }}</span
+                        >
+                        <h6>KDA: {{ player.challenges.kda.toFixed(2) }}</h6>
+                      </div>
+                      <div>
+                        <h5 class="text-white font-lol">Damage</h5>
+                        <span>{{ player.totalDamageDealtToChampions }}</span>
+                      </div>
+                      <div>
+                        <h5 class="text-white font-lol">Gold</h5>
+                        <span
+                          >{{ (player.goldEarned / 1000).toFixed(1) }}k</span
+                        >
+                      </div>
+                      <div>
+                        <h5 class="text-white font-lol">Minions</h5>
+                        <span>{{ player.totalMinionsKilled }}</span>
+                      </div>
+                      <div>
+                        <h5 class="text-white font-lol">Vision</h5>
+                        <span>{{ player.visionScore }}</span>
                       </div>
                     </div>
                   </div>
@@ -515,6 +549,23 @@ export default {
         }
       });
     },
+    // getOtherRanks(player) {
+    //   let playerId;
+    //   const dataurl = store.playersUrls.summonerData + player.summonerName;
+    //   axios.get(dataurl, { params: { api_key: store.apiKey } }).then((res) => {
+    //     playerId = res.data.id;
+    //   });
+    //   const rankUrl = store.playersUrls.summonerRank + playerId;
+    //   axios.get(rankUrl, { params: { api_key: store.apiKey } }).then((res) => {
+    //     if (res.data.length > 0) {
+    //       res.data.forEach((element) => {
+    //         if (element.queueType == "RANKED_SOLO_5x5") {
+    //           return element.tier.slice(0, 1) + " " + element.rank;
+    //         }
+    //       });
+    //     }
+    //   });
+    // },
     // getRankImage(rank) {
     //   console.log(rank);
     //   return (
@@ -715,6 +766,9 @@ export default {
 @use "../assets/style/partials/variables" as *;
 
 .wrapper {
+  .font-lol {
+    font-family: $font-LOL;
+  }
   .cursor-pointer {
     cursor: pointer;
   }
@@ -780,7 +834,7 @@ export default {
       transition: all 0.7s ease;
 
       &.opened {
-        height: 1050px;
+        height: 1183px;
         margin-top: 15px;
       }
 
@@ -801,8 +855,8 @@ export default {
 
       .specific-icon {
         position: relative;
-        max-width: 65px;
-        max-height: 65px;
+        max-width: 78px;
+        max-height: 78px;
 
         .level {
           position: absolute;
