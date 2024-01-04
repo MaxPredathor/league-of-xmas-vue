@@ -34,9 +34,13 @@ header {
   color: white;
   border-top: 1px solid goldenrod;
   border-bottom: 1px solid goldenrod;
-  // width: 100%;
-  // position: fixed;
-  // z-index: 9999;
+  width: 100%;
+  height: 150px;
+  position: fixed;
+  z-index: 9999;
+}
+main {
+  padding-top: 150px;
 }
 
 footer {

@@ -16,7 +16,7 @@
       <!-- Start Navbar routes -->
       <div class="col-8 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
-          <div class="pe-2">
+          <div class="pe-4">
             <a href="#">
               <img
                 v-for="(el, index) in champsPng"
@@ -30,13 +30,17 @@
           <li
             v-for="(el, index) in navItems"
             :key="index"
-            class="px-3"
+            class="px-3 mx-1"
             :class="{ active: this.active === index }"
             @click="this.active = index"
           >
             <router-link :to="el.route">{{ el.name }}</router-link>
           </li>
-          <li v-for="(el, index) in navItemsSecond" :key="index" class="px-3">
+          <li
+            v-for="(el, index) in navItemsSecond"
+            :key="index"
+            class="px-3 mx-1"
+          >
             <a :href="el.route" class="position-relative"
               >{{ el.name }}
               <i class="position-absolute fa-solid fa-turn-up"></i
