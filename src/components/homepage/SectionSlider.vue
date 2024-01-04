@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Ciao</h1>
     <swiper
       :effect="'coverflow'"
       :grabCursor="true"
@@ -8,32 +9,23 @@
       :coverflowEffect="{
         rotate: 50,
         stretch: 0,
-        depth: 100,
+        depth: 150,
         modifier: 1,
-        slideShadows: true,
+        slideShadows: false,
       }"
       :pagination="false"
       :loop="true"
       :modules="modules"
       class="mySwiper py-2"
     >
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-      </swiper-slide>
-      <swiper-slide>
-        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+      <swiper-slide
+        class="d-flex flex-column justify-content-center align-items-center"
+        v-for="(partner, index) in partners"
+        :key="index"
+      >
+        <div class="img-cont">
+          <img :src="path + partner.img" />
+        </div>
       </swiper-slide>
     </swiper>
   </div>
@@ -64,7 +56,31 @@ export default {
     };
   },
   data() {
-    return {};
+    return {
+      path: "/images/logos/",
+      partners: [
+        {
+          name: "Google",
+          img: "logo-google.png",
+        },
+        {
+          name: "Adidas",
+          img: "logo-adidas.png",
+        },
+        {
+          name: "Fedex",
+          img: "logo-fedex.png",
+        },
+        {
+          name: "Samsung",
+          img: "logo-samsung.png",
+        },
+        {
+          name: "Spotify",
+          img: "logo-spotify.png",
+        },
+      ],
+    };
   },
   methods: {},
 };
@@ -84,13 +100,23 @@ export default {
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 450px;
-  height: 250px;
+  width: 300px;
+  height: 150px;
+  .img-cont {
+    width: 50%;
+    height: 70%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  object-fit: contain;
-}
+// .img-cont {
+//   width: 50%;
+//   img {
+//     width: 100%;
+//   }
+// }
 </style>
