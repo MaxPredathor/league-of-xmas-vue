@@ -6,9 +6,7 @@
           <div id="wings">
             <div v-if="rank" class="rank">
               <img
-                :src="
-                  '/public/images/Ranked Emblems Latest/Wings/' + rank + '.png'
-                "
+                :src="'/images/Ranked Emblems Latest/Wings/' + rank + '.png'"
                 :alt="rank"
               />
             </div>
@@ -378,6 +376,7 @@
                       </div>
                       <div
                         class="specific-icon d-flex flex-wrap align-items-center flex-column g-0"
+                        ì
                       >
                         <div class="w-50 h-50 p-1">
                           <img
@@ -430,23 +429,27 @@
                           />
                         </div>
                       </div>
-                      <div class="px-2 col-2">
+                      <div class="pe-2 col-2">
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
                         <!-- <span>{{ getOtherRanks(player) }}</span> -->
                       </div>
                       <div class="px-2 col-2">
-                        <h5 class="text-white font-lol m-0">KDA</h5>
-                        <span
+                        <h5 class="text-white font-lol m-0 text-center">KDA</h5>
+                        <span class="d-block text-center"
                           >{{ player.kills }} / {{ player.deaths }} /
                           {{ player.assists }}</span
                         >
-                        <h6>KDA: {{ player.challenges.kda.toFixed(2) }}</h6>
+                        <h6 class="text-center" v-if="player.challenges">
+                          KDA: {{ player.challenges.kda.toFixed(2) }}
+                        </h6>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol m-0">Damage</h5>
-                        <span class="my-1 d-block">{{
+                        <h5 class="text-white font-lol m-0 text-center">
+                          Damage
+                        </h5>
+                        <span class="my-1 d-block text-center">{{
                           player.totalDamageDealtToChampions
                         }}</span>
                         <div class="totalbar w-100 mt-2 rounded-pill">
@@ -457,18 +460,22 @@
                         </div>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol m-0">Gold</h5>
-                        <span
+                        <h5 class="text-white font-lol">Gold</h5>
+                        <span class="text-center d-block"
                           >{{ (player.goldEarned / 1000).toFixed(1) }}k</span
                         >
                       </div>
                       <div>
-                        <h5 class="text-white font-lol m-0">Minions</h5>
-                        <span>{{ player.totalMinionsKilled }}</span>
+                        <h5 class="text-white font-lol">Minions</h5>
+                        <span class="text-center d-block">{{
+                          player.totalMinionsKilled
+                        }}</span>
                       </div>
                       <div>
-                        <h5 class="text-white font-lol m-0">Vision</h5>
-                        <span>{{ player.visionScore }}</span>
+                        <h5 class="text-white font-lol">Vision</h5>
+                        <span class="text-center d-block">{{
+                          player.visionScore
+                        }}</span>
                       </div>
                     </div>
                   </div>
