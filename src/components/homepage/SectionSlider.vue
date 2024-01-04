@@ -13,6 +13,11 @@
         modifier: 1,
         slideShadows: false,
       }"
+      :autoplay="{
+        delay: 7000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }"
       :pagination="false"
       :loop="true"
       :modules="modules"
@@ -42,7 +47,7 @@ import "swiper/scss/effect-coverflow";
 import "swiper/scss/pagination";
 
 // import required modules
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 
 export default {
   components: {
@@ -52,7 +57,7 @@ export default {
   name: "SectionSlider",
   setup() {
     return {
-      modules: [EffectCoverflow, Pagination],
+      modules: [EffectCoverflow, Pagination, Autoplay],
     };
   },
   data() {

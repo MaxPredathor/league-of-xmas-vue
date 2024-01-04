@@ -1,5 +1,5 @@
 <template>
-  <div class="external position-relative">
+  <div class="external">
     <h1 class="fst-italic display-4 fw-bold position-absolute m-0">
       CHAMPIONS
     </h1>
@@ -164,7 +164,7 @@ export default {
 h1 {
   z-index: 998;
   right: 50%;
-  top: -1.8%;
+  top: 0;
   transform: translate(50%, -50%);
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: goldenrod;

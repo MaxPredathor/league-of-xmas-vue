@@ -1,7 +1,7 @@
 <template>
   <swiper
     :autoplay="{
-      delay: 2500,
+      delay: 5000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     }"
