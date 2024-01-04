@@ -35,12 +35,14 @@ header {
   border-top: 1px solid goldenrod;
   border-bottom: 1px solid goldenrod;
   width: 100%;
-  height: 150px;
+  height: 100px;
   position: fixed;
   z-index: 9999;
+  display: flex;
+  align-items: center;
 }
 main {
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 footer {

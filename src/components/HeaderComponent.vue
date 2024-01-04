@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <nav class="row justify-content-between align-items-center py-5">
+    <nav class="row justify-content-between align-items-center py-3">
       <!-- Start Logo section -->
       <div class="col-2 d-flex gap-2 align-items-center">
         <div class="position-relative logo-cont-first">

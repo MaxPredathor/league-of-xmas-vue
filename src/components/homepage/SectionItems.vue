@@ -194,7 +194,6 @@ export default {
 .bckdrop {
   width: 500px;
   height: 250px;
-  // background-color: rgba(0, 0, 0, 0.205);
   border-radius: 50px;
   box-shadow: -10px -10px goldenrod;
   padding: 70px 0;
