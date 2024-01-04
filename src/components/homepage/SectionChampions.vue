@@ -1,5 +1,8 @@
 <template>
   <div class="external">
+    <h1 class="fst-italic display-4 fw-bold position-absolute m-0">
+      CHAMPIONS
+    </h1>
     <div class="background">
       <svg class="shape-a" width="200" height="200">
         <circle cx="100" cy="100" r="100" />
@@ -158,8 +161,18 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../assets/style/partials/variables" as *;
+h1 {
+  z-index: 998;
+  right: 50%;
+  top: 0;
+  transform: translate(50%, -50%);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: goldenrod;
+  color: white;
+  text-shadow: black 8px 0 10px;
+}
 .external {
-  border-top: 3px solid goldenrod;
+  border-top: 4px solid goldenrod;
   border-bottom: 4px solid goldenrod;
   position: relative;
   .background {
