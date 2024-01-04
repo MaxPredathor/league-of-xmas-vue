@@ -436,9 +436,19 @@
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
-                        <span v-if="checkArrayWithName(player.summonerName)">{{
-                          getRankWithName(player.summonerName)
-                        }}</span>
+                        <span v-if="checkArrayWithName(player.summonerName)">
+                          <img
+                            class="w-25"
+                            :src="
+                              '/images/Ranked Emblems Latest/Rank=' +
+                              getRankedIconByTier(
+                                getRankWithName(player.summonerName)
+                              )
+                            "
+                            alt=""
+                          />
+                          {{ getRankWithName(player.summonerName) }}</span
+                        >
                         <span
                           v-else-if="!checkArrayWithName(player.summonerName)"
                         >
@@ -617,30 +627,54 @@ export default {
         });
     },
     getRankedIconByTier(tier) {
-      switch (tier) {
-        case "IRON":
-          return "IRON.png";
-        case "BRONZE":
-          return "BRONZE.png";
-        case "SILVER":
-          return "SILVER.png";
-        case "GOLD":
-          return "GOLD.png";
-        case "PLATINUM":
-          return "PLATINUM.png";
-        case "EMERALD":
-          return "EMERALD.png";
-        case "DIAMOND":
-          return "DIAMOND.png";
-        case "MASTER":
-          return "MASTER.png";
-        case "GRANDMASTER":
-          return "GRANDMASTER.png";
-        case "CHALLENGER":
-          return "CHALLENGER.png";
-        default:
-          return "Invalid rank entered.";
+      console.log(tier);
+      if (tier.includes("I")) {
+        return "IRON.png";
+      } else if (tier.includes("B")) {
+        return "BRONZE.png";
+      } else if (tier.includes("S")) {
+        return "SILVER.png";
+      } else if (tier.includes("GM")) {
+        return "GRANDMASTER.png";
+      } else if (tier.includes("P")) {
+        return "PLATINUM.png";
+      } else if (tier.includes("E")) {
+        return "EMERALD.png";
+      } else if (tier.includes("D")) {
+        return "DIAMOND.png";
+      } else if (tier.includes("M")) {
+        return "MASTER.png";
+      } else if (tier.includes("G")) {
+        return "GOLD.png";
+      } else if (tier.includes("C")) {
+        return "CHALLENGER.png";
+      } else {
+        return;
       }
+      // switch (tier) {
+      //   case tier.includes("I"):
+      //     return "IRON.png";
+      //   case tier.includes("B"):
+      //     return "BRONZE.png";
+      //   case tier.includes("S"):
+      //     return "SILVER.png";
+      //   case tier.includes("G"):
+      //     return "GOLD.png";
+      //   case tier.includes("P"):
+      //     return "PLATINUM.png";
+      //   case tier.includes("E"):
+      //     return "EMERALD.png";
+      //   case tier.includes("D"):
+      //     return "DIAMOND.png";
+      //   case tier.includes("M"):
+      //     return "MASTER.png";
+      //   case tier.includes("GM"):
+      //     return "GRANDMASTER.png";
+      //   case tier.includes("C"):
+      //     return "CHALLENGER.png";
+      //   default:
+      //     return "Invalid rank entered.";
+      // }
     },
     checkArrayWithName(player) {
       let targetObject = this.allRanks.find((obj) => obj.name == player);
@@ -685,9 +719,15 @@ export default {
                     } else {
                       rankNumber = "/";
                     }
+                    let rank;
+                    if (element.tier == "GRANDMASTER") {
+                      rank = "GM";
+                    } else {
+                      rank = element.tier.slice(0, 1);
+                    }
                     this.allRanks.push({
                       name: element.summonerName,
-                      rank: element.tier.slice(0, 1) + rankNumber,
+                      rank: rank + rankNumber,
                     });
                   } else {
                     // this.allRanks.push("-");
