@@ -185,7 +185,7 @@
                     {{ Math.floor(match.gameDuration / 60) }} min.
                   </div>
                   <div>
-                    <strong>{{ gamemode(match.queueId) }}</strong>
+                    <strong class="fs-4">{{ gamemode(match.queueId) }}</strong>
                   </div>
                 </div>
                 <div class="col d-flex">
@@ -827,6 +827,7 @@ export default {
   .font-lol {
     font-family: $font-LOL;
   }
+
   .cursor-pointer {
     cursor: pointer;
   }
@@ -856,9 +857,11 @@ export default {
         .obj {
           background-color: #2a73fa;
         }
+
         .totalbar {
           background-color: #2a4796;
           height: 5px;
+
           .bar {
             background-color: #2a73fa;
           }
@@ -877,9 +880,11 @@ export default {
         .obj {
           background-color: #ff4e4c;
         }
+
         .totalbar {
           background-color: #53263e;
           height: 5px;
+
           .bar {
             background-color: #ff4e4c;
           }
@@ -909,6 +914,7 @@ export default {
         height: 1183px;
         margin-top: 15px;
       }
+
       .bg-win-in {
         background-color: $color-game-win;
 
@@ -921,9 +927,11 @@ export default {
         .obj {
           background-color: #2a73fa;
         }
+
         .totalbar {
           background-color: #2a4796;
           height: 5px;
+
           .bar {
             background-color: #2a73fa;
           }
@@ -942,14 +950,17 @@ export default {
         .obj {
           background-color: #ff4e4c;
         }
+
         .totalbar {
           background-color: #53263e;
           height: 5px;
+
           .bar {
             background-color: #ff4e4c;
           }
         }
       }
+
       .player {
         padding: 3px;
 
