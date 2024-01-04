@@ -330,7 +330,7 @@
               </div>
               <div class="all-players p-0 w-100" ref="players">
                 <div
-                  v-for="player in match.participants"
+                  v-for="(player, index) in match.participants"
                   class="player p-1 w-100"
                   :class="{
                     'bg-loss-in': !player.win,
@@ -433,7 +433,7 @@
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
-                        <!-- <span>{{ getOtherRanks(player) }}</span> -->
+                        <span>{{ allRanks[index] }}</span>
                       </div>
                       <div class="px-2 col-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
@@ -511,6 +511,7 @@ export default {
       champMastery: [],
       masteryReady: false,
       championsArray: [],
+      allRanks: [],
     };
   },
   methods: {
@@ -569,23 +570,39 @@ export default {
           this.rank = "";
         });
     },
-    // getOtherRanks(player) {
-    //   let playerId;
-    //   const dataurl = store.playersUrls.summonerData + player.summonerName;
-    //   axios.get(dataurl, { params: { api_key: store.apiKey } }).then((res) => {
-    //     playerId = res.data.id;
-    //   });
-    //   const rankUrl = store.playersUrls.summonerRank + playerId;
-    //   axios.get(rankUrl, { params: { api_key: store.apiKey } }).then((res) => {
-    //     if (res.data.length > 0) {
-    //       res.data.forEach((element) => {
-    //         if (element.queueType == "RANKED_SOLO_5x5") {
-    //           return element.tier.slice(0, 1) + " " + element.rank;
-    //         }
-    //       });
-    //     }
-    //   });
-    // },
+    getOtherRanks(match) {
+      this.allRanks = [];
+      let playerId;
+
+      match.participants.forEach((value) => {
+        const dataurl = store.playersUrls.summonerData + value.summonerName;
+        axios
+          .get(dataurl, { params: { api_key: store.apiKey } })
+          .then((res) => {
+            playerId = res.data.id;
+            console.log(playerId);
+            const rankUrl = store.playersUrls.summonerRank + playerId;
+            //console.log(rankUrl);
+            axios
+              .get(rankUrl, { params: { api_key: store.apiKey } })
+              .then((res) => {
+                if (res.data.length > 0) {
+                  res.data.forEach((element) => {
+                    if (element.queueType == "RANKED_SOLO_5x5") {
+                      const firstLetterTier = element.tier.slice(0, 1);
+                      let numericRank;
+                      if (element.rank === "I") numericRank = 1;
+                      else if (element.rank === "II") numericRank = 2;
+                      else if (element.rank === "III") numericRank = 3;
+                      else if (element.rank === "IV") numericRank = 4;
+                      this.allRanks.push(firstLetterTier + " " + numericRank);
+                    }
+                  });
+                }
+              });
+          });
+      });
+    },
     // getRankImage(rank) {
     //   console.log(rank);
     //   return (
@@ -765,6 +782,7 @@ export default {
       );
     },
     toggleShow(index) {
+      this.getOtherRanks(this.matches[index]);
       const currentMenu = this.$refs.players;
       const currentArrow = this.$refs.chevron;
       currentMenu.forEach((value) => {
