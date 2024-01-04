@@ -159,7 +159,7 @@ export default {
 <style lang="scss" scoped>
 @use "../../assets/style/partials/variables" as *;
 .external {
-  border-top: 3px solid goldenrod;
+  border-top: 4px solid goldenrod;
   border-bottom: 4px solid goldenrod;
   position: relative;
   .background {
