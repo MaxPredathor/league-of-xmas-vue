@@ -16,7 +16,7 @@
       <!-- Start Navbar routes -->
       <div class="col-8 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
-          <li class="pe-2">
+          <div class="pe-2">
             <a href="#">
               <img
                 v-for="(el, index) in champsPng"
@@ -26,16 +26,17 @@
                 :alt="el.name"
               />
             </a>
-          </li>
+          </div>
           <li
-            v-for="(el, id) in navItems"
-            :key="id"
-            class="px-3 position-relative"
+            v-for="(el, index) in navItems"
+            :key="index"
+            class="px-3"
+            :class="{ active: this.active === index }"
+            @click="this.active = index"
           >
             <router-link :to="el.route">{{ el.name }}</router-link>
-            <div class="void position-absolute">{{ el.name }}</div>
           </li>
-          <li v-for="(el, id) in navItemsSecond" :key="id" class="px-3">
+          <li v-for="(el, index) in navItemsSecond" :key="index" class="px-3">
             <a :href="el.route" class="position-relative"
               >{{ el.name }}
               <i class="position-absolute fa-solid fa-turn-up"></i
@@ -108,6 +109,7 @@ export default {
         },
       ],
       selected: 0,
+      active: 0,
     };
   },
   methods: {
@@ -118,7 +120,7 @@ export default {
         } else {
           this.selected = 0;
         }
-      }, 3000);
+      }, 4000);
     },
   },
   mounted() {
@@ -136,26 +138,30 @@ export default {
     width: 100%;
   }
 }
-
+.active {
+  border-bottom: 3px solid goldenrod;
+}
 ul {
+  div {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
   li {
     font-size: 1.5rem;
     text-shadow: 1px 2px 1px goldenrod;
     font-weight: bold;
     font-style: italic;
+    padding-bottom: 10px;
     &:hover {
       border-bottom: 3px solid goldenrod;
+      cursor: pointer;
     }
-
     i {
       top: 5px;
       right: -15px;
       font-size: 0.5em;
-    }
-    img {
-      width: 50px;
-      height: 50px;
-      transition: 1s all ease;
     }
     .void {
       bottom: 0;
@@ -190,7 +196,6 @@ ul {
   }
   .after {
     transition: 0.8s all ease;
-
     opacity: 0;
   }
   img {
