@@ -2,7 +2,10 @@
   <div class="wrapper w-100 py-5">
     <div class="container py-5">
       <div class="d-flex align-items-start">
-        <div class="profile d-flex flex-column align-items-center">
+        <div
+          class="profile d-flex flex-column align-items-center"
+          style="width: 15%"
+        >
           <div id="wings">
             <div v-if="rank" class="rank">
               <img
@@ -165,7 +168,7 @@
             </div>
           </div>
         </div>
-        <div class="content w-100">
+        <div class="content" style="width: 85%">
           <h1></h1>
           <div class="matches">
             <div
@@ -350,7 +353,7 @@
                     <div
                       class="d-flex justify-content-between align-items-start"
                     >
-                      <div class="specific-icon col">
+                      <div class="specific-icon">
                         <img
                           v-if="player.championName !== 'FiddleSticks'"
                           :src="
@@ -369,7 +372,8 @@
                             '.png'
                           "
                           :alt="player.championName"
-                          class="h-100 w-100"
+                          class=""
+                          style="width: 78px; height: 78px"
                         />
                         <div class="level">{{ player.champLevel }}</div>
                       </div>
@@ -442,7 +446,7 @@
                         </span>
                         <span v-else> {{ rankError }}</span>
                       </div>
-                      <div class="px-2 col-2">
+                      <div class="px-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
                         <span class="d-block text-center"
                           >{{ player.kills }} / {{ player.deaths }} /
@@ -483,6 +487,40 @@
                         <span class="text-center d-block">{{
                           player.visionScore
                         }}</span>
+                      </div>
+                      <div
+                        class="d-flex flex-wrap flex-column items align-items-center p-0 g-0"
+                        style="height: 74px"
+                      >
+                        <div class="h-50 pt-1 me-1" v-for="num in 6">
+                          <img
+                            v-if="player['item' + (num - 1)]"
+                            class="h-100"
+                            :src="
+                              store.ItemsUrls.itemIcon +
+                              player['item' + (num - 1)] +
+                              '.png'
+                            "
+                            :alt="'item' + num"
+                          />
+                          <div
+                            v-else
+                            class="h-100 obj rounded-2 pt-1 h-100"
+                            style="
+                              width: 33px !important;
+                              height: 33px !important;
+                            "
+                          ></div>
+                        </div>
+                        <div style="width: 35px" class="p-1 lume">
+                          <img
+                            class="w-100"
+                            :src="
+                              store.ItemsUrls.itemIcon + player.item6 + '.png'
+                            "
+                            alt=""
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -968,6 +1006,10 @@ export default {
       height: 0px;
       overflow: hidden;
       transition: all 0.7s ease;
+
+      h5 {
+        font-size: 1.1em;
+      }
 
       &.opened {
         height: 1183px;
