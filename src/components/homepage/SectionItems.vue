@@ -1,5 +1,19 @@
 <template>
   <div class="external">
+    <div class="background">
+      <svg class="shape-a" width="200" height="200">
+        <circle cx="100" cy="100" r="100" />
+      </svg>
+      <svg class="shape-b" width="80" height="80">
+        <circle cx="40" cy="40" r="40" />
+      </svg>
+      <svg class="shape-c" width="1000" height="1000">
+        <circle cx="500" cy="500" r="500" />
+      </svg>
+      <svg class="shape-d" width="300" height="300">
+        <circle cx="150" cy="150" r="150" />
+      </svg>
+    </div>
     <div class="container py-5">
       <div class="row align-items-center">
         <div class="col-5">
@@ -119,9 +133,9 @@ export default {
     // Api to get champs infos
     getItems() {
       axios.get(store.ItemsUrls.allItems).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         this.items = Object.entries(res.data.data);
-        console.log(this.items);
+        // console.log(this.items);
         this.randomItems();
       });
     },
@@ -132,7 +146,7 @@ export default {
           this.randomItemsList.push(this.items[randNumber]);
         }
       }
-      console.log(this.randomItemsList);
+      // console.log(this.randomItemsList);
     },
   },
   mounted() {
@@ -148,8 +162,38 @@ export default {
 .external {
   border-top: 3px solid goldenrod;
   border-bottom: 4px solid goldenrod;
+  position: relative;
+  background-color: white;
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    svg {
+      fill: rgba(0, 0, 0, 0.1);
+      position: absolute;
+    }
+    .shape-a {
+      bottom: -80px;
+      left: 1750px;
+    }
+    .shape-b {
+      top: 470px;
+      right: 1285px;
+    }
+    .shape-c {
+      top: -400px;
+      right: 1200px;
+    }
+    .shape-d {
+      top: -50px;
+      right: 20%;
+    }
+  }
 }
 .bckdrop {
+  width: 500px;
+  height: 250px;
   // background-color: rgba(0, 0, 0, 0.205);
   border-radius: 50px;
   box-shadow: -10px -10px goldenrod;
