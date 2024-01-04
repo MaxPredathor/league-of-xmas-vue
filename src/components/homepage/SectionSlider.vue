@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <h1>Ciao</h1>
+  <div class="position-relative">
+    <h1 class="fst-italic display-4 fw-bold position-absolute m-0">PARTNERS</h1>
     <swiper
       :effect="'coverflow'"
       :grabCursor="true"
       :centeredSlides="true"
       :slidesPerView="'auto'"
       :coverflowEffect="{
-        rotate: 50,
+        rotate: 10,
         stretch: 0,
         depth: 150,
         modifier: 1,
@@ -88,6 +88,16 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../assets/style/partials/variables" as *;
+h1 {
+  z-index: 998;
+  right: 50%;
+  top: -6%;
+  transform: translate(50%, -50%);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: goldenrod;
+  color: white;
+  text-shadow: black 8px 0 10px;
+}
 .swiper {
   width: 100%;
   padding-top: 50px;
