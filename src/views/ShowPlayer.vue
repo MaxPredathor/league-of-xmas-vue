@@ -1052,7 +1052,7 @@ export default {
       }
 
       &.opened {
-        height: 1183px;
+        height: 1060px;
         margin-top: 15px;
       }
 
