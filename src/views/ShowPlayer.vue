@@ -596,8 +596,8 @@ export default {
         return "BRONZE.png";
       } else if (tier.includes("S")) {
         return "SILVER.png";
-      } else if (tier.includes("G")) {
-        return "GOLD.png";
+      } else if (tier.includes("GM")) {
+        return "GRANDMASTER.png";
       } else if (tier.includes("P")) {
         return "PLATINUM.png";
       } else if (tier.includes("E")) {
@@ -606,8 +606,8 @@ export default {
         return "DIAMOND.png";
       } else if (tier.includes("M")) {
         return "MASTER.png";
-      } else if (tier.includes("GM")) {
-        return "GRANDMASTER.png";
+      } else if (tier.includes("G")) {
+        return "GOLD.png";
       } else if (tier.includes("C")) {
         return "CHALLENGER.png";
       } else {
@@ -681,9 +681,15 @@ export default {
                     } else {
                       rankNumber = "/";
                     }
+                    let rank;
+                    if (element.tier == "GRANDMASTER") {
+                      rank = "GM";
+                    } else {
+                      rank = element.tier.slice(0, 1);
+                    }
                     this.allRanks.push({
                       name: element.summonerName,
-                      rank: element.tier.slice(0, 1) + rankNumber,
+                      rank: rank + rankNumber,
                     });
                   } else {
                     // this.allRanks.push("-");
