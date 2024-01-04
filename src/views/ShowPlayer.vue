@@ -337,10 +337,6 @@
                     'bg-win-in': player.win,
                   }"
                 >
-                  <h3 v-if="player.win" class="d-none winners text-primary">
-                    Winner Team
-                  </h3>
-                  <h3 v-else class="d-none losers text-danger">Loser Team</h3>
                   <div
                     class="border rounded-3 p-2 container"
                     :class="{
@@ -433,7 +429,7 @@
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
-                        <span>{{ allRanks[index] }}</span>
+                        <span>{{ getOtherRanks(player) }}</span>
                       </div>
                       <div class="px-2 col-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
@@ -570,12 +566,10 @@ export default {
           this.rank = "";
         });
     },
-    getOtherRanks(match) {
-      this.allRanks = [];
-      let playerId;
-
-      match.participants.forEach((value) => {
-        const dataurl = store.playersUrls.summonerData + value.summonerName;
+    getOtherRanks(player) {
+      setTimeout(() => {
+        let playerId;
+        const dataurl = store.playersUrls.summonerData + player.summonerName;
         axios
           .get(dataurl, { params: { api_key: store.apiKey } })
           .then((res) => {
@@ -583,25 +577,27 @@ export default {
             console.log(playerId);
             const rankUrl = store.playersUrls.summonerRank + playerId;
             //console.log(rankUrl);
-            axios
-              .get(rankUrl, { params: { api_key: store.apiKey } })
-              .then((res) => {
-                if (res.data.length > 0) {
-                  res.data.forEach((element) => {
-                    if (element.queueType == "RANKED_SOLO_5x5") {
-                      const firstLetterTier = element.tier.slice(0, 1);
-                      let numericRank;
-                      if (element.rank === "I") numericRank = 1;
-                      else if (element.rank === "II") numericRank = 2;
-                      else if (element.rank === "III") numericRank = 3;
-                      else if (element.rank === "IV") numericRank = 4;
-                      this.allRanks.push(firstLetterTier + " " + numericRank);
-                    }
-                  });
-                }
-              });
+            setTimeout(() => {
+              axios
+                .get(rankUrl, { params: { api_key: store.apiKey } })
+                .then((res) => {
+                  if (res.data.length > 0) {
+                    res.data.forEach((element) => {
+                      if (element.queueType == "RANKED_SOLO_5x5") {
+                        const firstLetterTier = element.tier.slice(0, 1);
+                        let numericRank;
+                        if (element.rank === "I") numericRank = 1;
+                        else if (element.rank === "II") numericRank = 2;
+                        else if (element.rank === "III") numericRank = 3;
+                        else if (element.rank === "IV") numericRank = 4;
+                        return firstLetterTier + " " + numericRank;
+                      }
+                    });
+                  }
+                });
+            }, 1500);
           });
-      });
+      }, 1500);
     },
     // getRankImage(rank) {
     //   console.log(rank);
@@ -782,7 +778,7 @@ export default {
       );
     },
     toggleShow(index) {
-      this.getOtherRanks(this.matches[index]);
+      //this.getOtherRanks(this.matches[index]);
       const currentMenu = this.$refs.players;
       const currentArrow = this.$refs.chevron;
       currentMenu.forEach((value) => {
