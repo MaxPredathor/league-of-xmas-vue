@@ -322,7 +322,9 @@
                 <div class="col d-flex justify-content-end align-items-end">
                   <div
                     @click="toggleShow(index)"
-                    @click.once="getOtherRanks(this.matches[0].participants)"
+                    @click.once="
+                      getOtherRanks(this.matches[index].participants)
+                    "
                     class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer"
                   >
                     <i class="fa-solid fa-chevron-down" ref="chevron"></i>
@@ -331,7 +333,7 @@
               </div>
               <div class="all-players p-0 w-100" ref="players">
                 <div
-                  v-for="(player, i) in match.participants"
+                  v-for="player in match.participants"
                   class="player p-1 w-100"
                   :class="{
                     'bg-loss-in': !player.win,
@@ -430,7 +432,15 @@
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
-                        <span>{{ allRanks[i] }}</span>
+                        <span v-if="checkArrayWithName(player.summonerName)">{{
+                          getRankWithName(player.summonerName)
+                        }}</span>
+                        <span
+                          v-else-if="!checkArrayWithName(player.summonerName)"
+                        >
+                          Unranked
+                        </span>
+                        <span v-else> {{ rankError }}</span>
                       </div>
                       <div class="px-2 col-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
@@ -509,6 +519,7 @@ export default {
       masteryReady: false,
       championsArray: [],
       allRanks: [],
+      rankError: null,
     };
   },
   methods: {
@@ -593,8 +604,19 @@ export default {
           return "Invalid rank entered.";
       }
     },
+    checkArrayWithName(player) {
+      let targetObject = this.allRanks.find((obj) => obj.name == player);
+      if (targetObject) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    getRankWithName(player) {
+      let targetObject = this.allRanks.find((obj) => obj.name == player);
+      return targetObject.rank;
+    },
     getOtherRanks(players) {
-      this.allRanks = [];
       let summonerId;
       let rankNumber;
       players.forEach((player) => {
@@ -611,27 +633,32 @@ export default {
               .get(rankUrl, {
                 params: { api_key: store.apiKey },
               })
-              .then((res) => {
-                res.data.forEach((element) => {
-                  if (Object.values(element).includes("RANKED_SOLO_5x5")) {
-                    if (element.queueType === "RANKED_SOLO_5x5") {
-                      if (res.data.rank === "I") {
-                        rankNumber = 1;
-                      } else if (res.data.rank === "II") {
-                        rankNumber = 2;
-                      } else if (res.data.rank === "III") {
-                        rankNumber = 3;
-                      } else if (res.data.rank === "IV") {
-                        rankNumber = 4;
-                      } else {
-                        return;
-                      }
-                      this.allRanks.push(element.tier.slice(0, 1) + rankNumber);
+              .then((response) => {
+                response.data.forEach((element) => {
+                  if (element.queueType.includes("RANKED_SOLO_5x5")) {
+                    if (element.rank == "I") {
+                      rankNumber = 1;
+                    } else if (element.rank === "II") {
+                      rankNumber = 2;
+                    } else if (element.rank == "III") {
+                      rankNumber = 3;
+                    } else if (element.rank == "IV") {
+                      rankNumber = 4;
+                    } else {
+                      rankNumber = "/";
                     }
+                    this.allRanks.push({
+                      name: element.summonerName,
+                      rank: element.tier.slice(0, 1) + rankNumber,
+                    });
                   } else {
-                    this.allRanks.push("-");
+                    // this.allRanks.push("-");
+                    //element.tier.slice(0, 1) + rankNumber
                   }
                 });
+              })
+              .catch((error) => {
+                this.rankError = error;
               });
           });
       });
