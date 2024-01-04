@@ -284,7 +284,7 @@
                         <h5 class="text-white font-lol">
                           {{ player.summonerName }}
                         </h5>
-                        <span>{{ getOtherRanks(player) }}</span>
+                        <span>{{ allRanks[index] }}</span>
                       </div>
                       <div class="px-2 col-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
@@ -451,27 +451,25 @@ export default {
             console.log(playerId);
             const rankUrl = store.playersUrls.summonerRank + playerId;
             //console.log(rankUrl);
-            setTimeout(() => {
-              axios
-                .get(rankUrl, { params: { api_key: store.apiKey } })
-                .then((res) => {
-                  if (res.data.length > 0) {
-                    res.data.forEach((element) => {
-                      if (element.queueType == "RANKED_SOLO_5x5") {
-                        const firstLetterTier = element.tier.slice(0, 1);
-                        let numericRank;
-                        if (element.rank === "I") numericRank = 1;
-                        else if (element.rank === "II") numericRank = 2;
-                        else if (element.rank === "III") numericRank = 3;
-                        else if (element.rank === "IV") numericRank = 4;
-                        return firstLetterTier + " " + numericRank;
-                      }
-                    });
-                  }
-                });
-            }, 1500);
+            axios
+              .get(rankUrl, { params: { api_key: store.apiKey } })
+              .then((res) => {
+                if (res.data.length > 0) {
+                  res.data.forEach((element) => {
+                    if (element.queueType == "RANKED_SOLO_5x5") {
+                      const firstLetterTier = element.tier.slice(0, 1);
+                      let numericRank;
+                      if (element.rank === "I") numericRank = 1;
+                      else if (element.rank === "II") numericRank = 2;
+                      else if (element.rank === "III") numericRank = 3;
+                      else if (element.rank === "IV") numericRank = 4;
+                      this.allRanks.push(firstLetterTier + " " + numericRank);
+                    }
+                  });
+                }
+              });
           });
-      }, 1500);
+      });
     },
     // getRankImage(rank) {
     //   console.log(rank);
@@ -652,7 +650,7 @@ export default {
       );
     },
     toggleShow(index) {
-      //this.getOtherRanks(this.matches[index]);
+      this.getOtherRanks(this.matches[index]);
       const currentMenu = this.$refs.players;
       const currentArrow = this.$refs.chevron;
       currentMenu.forEach((value) => {
