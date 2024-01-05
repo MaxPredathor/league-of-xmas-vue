@@ -1,42 +1,47 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Register</h1>
-    <form class="mx-2" @submit.prevent="saveData">
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input
-          v-model="user.email"
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          v-model="user.password"
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="Password"
-        />
-      </div>
-      <div class="form-group">
-        <label for="summonerName">Summoner Name</label>
-        <input
-          v-model="user.name"
-          type="text"
-          class="form-control"
-          id="summonerName"
-          placeholder="Your Summoner Name"
-          name="summonerName"
-        />
-      </div>
-      <!-- <div class="form-group">
+    <div class="row">
+      <form class="mx-2" @submit.prevent="saveData">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            v-model="user.email"
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group position-relative">
+          <label for="password">Password</label>
+          <input
+            v-model="user.password"
+            :type="returnInputType()"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="summonerName">Summoner Name</label>
+          <input
+            v-model="user.name"
+            type="text"
+            class="form-control"
+            id="summonerName"
+            placeholder="Your Summoner Name"
+            name="summonerName"
+          />
+          <span @click="showPassword = !showPassword">
+            <i v-if="!showPassword" class="fa-regular fa-eye eye"></i>
+            <i v-else class="fa-regular fa-eye-slash eye"></i>
+          </span>
+        </div>
+        <!-- <div class="form-group">
         <label for="server">Server</label> <br />
         <select name="server" id="server">
           <option value="#EUW">Europe (EUW)</option>
@@ -44,10 +49,11 @@
           <option value="#KR">South Korea (KR)</option>
         </select>
       </div> -->
-      <button type="submit" value="Save" class="btn btn-primary my-2">
-        Submit
-      </button>
-    </form>
+        <button type="submit" value="Save" class="btn btn-primary my-2">
+          Submit
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -64,6 +70,7 @@ export default {
         email: "",
         password: "",
       },
+      showPassword: false,
     };
   },
   beforeCreate() {
@@ -88,8 +95,22 @@ export default {
         path: "/login",
       });
     },
+    returnInputType() {
+      if (this.showPassword) {
+        return "text";
+      } else {
+        return "password";
+      }
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.eye {
+  cursor: pointer;
+  position: absolute;
+  right: 1%;
+  top: 55%;
+}
+</style>
