@@ -18,15 +18,13 @@
       <div class="col-8 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
           <div class="pe-4">
-            <a href="#">
-              <img
-                v-for="(el, index) in champsPng"
-                v-show="this.selected === index"
-                :key="index"
-                :src="el.img"
-                :alt="el.name"
-              />
-            </a>
+            <img
+              v-for="(el, index) in champsPng"
+              v-show="this.selected === index"
+              :key="index"
+              :src="el.img"
+              :alt="el.name"
+            />
           </div>
           <li
             v-for="(el, index) in navItems"
