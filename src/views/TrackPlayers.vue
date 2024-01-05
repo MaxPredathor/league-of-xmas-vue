@@ -1,5 +1,5 @@
 <template>
-  <div class="m-0 position-relative">
+  <div class="m-0 position-relative vh-100">
     <div class="o-lay">
       <video autoplay loop>
         <source
@@ -8,9 +8,9 @@
         />
       </video>
     </div>
-    <div class="container py-5">
+    <div class="container pt-tanto">
       <h1 class="text-center m-0 text-white pb-4">Search a summoner</h1>
-      <div class="form-floating d-flex">
+      <div class="form-floating d-flex w-75 m-auto">
         <input
           v-model="search"
           type="text"
@@ -25,7 +25,7 @@
         >
           Search
         </button>
-        <label for="floatingInput">Write the Summoner Name</label>
+        <label for="floatingInput text-white">Write the Summoner Name</label>
       </div>
       <div class="alert alert-danger my-4" v-if="err">
         <h2 class="m-0 text-center">
@@ -87,6 +87,27 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/style/partials/_variables.scss" as *;
 
+.form-floating {
+  input {
+    background-color: transparent;
+    transition: all 0.2s linear;
+    &::placeholder {
+      color: white;
+      transition: all 4s linear;
+    }
+    &:focus {
+      background-color: #fff;
+      &::placeholder {
+        color: transparent;
+      }
+    }
+  }
+  label {
+    color: white;
+    background-color: transparent;
+    transition: all 0.2s linear;
+  }
+}
 .o-lay {
   position: absolute;
   top: 0;
@@ -116,5 +137,9 @@ export default {
 h1,
 h2 {
   font-family: $font-LOL;
+}
+
+.pt-tanto {
+  padding-top: 300px;
 }
 </style>
