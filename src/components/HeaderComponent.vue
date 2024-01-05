@@ -5,12 +5,14 @@
 
       <div class="col-2 d-flex gap-2 align-items-center">
         <div class="position-relative logo-cont-first">
-          <a href="#" class="position-absolute before">
-            <img src="/images/logos/logo-riot-white.png" alt="logo" />
-          </a>
-          <a href="#" class="position-absolute after">
-            <img src="/images/logos/logo-riot.png" alt="logo" />
-          </a>
+          <router-link :to="{ name: 'Home' }" @click="this.active = 0">
+            <a href="#" class="position-absolute before">
+              <img src="/images/logos/logo-riot-white.png" alt="logo" />
+            </a>
+            <a href="#" class="position-absolute after">
+              <img src="/images/logos/logo-riot.png" alt="logo" />
+            </a>
+          </router-link>
         </div>
       </div>
       <!-- End Logo section -->
