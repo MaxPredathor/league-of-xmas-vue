@@ -53,7 +53,15 @@
       <!-- Start User/register section -->
       <div class="col-2 d-flex align-items-center justify-content-around">
         <div class="user-cont">
-          <i :class="this.userUnlogged.fa"></i>
+          <i
+            v-if="this.store.activeUser === ''"
+            :class="this.userUnlogged.fa"
+          ></i>
+          <img
+            v-else
+            :src="this.baseImgUrl + store.activeImgId + '.png'"
+            alt="Image User"
+          />
         </div>
         <span class="register-btn">Login</span>
       </div>
@@ -65,6 +73,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import { store } from "../data/store.js";
+import axios from "axios";
 export default {
   name: "HeaderComponent",
   data() {
@@ -123,10 +132,24 @@ export default {
           img: "/images/champs/yasuo.png",
         },
       ],
+      baseImgUrl: store.playersUrls.profilePicUrl,
       selected: 0,
     };
   },
   methods: {
+    getApiUser() {
+      axios
+        .get(store.playersUrls.summonerData + store.activeUser, {
+          params: {
+            api_key: store.apiKey,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          store.activeImgId = res.data.profileIconId;
+          console.log(store.activeImgId);
+        });
+    },
     setActive() {
       setInterval(() => {
         if (this.selected < this.champsPng.length - 1) {
@@ -139,6 +162,7 @@ export default {
   },
   mounted() {
     this.setActive();
+    this.getApiUser();
   },
 };
 </script>
@@ -181,6 +205,9 @@ export default {
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
+  }
+  img {
+    width: 100%;
   }
   i {
     color: black;
