@@ -46,6 +46,10 @@
 <script>
 export default {
   name: "Register",
+  beforeCreate() {
+    this.$root.showHeader = false;
+    this.$root.showFooter = false;
+  },
 };
 </script>
 

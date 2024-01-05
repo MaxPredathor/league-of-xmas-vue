@@ -29,6 +29,10 @@
 <script>
 export default {
   name: "Login",
+  beforeCreate() {
+    this.$root.showHeader = false;
+    this.$root.showFooter = false;
+  },
 };
 </script>
 
