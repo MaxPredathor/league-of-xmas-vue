@@ -233,6 +233,8 @@ h1 {
   }
 }
 .active {
-  border: 3px solid goldenrod;
+  border: 2.5px solid goldenrod;
+  box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.644);
+  transform: scale(1.35);
 }
 </style>
