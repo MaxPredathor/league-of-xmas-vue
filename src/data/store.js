@@ -2,6 +2,7 @@
 import { reactive } from "vue";
 
 export const store = reactive({
+  activeNav: 0,
   apiKey: "RGAPI-9a0c4b4e-1dc7-452c-a030-b797e7d0abb5",
   // 'https://developer.riotgames.com/' link per rigenerare la key
 
@@ -89,11 +90,9 @@ export const store = reactive({
   runeCathegoryImage:
     "https://cdn.lolrift.com/images/rrunes/splash/icon-" /*+ iniziale in minuscolo + -36x36.png*/,
   runeImages:
-
     "https://cdn.lolrift.com/images/rrunes/runes/" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
   runeImage2:
     "https://ddragon.canisback.com/img/perk-images/Styles/" /* + idStrano_Name.png */,
-
 });
 
 //https://static.developer.riotgames.com/docs/lol/queues.json

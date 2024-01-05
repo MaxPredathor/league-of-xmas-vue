@@ -976,6 +976,7 @@ export default {
     setTimeout(() => {
       this.getChampMastery();
     }, 1500);
+    this.store.activeNav = 2;
   },
 };
 </script>
