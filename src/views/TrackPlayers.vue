@@ -1,5 +1,5 @@
 <template>
-  <div class="m-0 position-relative vh-100">
+  <div class="m-0 position-relative vh-100 god">
     <div class="o-lay">
       <video autoplay loop>
         <source
@@ -97,7 +97,9 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/_variables.scss" as *;
-
+.god {
+  padding-top: 100px;
+}
 .form-floating {
   input {
     background-color: transparent;

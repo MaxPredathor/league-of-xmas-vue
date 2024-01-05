@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper w-100 py-5">
+  <div class="wrapper w-100 god">
     <div
       class="alert alert-warning container fw-bold text-center"
       v-if="rank === 'error'"
@@ -983,7 +983,9 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
-
+.god {
+  padding-top: 150px;
+}
 .wrapper {
   .clickable {
     cursor: pointer;
