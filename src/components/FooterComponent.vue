@@ -20,8 +20,8 @@
     <div class="row flex-column align-items-center justify-content-center g-3">
       <div class="col-6 text-center">
         <div class="logo-cont">
-          <a href="">
-            <img src="" alt="Logo" />
+          <a href="#">
+            <img src="/images/logos/logo-lol.png" alt="Logo" />
           </a>
         </div>
       </div>
@@ -31,7 +31,7 @@
     </div>
     <!-- End Brand copyright area -->
     <!-- Start PEGI area -->
-    <div class="row py-2">
+    <div class="row pt-3 pb-2">
       <div class="col-12 text-center">
         <a v-for="(el, id) in pegi" :key="id" class="pegi-area" :href="el.link"
           ><img :src="el.img" alt=""
@@ -105,6 +105,7 @@ div {
     border: 1px solid black;
     text-align: center;
     border-radius: 35%;
+    background-color: rgba(128, 128, 128, 0.205);
   }
   .instagram {
     transition: all 0.4s ease;
@@ -134,8 +135,19 @@ div {
       color: blue;
     }
   }
+  .logo-cont {
+    margin: 0 auto;
+    max-width: 250px;
+    max-height: 300px;
+    img {
+      width: 100%;
+    }
+  }
   .txt-copyright {
-    font-size: 0.8em;
+    font-size: 0.9em;
+    font-style: italic;
+    // -webkit-text-stroke-width: 0.1px;
+    // -webkit-text-stroke-color: goldenrod;
   }
   .pegi-area {
     margin: 0 2px;
@@ -143,7 +155,7 @@ div {
     img {
       border-radius: 15%;
       padding: 10px 15px;
-      background-color: rgba(0, 0, 0, 0.308);
+      background-color: rgba(128, 128, 128, 0.205);
     }
   }
 }

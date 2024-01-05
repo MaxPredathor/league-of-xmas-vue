@@ -1,5 +1,22 @@
 <template>
   <div class="external">
+    <h1 class="fst-italic display-4 fw-bold position-absolute m-0">
+      CHAMPIONS
+    </h1>
+    <div class="background">
+      <svg class="shape-a" width="200" height="200">
+        <circle cx="100" cy="100" r="100" />
+      </svg>
+      <svg class="shape-b" width="80" height="80">
+        <circle cx="40" cy="40" r="40" />
+      </svg>
+      <svg class="shape-c" width="1000" height="1000">
+        <circle cx="500" cy="500" r="500" />
+      </svg>
+      <svg class="shape-d" width="300" height="300">
+        <circle cx="150" cy="150" r="150" />
+      </svg>
+    </div>
     <div class="container py-5">
       <div class="row align-items-center">
         <div class="col-2">
@@ -113,13 +130,13 @@ export default {
         } else {
           this.selected = 0;
         }
-        console.log(this.selected);
+        // console.log(this.selected);
       }, 4000);
     },
     // Api to get champs infos
     getChamps() {
       axios.get(store.ChampionsUrls.allChamps).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         this.champs = Object.entries(res.data.data);
         this.randomChamps();
       });
@@ -131,7 +148,7 @@ export default {
           this.randomChampsList.push(this.champs[randNumber]);
         }
       }
-      console.log(this.randomChampsList);
+      // console.log(this.randomChampsList);
     },
   },
   mounted() {
@@ -144,12 +161,51 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../assets/style/partials/variables" as *;
+h1 {
+  z-index: 998;
+  right: 50%;
+  top: 0;
+  transform: translate(50%, -50%);
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: goldenrod;
+  color: white;
+  text-shadow: black 8px 0 10px;
+}
 .external {
-  border-top: 3px solid goldenrod;
+  border-top: 4px solid goldenrod;
   border-bottom: 4px solid goldenrod;
+  position: relative;
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    svg {
+      fill: rgba(0, 0, 0, 0.1);
+      position: absolute;
+    }
+    .shape-a {
+      bottom: -80px;
+      left: -80px;
+    }
+    .shape-b {
+      top: 470px;
+      right: 530px;
+    }
+    .shape-c {
+      top: -400px;
+      right: -300px;
+    }
+    .shape-d {
+      top: -50px;
+      right: 65%;
+    }
+  }
 }
 .bckdrop {
   // background-color: rgba(0, 0, 0, 0.205);
+  width: 500px;
+  height: 400px;
   border-radius: 50px;
   box-shadow: 10px 10px goldenrod;
   padding: 70px 0;
@@ -167,8 +223,8 @@ export default {
   }
 }
 .swiper {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   overflow: visible;
   .swiper-slide img {
     width: 100%;
