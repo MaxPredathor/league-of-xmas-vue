@@ -10,6 +10,17 @@
     </div>
     <div class="container pt-tanto">
       <h1 class="text-center m-0 text-white pb-4">Search a summoner</h1>
+      <h2 class="text-center m-0 text-white pb-4 fs-3">Select the region</h2>
+      <select
+        name="tag"
+        id="tag"
+        class="form-select m-auto mb-4"
+        style="width: 8%"
+      >
+        <option value="euw1">EUW1</option>
+        <option value="kr">KR</option>
+        <option value="na1">NA1</option>
+      </select>
       <div class="form-floating d-flex w-75 m-auto">
         <input
           v-model="search"
@@ -140,6 +151,6 @@ h2 {
 }
 
 .pt-tanto {
-  padding-top: 300px;
+  padding-top: 200px;
 }
 </style>
