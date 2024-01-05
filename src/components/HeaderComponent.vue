@@ -52,10 +52,10 @@
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
       <div class="col-2 text-end">
-        <span class="mx-1 user-cont">
-          <i class="fa-solid fa-user-secret"></i>
-        </span>
-        <span class="mx-1">Register</span>
+        <div class="user-cont">
+          <i :class="this.userUnlogged.fa"></i>
+        </div>
+        <!-- <span class="mx-1">Register</span> -->
       </div>
       <!-- End User/register section -->
     </nav>
@@ -102,6 +102,10 @@ export default {
           target: "_blank",
         },
       ],
+      userUnlogged: {
+        name: "Unlogged",
+        fa: "fa-solid fa-user-secret",
+      },
       champsPng: [
         {
           idImg: 1,
@@ -151,9 +155,24 @@ export default {
 .user-cont {
   width: 50px;
   height: 50px;
+  line-height: 50px;
   border-radius: 50%;
-  border: 1px solid white;
-  .fa-user-secret {
+  border: 3px solid goldenrod;
+  overflow: hidden;
+  transition: all 0.7s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  i {
+    color: black;
+    font-size: 50px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
   }
 }
 .active {
