@@ -99,4 +99,7 @@ export default {
   right: 1%;
   top: 55%;
 }
+main {
+  padding-top: -100px;
+}
 </style>
