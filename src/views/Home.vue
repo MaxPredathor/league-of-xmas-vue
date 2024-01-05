@@ -23,6 +23,10 @@ export default {
   data() {
     return {};
   },
+  beforeCreate() {
+    this.$root.showHeader = true;
+    this.$root.showFooter = true;
+  },
 };
 </script>
 

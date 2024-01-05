@@ -31,7 +31,7 @@
             </div>
           </div>
           <div id="name">
-            <h1>{{ summonerName }}</h1>
+            <h1 class="text-break">{{ summonerName }}</h1>
           </div>
           <div id="ranked">
             <div class="d-flex flex-column" v-for="rank in profileRank">
