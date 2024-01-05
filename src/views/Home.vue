@@ -1,6 +1,6 @@
 <template>
-  <SectionJumbotron />
-  <div>
+  <div class="god">
+    <SectionJumbotron />
     <SectionChampions />
     <SectionSlider />
     <SectionItems />
@@ -28,4 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
+.god {
+  padding-top: 100px;
+}
 </style>
