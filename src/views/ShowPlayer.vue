@@ -469,7 +469,7 @@
                       </div>
                       <div class="px-2">
                         <h5 class="text-white font-lol m-0 text-center">KDA</h5>
-                        <span class="d-block text-center"
+                        <span class="d-block text-center fs-6 fw-light"
                           >{{ player.kills }} / {{ player.deaths }} /
                           {{ player.assists }}</span
                         >
