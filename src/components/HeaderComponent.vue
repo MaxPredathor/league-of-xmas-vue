@@ -5,7 +5,7 @@
 
       <div class="col-2 d-flex gap-2 align-items-center">
         <div class="position-relative logo-cont-first">
-          <router-link :to="{ name: 'Home' }" @click="this.active = 0">
+          <router-link :to="{ name: 'Home' }" @click="store.activeNav = 0">
             <a href="#" class="position-absolute before">
               <img src="/images/logos/logo-riot-white.png" alt="logo" />
             </a>
@@ -32,8 +32,8 @@
             v-for="(el, index) in navItems"
             :key="index"
             class="px-3 mx-1"
-            :class="{ active: this.active === index }"
-            @click="this.active = index"
+            :class="{ active: store.activeNav === index }"
+            @click="store.activeNav = index"
           >
             <router-link :to="el.route">{{ el.name }}</router-link>
           </li>
@@ -62,10 +62,12 @@
 
 <script>
 import { RouterLink } from "vue-router";
+import { store } from "../data/store.js";
 export default {
   name: "HeaderComponent",
   data() {
     return {
+      store,
       // Elements in navbar
       navItems: [
         {
@@ -116,7 +118,6 @@ export default {
         },
       ],
       selected: 0,
-      active: 0,
     };
   },
   methods: {
