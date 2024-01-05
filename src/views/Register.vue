@@ -1,13 +1,13 @@
 <template>
-  <div class="container my-div vh-100">
-    <form class="mx-2 w-100" @submit.prevent="saveData">
+  <div class="my-div vh-100">
+    <form class="my-form" @submit.prevent="saveData">
       <h1>Register</h1>
-      <div class="form-group">
+      <div class="form-group w-100">
         <label for="email">Email address</label>
         <input
           v-model="user.email"
           type="email"
-          class="form-control w-100"
+          class="form-control"
           id="email"
           name="email"
           aria-describedby="emailHelp"
@@ -105,6 +105,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/style/partials/variables" as *;
 .eye {
   cursor: pointer;
   position: absolute;
@@ -112,8 +113,57 @@ export default {
   top: 55%;
 }
 .my-div {
+  width: 100%;
   display: grid;
   place-items: center;
-  width: 20%;
+  background-image: url(../public/images/Lol-wallpaper/11.png);
+  background-size: cover;
+
+  .my-form {
+    width: 20%;
+    padding: 10px 25px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255, 5%);
+    box-shadow: 0 0 5px rgb(0, 0, 0, 15%);
+    backdrop-filter: blur(10px);
+    font-family: $font-spiegel;
+    display: flex;
+    flex-direction: column;
+    // justify-items: center;
+    align-items: center;
+
+    .form-group {
+      input {
+        background-color: rgb(255, 255, 255, 10%);
+        border: none;
+        display: block;
+
+        &:active {
+          outline: none;
+          border: none;
+        }
+        &:focus {
+          outline: none;
+          background-color: rgb(255, 255, 255, 20%);
+          border: transparent !important;
+          border-bottom: 2px solid black !important;
+          border-radius: 10px 10px 0 0;
+        }
+        // &::placeholder {
+        //   color: black;
+        //   transition: color 0.2s linear;
+        // }
+        &:focus::placeholder {
+          color: transparent;
+          transition: all 0.2s linear;
+        }
+      }
+    }
+
+    h1 {
+      color: $color-showpage;
+      font-family: $font-LOL;
+    }
+  }
 }
 </style>
