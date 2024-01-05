@@ -48,19 +48,20 @@ export default {
   background-size: cover;
   z-index: 0;
   color: white;
+  box-shadow: 0 0 8px 15px $color-showpage inset;
 
-  &:after {
-    content: "";
-    -webkit-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
-    -moz-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
-    box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
-    display: block;
-    height: 96.7%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  }
+  // &:after {
+  //   content: "";
+  //   -webkit-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+  //   -moz-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+  //   box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+  //   display: block;
+  //   height: 10%;
+  //   position: absolute;
+  //   top: 0;
+  //   width: 100%;
+  //   z-index: 100;
+  // }
 
   .blur {
     backdrop-filter: blur(6px);
@@ -97,6 +98,12 @@ export default {
       .img-cont {
         img {
           width: 100%;
+          // -webkit-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+          // -moz-box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+          // box-shadow: inset 0 -28px 14.5px -0.5px $color-showpage;
+          // box-shadow: 0 0 8px 8px $color-showpage inset;
+          // padding-bottom: 15px;
+          mask-image: linear-gradient($color-showpage 5%, transparent);
         }
       }
     }
