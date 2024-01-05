@@ -1,10 +1,8 @@
 <template>
   <SectionJumbotron />
-  <div>
-    <SectionChampions />
-    <SectionSlider />
-    <SectionItems />
-  </div>
+  <SectionChampions />
+  <SectionSlider />
+  <SectionItems />
 </template>
 
 <script>

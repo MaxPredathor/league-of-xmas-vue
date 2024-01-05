@@ -52,7 +52,9 @@
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
       <div class="col-2 text-end">
-        <span class="mx-1">Guest/User</span>
+        <span class="mx-1 user-cont">
+          <i class="fa-solid fa-user-secret"></i>
+        </span>
         <span class="mx-1">Register</span>
       </div>
       <!-- End User/register section -->
@@ -144,6 +146,14 @@ export default {
   height: 40px;
   img {
     width: 100%;
+  }
+}
+.user-cont {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid white;
+  .fa-user-secret {
   }
 }
 .active {
