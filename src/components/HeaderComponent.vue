@@ -40,7 +40,7 @@
             :key="index"
             class="px-3 mx-1"
           >
-            <a :href="el.route" class="position-relative"
+            <a :href="el.route" :target="el.target" class="position-relative"
               >{{ el.name }}
               <i class="position-absolute fa-solid fa-turn-up"></i
             ></a>
@@ -87,11 +87,13 @@ export default {
           navIdSec: 1,
           name: "E-Sport",
           route: "https://lolesports.com/en",
+          target: "_blank",
         },
         {
           navIdSec: 2,
           name: "Patches",
           route: "https://www.leagueoflegends.com/en-us/news/tags/patch-notes/",
+          target: "_blank",
         },
       ],
       champsPng: [
