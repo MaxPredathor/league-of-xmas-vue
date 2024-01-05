@@ -25,6 +25,10 @@
             name="password"
             placeholder="Password"
           />
+          <span @click="showPassword = !showPassword">
+            <i v-if="!showPassword" class="fa-regular fa-eye eye"></i>
+            <i v-else class="fa-regular fa-eye-slash eye"></i>
+          </span>
         </div>
         <div class="form-group">
           <label for="summonerName">Summoner Name</label>
@@ -36,10 +40,6 @@
             placeholder="Your Summoner Name"
             name="summonerName"
           />
-          <span @click="showPassword = !showPassword">
-            <i v-if="!showPassword" class="fa-regular fa-eye eye"></i>
-            <i v-else class="fa-regular fa-eye-slash eye"></i>
-          </span>
         </div>
         <!-- <div class="form-group">
         <label for="server">Server</label> <br />
