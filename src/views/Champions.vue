@@ -1,15 +1,32 @@
 <template>
   <div class="container god" @click="search = false">
-    <h1>This is the Champions page</h1>
+    <h3>CHOOSE YOUR</h3>
+    <h1>CHAMPION</h1>
+    <p>
+      With more than 160 champions, you’ll find the perfect match for your
+      playstyle. Master one, or master them all.
+    </p>
     <nav class="navbar navbar-expand-lg py-3">
       <div class="container-fluid">
         <div
           class="collapse navbar-collapse justify-content-between"
           id="navbarNav"
         >
-          <div class="search" @click.stop="search = true">
-            <h4 v-if="!search">Search</h4>
+          <div class="search position-relative" @click.stop="search = true">
+            <h4 v-if="!search">
+              <i class="fa-solid fa-magnifying-glass"></i> Search
+            </h4>
             <input v-else type="text" v-model="searchValue" />
+            <span id="close" v-if="search" @click.stop="search = false">
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+            <span
+              id="clear"
+              v-if="champsId !== ''"
+              @click.stop="filterChamps(null, null, '')"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </span>
             <div class="search-dropdown" :class="{ 'd-block': search }">
               <div
                 class="search-option"
@@ -173,6 +190,9 @@ export default {
           this.champsId = id;
           this.search = false;
         }
+        if (id === "") {
+          this.champsId = "";
+        }
       }, 400);
       setTimeout(() => {
         this.loading = false;
@@ -190,6 +210,59 @@ export default {
 
 .god {
   padding-top: 100px;
+}
+h1 {
+  font-family: $font-LOL;
+  font-size: 80px;
+  transform: skew(-15deg);
+  text-align: center;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px;
+}
+h3 {
+  transform: skew(-15deg);
+  font-size: 40px;
+  font-family: $font-LOL;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+}
+p {
+  font-family: $font-spiegel;
+  text-align: center;
+  font-size: 20px;
+}
+li {
+  font-family: $font-spiegel;
+}
+.fa-magnifying-glass {
+  color: goldenrod;
+  font-size: 0.9em;
+}
+#close {
+  position: absolute;
+  top: 24%;
+  right: 4%;
+  font-size: 0.6em;
+  background-color: rgb(162, 158, 145);
+  border-radius: 50%;
+  padding: 0 4.5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+#clear {
+  position: absolute;
+  top: 20%;
+  right: -30%;
+  font-size: 0.6em;
+  background-color: rgb(162, 158, 145);
+  border-radius: 50%;
+  padding: 0 4.5px;
+  overflow: hidden;
+  cursor: pointer;
 }
 nav {
   font-size: 1.3em;
@@ -243,6 +316,9 @@ nav {
     z-index: 100;
     background-color: white;
     width: 250px;
+    font-family: $font-spiegel;
+    font-size: 0.9em;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 
     .search-option {
       z-index: 101;

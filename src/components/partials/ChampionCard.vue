@@ -89,6 +89,7 @@ export default {
     width: 100%;
     font-size: 1.3em;
     transition: all 0.1s linear;
+    font-family: $font-LOL;
   }
 
   span {
