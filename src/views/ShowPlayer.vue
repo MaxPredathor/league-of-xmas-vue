@@ -343,6 +343,9 @@
                     'bg-win-in': player.win,
                   }"
                 >
+                  <h3 class="win-lose dont-lol d-none px-2">
+                    {{ player.win ? "Winner Team" : "Loser Team" }}
+                  </h3>
                   <div
                     class="border rounded-3 p-2 container"
                     :class="{
@@ -350,9 +353,7 @@
                       'border-primary': player.win,
                     }"
                   >
-                    <div
-                      class="d-flex justify-content-between align-items-start"
-                    >
+                    <div class="d-flex custom-gap align-items-start">
                       <div class="specific-icon">
                         <img
                           v-if="player.championName !== 'FiddleSticks'"
@@ -1051,8 +1052,12 @@ export default {
         font-size: 1.1em;
       }
 
+      .custom-gap {
+        gap: 17px;
+      }
+
       &.opened {
-        height: 1060px;
+        height: 1173px;
         margin-top: 15px;
       }
 
@@ -1106,7 +1111,7 @@ export default {
         padding: 3px;
 
         &:nth-child(6) {
-          margin-top: 20px;
+          margin-top: 10px;
         }
 
         &:first-child h3,
