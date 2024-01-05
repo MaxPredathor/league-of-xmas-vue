@@ -51,11 +51,11 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-2 text-end">
+      <div class="col-2 d-flex align-items-center justify-content-around">
         <div class="user-cont">
           <i :class="this.userUnlogged.fa"></i>
         </div>
-        <!-- <span class="mx-1">Register</span> -->
+        <span class="register-btn">Login</span>
       </div>
       <!-- End User/register section -->
     </nav>
@@ -150,6 +150,20 @@ export default {
   height: 40px;
   img {
     width: 100%;
+  }
+}
+.register-btn {
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid goldenrod;
+  border-left: 3px solid goldenrod;
+  border-top: 3px solid transparent;
+  padding: 1px 10px;
+  transition: 0.4s all ease;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    // border-right: 3px solid goldenrod;
+    // border-top: 3px solid goldenrod;
   }
 }
 .user-cont {
