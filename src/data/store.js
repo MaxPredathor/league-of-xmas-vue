@@ -2,14 +2,15 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  apiKey: "RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa",
+  apiKey: "RGAPI-9a0c4b4e-1dc7-452c-a030-b797e7d0abb5",
+  // 'https://developer.riotgames.com/' link per rigenerare la key
 
   playersUrls: {
     GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
     //^^dopo lo slash ci va l'id del match e la api_key^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     matchIdByPlayerPUUID:
-      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/",
+      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
     //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     summonerData:
@@ -17,7 +18,7 @@ export const store = reactive({
     //^^dopo lo slash ci va il nome in game e restituisce id (che è l'encrypted summoner id), il PUUID, il livello e l'immagine profilo^^
     //es https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Prædathor?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     profilePicUrl:
-      "https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/" /*+ iconId + .png*/,
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/" /*+ iconId + .png*/,
 
     championMastery:
       "https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/",
@@ -82,12 +83,17 @@ export const store = reactive({
   imageSpellUrl:
     "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/spell/" /*+ key + .png */,
 
+  runes:
+    "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/runesReforged.json",
+
   runeCathegoryImage:
     "https://cdn.lolrift.com/images/rrunes/splash/icon-" /*+ iniziale in minuscolo + -36x36.png*/,
   runeImages:
-    "https://cdn.lolrift.com/images/rrunes/runes/domination/Predator_rune.png" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
 
-  activeChamp: "",
+    "https://cdn.lolrift.com/images/rrunes/runes/" /* + nome runa con l'iniziale in maiuscolo (se ha più parole si mette un _ in mezzo e tutte le parole con iniziale maiuscola) + _rune.png */,
+  runeImage2:
+    "https://ddragon.canisback.com/img/perk-images/Styles/" /* + idStrano_Name.png */,
+
 });
 
 //https://static.developer.riotgames.com/docs/lol/queues.json
