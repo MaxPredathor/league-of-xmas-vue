@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Register</h1>
-    <form>
+    <form class="mx-2">
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input
@@ -11,9 +11,6 @@
           aria-describedby="emailHelp"
           placeholder="Enter email"
         />
-        <small id="emailHelp" class="form-text text-muted"
-          >We'll never share your email with anyone else.</small
-        >
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
@@ -24,11 +21,24 @@
           placeholder="Password"
         />
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Summoner Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputSummonerName1"
+          placeholder="Your Summoner Name"
+        />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Server</label> <br />
+        <select name="server" id="server">
+          <option value="#EUW">Europe (EUW)</option>
+          <option value="#NA">North America (NA)</option>
+          <option value="#KR">South Korea (KR)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary my-2">Submit</button>
     </form>
   </div>
 </template>
