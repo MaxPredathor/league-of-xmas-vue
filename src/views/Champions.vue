@@ -6,121 +6,126 @@
       With more than 160 champions, you’ll find the perfect match for your
       playstyle. Master one, or master them all.
     </p>
-    <nav class="navbar navbar-expand-lg py-3">
-      <div class="container-fluid">
-        <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarNav"
-        >
-          <div class="search position-relative" @click.stop="search = true">
-            <h4 v-if="!search">
-              <i class="fa-solid fa-magnifying-glass"></i> Search
-            </h4>
-            <input v-else type="text" v-model="searchValue" />
-            <span id="close" v-if="search" @click.stop="search = false">
-              <i class="fa-solid fa-xmark"></i>
-            </span>
-            <span
-              id="clear"
-              v-if="champsId !== ''"
-              @click.stop="filterChamps(null, null, '')"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </span>
-            <div class="search-dropdown" :class="{ 'd-block': search }">
-              <div
-                class="search-option"
-                v-for="champs in champions"
-                @click="filterChamps(null, null, champs.id)"
-                v-show="
-                  champs.id.toLowerCase().includes(searchValue.toLowerCase()) ||
-                  searchValue === ''
-                "
+    <div class="polygon">
+      <nav class="navbar navbar-expand-lg py-3">
+        <div></div>
+        <div class="container-fluid">
+          <div
+            class="collapse navbar-collapse justify-content-between"
+            id="navbarNav"
+          >
+            <div class="search position-relative" @click.stop="search = true">
+              <h4 v-if="!search">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </h4>
+              <input v-else type="text" v-model="searchValue" />
+              <span id="close" v-if="search" @click.stop="search = false">
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <span
+                id="clear"
+                v-if="champsId !== ''"
+                @click.stop="filterChamps(null, null, '')"
               >
-                {{ champs.name }}
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+              <div class="search-dropdown" :class="{ 'd-block': search }">
+                <div
+                  class="search-option"
+                  v-for="champs in champions"
+                  @click="filterChamps(null, null, champs.id)"
+                  v-show="
+                    champs.id
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase()) || searchValue === ''
+                  "
+                >
+                  {{ champs.name }}
+                </div>
               </div>
             </div>
-          </div>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                :class="{ active: tag === ' ' }"
-                @click="filterChamps('', null, null)"
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  :class="{ active: tag === ' ' }"
+                  @click="filterChamps('', null, null)"
+                >
+                  All
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Assassin', null, null)"
+                  :class="{ active: tag === 'Assassin' }"
+                >
+                  Assassins
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Fighter', null, null)"
+                  :class="{ active: tag === 'Fighter' }"
+                >
+                  Fighters
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Mage', null, null)"
+                  :class="{ active: tag === 'Mage' }"
+                >
+                  Mages
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Marksman', null, null)"
+                  :class="{ active: tag === 'Marksman' }"
+                >
+                  Marksmen
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Support', null, null)"
+                  :class="{ active: tag === 'Support' }"
+                >
+                  Supports
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  @click="filterChamps('Tank', null, null)"
+                  :class="{ active: tag === 'Tank' }"
+                >
+                  Tanks
+                </button>
+              </li>
+            </ul>
+            <div class="difficulty">
+              <select
+                @change="filterChamps(null, $event.target.value, null)"
+                name="difficulty"
+                id=""
               >
-                All
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Assassin', null, null)"
-                :class="{ active: tag === 'Assassin' }"
-              >
-                Assassins
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Fighter', null, null)"
-                :class="{ active: tag === 'Fighter' }"
-              >
-                Fighters
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Mage', null, null)"
-                :class="{ active: tag === 'Mage' }"
-              >
-                Mages
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Marksman', null, null)"
-                :class="{ active: tag === 'Marksman' }"
-              >
-                Marksmen
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Support', null, null)"
-                :class="{ active: tag === 'Support' }"
-              >
-                Supports
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                @click="filterChamps('Tank', null, null)"
-                :class="{ active: tag === 'Tank' }"
-              >
-                Tanks
-              </button>
-            </li>
-          </ul>
-          <div class="difficulty">
-            <select
-              @change="filterChamps(null, $event.target.value, null)"
-              name="difficulty"
-              id=""
-            >
-              <option value="/">All</option>
-              <option value="3">Easy</option>
-              <option value="7">Medium</option>
-              <option value="10">Hard</option>
-            </select>
+                <option value="/">All</option>
+                <option value="3">Easy</option>
+                <option value="7">Medium</option>
+                <option value="10">Hard</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
+
     <div class="row" :class="{ opacited: loading }">
       <ChampionsCard
         v-for="champ in champions"
@@ -230,6 +235,9 @@ h3 {
   margin: 0;
   margin-top: 40px;
 }
+h4 {
+  font-family: $font-spiegel;
+}
 p {
   font-family: $font-spiegel;
   text-align: center;
@@ -264,35 +272,49 @@ li {
   overflow: hidden;
   cursor: pointer;
 }
-nav {
-  font-size: 1.3em;
+.polygon {
+  clip-path: polygon(2% 0, 100% 0, 100% 77%, 98% 100%, 0 100%, 0 23%);
+  background-color: #c1c1c1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  margin-bottom: 20px;
 
-  button {
-    &.active {
-      font-weight: bold;
+  nav {
+    font-size: 1.3em;
+    width: 99.8%;
+    height: 98%;
+    background-color: white;
+    clip-path: polygon(2% 0, 100% 0, 100% 77%, 98% 100%, 0 100%, 0 23%);
+
+    button {
+      &.active {
+        font-weight: bold;
+
+        &:after {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        &:after {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
 
       &:after {
-        transform: translateY(0px);
-        opacity: 1;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: $color-selective-yellow;
+        transform: translateY(8px);
+        opacity: 0;
+        transition: all 0.3s linear;
       }
-    }
-
-    &:hover {
-      &:after {
-        transform: translateY(0px);
-        opacity: 1;
-      }
-    }
-
-    &:after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 3px;
-      background-color: $color-selective-yellow;
-      transform: translateY(8px);
-      opacity: 0;
-      transition: all 0.3s linear;
     }
   }
 }
