@@ -47,9 +47,6 @@ header {
   display: flex;
   align-items: center;
 }
-main {
-  padding-top: 100px;
-}
 
 footer {
   background-color: $color-header-footer;
