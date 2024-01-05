@@ -1,5 +1,12 @@
 <template>
   <div class="wrapper w-100 py-5">
+    <div
+      class="alert alert-warning container fw-bold text-center"
+      v-if="rank === 'error'"
+    >
+      We are sorry, this player has a rank but the service is down, so we can't
+      show it to you.
+    </div>
     <div class="container py-5">
       <div class="d-flex align-items-start">
         <div
@@ -434,7 +441,10 @@
                         </div>
                       </div>
                       <div class="pe-2 col-2">
-                        <h5 class="text-white font-lol">
+                        <h5
+                          class="text-white font-lol clickable"
+                          @click="changePage(player.summonerName)"
+                        >
                           {{ player.summonerName }}
                         </h5>
                         <span v-if="checkArrayWithName(player.summonerName)">
@@ -548,6 +558,7 @@
 <script>
 import axios from "axios";
 import { store } from "../data/store";
+import router from "../router/router";
 export default {
   name: "ShowPlayer",
   data() {
@@ -572,6 +583,17 @@ export default {
     };
   },
   methods: {
+    changePage(name) {
+      router.push({
+        path: "/players/" + name,
+        params: {
+          summonerName: name,
+        },
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 200);
+    },
     getSummoner() {
       const url = store.playersUrls.summonerData + this.summonerName;
       axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
@@ -624,7 +646,7 @@ export default {
           }
         })
         .catch((error) => {
-          this.rank = "";
+          this.rank = "error";
         });
     },
     getRankedIconByTier(tier) {
@@ -962,6 +984,14 @@ export default {
 @use "../assets/style/partials/variables" as *;
 
 .wrapper {
+  .clickable {
+    cursor: pointer;
+    transition: all 0.5s ease;
+    &:hover {
+      transform: scale(1.1);
+      text-decoration: underline;
+    }
+  }
   .font-lol {
     font-family: $font-LOL;
   }
