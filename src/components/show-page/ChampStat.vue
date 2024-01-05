@@ -4,7 +4,7 @@
     <div class="container">
       <div
         data-moba-widget="lol-champion-build"
-        :data-moba-champion="store.activeChamp"
+        :data-moba-champion="champName"
       ></div>
     </div>
   </div>
@@ -16,6 +16,7 @@ export default {
   name: "ChampStat",
   props: {
     obj: Object,
+    champName: String,
   },
   data() {
     return {

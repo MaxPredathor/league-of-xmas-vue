@@ -1,8 +1,8 @@
 <template>
-    <Overview :obj="champion" />
-    <ChampStat :obj="champion" />
-    <Skins :obj="champion" />
-    <VideoLol />
+  <Overview :obj="champion" :champName="champId" />
+  <ChampStat :obj="champion" :champName="champId" />
+  <Skins :obj="champion" :champName="champId" />
+  <VideoLol />
 </template>
 
 <script>
@@ -13,44 +13,45 @@ import Skins from "../components/show-page/Skins.vue";
 import VideoLol from "../components/show-page/VideoLol.vue";
 import axios from "axios";
 export default {
-    name: "Show",
-    data() {
-        return {
-            store,
-            champion: [],
-        }
+  name: "Show",
+  data() {
+    return {
+      store,
+      champion: [],
+      champId: this.$route.params.id,
+    };
+  },
+  components: {
+    Overview,
+    ChampStat,
+    Skins,
+    VideoLol,
+  },
+  methods: {
+    getSpecificChamp() {
+      const apiUrl = store.ChampionsUrls.specificChamp + this.champId + ".json";
+      console.log(apiUrl);
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          console.log(response.data.data);
+          this.champion = response.data.data;
+          console.log(this.champion);
+          this.loaded = true;
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
     },
-    components: {
-        Overview,
-        ChampStat,
-        Skins,
-        VideoLol,
-    },
-    methods: {
-        getSpecificChamp() {
-            const apiUrl = store.ChampionsUrls.specificChamp + store.activeChamp + '.json';
-            console.log(apiUrl);
-            axios
-                .get(apiUrl)
-                .then((response) => {
-                    console.log(response.data.data);
-                    this.champion = response.data.data;
-                    console.log(this.champion);
-                    this.loaded = true
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .finally(function () {
-                    // always executed
-                });
-        }
-    },
-    mounted() {
-        this.getSpecificChamp();
-    }
-}
+  },
+  mounted() {
+    this.getSpecificChamp();
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
