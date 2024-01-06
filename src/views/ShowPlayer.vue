@@ -813,15 +813,30 @@ export default {
       let summonerId;
       let rankNumber;
       players.forEach((player) => {
-        const playerId =
-          this.store.playersUrls.summonerData + player.summonerName;
+        let playerId;
+        if (store.searchedRegion === "euw1") {
+          playerId = this.store.playersUrls.summonerData + player.summonerName;
+        } else if (store.searchedRegion === "kr") {
+          playerId =
+            this.store.playersUrlsKr.summonerData + player.summonerName;
+        } else if (store.searchedRegion === "na1") {
+          playerId =
+            this.store.playersUrlsNa.summonerData + player.summonerName;
+        }
         axios
           .get(playerId, {
             params: { api_key: store.apiKey },
           })
           .then((res) => {
             summonerId = res.data.id;
-            const rankUrl = store.playersUrls.summonerRank + summonerId;
+            let rankUrl;
+            if (store.searchedRegion === "euw1") {
+              rankUrl = store.playersUrls.summonerRank + summonerId;
+            } else if (store.searchedRegion === "kr") {
+              rankUrl = store.playersUrlsKr.summonerRank + summonerId;
+            } else if (store.searchedRegion === "na1") {
+              rankUrl = store.playersUrlsNa.summonerRank + summonerId;
+            }
             axios
               .get(rankUrl, {
                 params: { api_key: store.apiKey },
