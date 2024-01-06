@@ -64,13 +64,12 @@
           />
         </div>
         <span class="register-btn">Login</span>
-
       </div>
-      <div class="col-2 text-end" v-else>
+      <!-- <div class="col-2 text-end" v-else>
         <span class="mx-1">Logout</span>
         <img :src="getProfPic()" alt="profilepicture" />
         <h5>{{ store.activeUser }}</h5>
-      </div>
+      </div> -->
       <!-- End User/register section -->
     </nav>
   </div>
@@ -143,7 +142,7 @@ export default {
     };
   },
   methods: {
-    getApiUser() {
+    getApiUserImg() {
       axios
         .get(store.playersUrls.summonerData + store.activeUser, {
           params: {
@@ -151,9 +150,9 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           store.activeImgId = res.data.profileIconId;
-          console.log(store.activeImgId);
+          // console.log(store.activeImgId);
         });
     },
     setActive() {
@@ -176,7 +175,7 @@ export default {
   },
   mounted() {
     this.setActive();
-    this.getApiUser();
+    this.getApiUserImg();
   },
 };
 </script>
