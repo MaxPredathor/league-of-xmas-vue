@@ -17,7 +17,7 @@
       </div>
       <!-- End Logo section -->
       <!-- Start Navbar routes -->
-      <div class="col-6 text-center">
+      <div class="col-7 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
           <div class="pe-4">
             <img
@@ -51,8 +51,8 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-3 d-flex align-items-center justify-content-evenly">
-        <div class="gap-2 user">
+      <div class="col-2 d-flex align-items-center justify-content-evenly">
+        <div class="gap-2 user me-2">
           <div class="user-cont" @click="pushIfLogged()">
             <i
               v-if="this.store.activeUser === ''"
