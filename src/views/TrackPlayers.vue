@@ -12,6 +12,7 @@
       <h1 class="text-center m-0 text-white pb-4">Search a summoner</h1>
       <h2 class="text-center m-0 text-white pb-4 fs-3">Select the region</h2>
       <select
+        v-model="region"
         name="tag"
         id="tag"
         class="form-select m-auto mb-4"
@@ -63,6 +64,7 @@ export default {
       profilePic: "",
       summonerLevel: 0,
       err: null,
+      region: "euw1",
     };
   },
   methods: {
