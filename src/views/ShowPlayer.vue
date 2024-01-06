@@ -31,7 +31,7 @@
             </div>
           </div>
           <div id="name">
-            <h1>{{ summonerName }}</h1>
+            <h1 class="text-break">{{ summonerName }}</h1>
           </div>
           <div id="ranked">
             <div class="d-flex flex-column" v-for="rank in profileRank">
@@ -201,10 +201,13 @@
                 <div class="col d-flex">
                   <div class="champIcon">
                     <img
+                      @click="
+                        championPage(you(match.participants).championName)
+                      "
                       v-if="
                         you(match.participants).championName !== 'FiddleSticks'
                       "
-                      class="w-100"
+                      class="w-100 clickable"
                       :src="
                         store.ChampionsUrls.champIcon +
                         you(match.participants).championName +
@@ -213,8 +216,11 @@
                       :alt="you(match.participants).championName"
                     />
                     <img
+                      @click="
+                        championPage(you(match.participants).championName)
+                      "
                       v-else
-                      class="w-100"
+                      class="w-100 clickable"
                       :src="
                         store.ChampionsUrls.champIcon +
                         capitalizeFirstLetter(
@@ -363,6 +369,7 @@
                     <div class="d-flex custom-gap align-items-start">
                       <div class="specific-icon">
                         <img
+                          @click="championPage(player.championName)"
                           v-if="player.championName !== 'FiddleSticks'"
                           :src="
                             store.ChampionsUrls.champIcon +
@@ -370,9 +377,11 @@
                             '.png'
                           "
                           :alt="player.championName"
-                          class="h-100 w-100"
+                          class="h-100 w-100 clickable"
                         />
                         <img
+                          class="clickable"
+                          @click="championPage(player.championName)"
                           v-else
                           :src="
                             store.ChampionsUrls.champIcon +
@@ -380,7 +389,6 @@
                             '.png'
                           "
                           :alt="player.championName"
-                          class=""
                           style="width: 78px; height: 78px"
                         />
                         <div class="level">{{ player.champLevel }}</div>
@@ -583,6 +591,11 @@ export default {
     };
   },
   methods: {
+    championPage(champ) {
+      router.push({
+        path: "/champions/" + champ,
+      });
+    },
     changePage(name) {
       router.push({
         path: "/players/" + name,

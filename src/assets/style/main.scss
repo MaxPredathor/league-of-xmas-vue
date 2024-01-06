@@ -16,7 +16,10 @@ $fa-font-path: '../webfonts';
     src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot");
     src: url("https://db.onlinewebfonts.com/t/12420e8c141ca7c3dff41de2d59df13e.eot?#iefix")format("embedded-opentype");
 }
-
+:root{
+    --swiper-theme-color: transparent !important;
+    --focus-outline-color: transparent !important;
+}
 //spiegelregular for paragraph
 @font-face {
     font-family: 'spiegelregular';
