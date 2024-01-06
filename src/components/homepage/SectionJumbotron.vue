@@ -36,7 +36,7 @@ import "swiper/css";
 
 import "swiper/css/pagination";
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 export default {
   components: {
