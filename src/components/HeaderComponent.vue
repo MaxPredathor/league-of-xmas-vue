@@ -51,26 +51,29 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-3 d-flex align-items-center justify-content-around">
-        <div class="user-cont">
-          <i
-            v-if="this.store.activeUser === ''"
-            :class="this.userUnlogged.fa"
-          ></i>
-          <img
-            v-else
-            :src="this.baseImgUrl + store.activeImgId + '.png'"
-            alt="Image User"
-          />
+      <div class="col-3 d-flex align-items-center justify-content-evenly">
+        <div class="gap-2 user">
+          <div class="user-cont">
+            <i
+              v-if="this.store.activeUser === ''"
+              :class="this.userUnlogged.fa"
+            ></i>
+            <img
+              v-else
+              :src="this.baseImgUrl + store.activeImgId + '.png'"
+              alt="Image User"
+            />
+          </div>
+          <span class="name-user">{{ store.activeUser }}</span>
         </div>
-        <span>MMMMMMMMMMMMMMMM</span>
-        <span class="register-btn">Login</span>
+        <span
+          @click="login()"
+          v-if="this.store.activeUser === ''"
+          class="register-btn"
+          >Login</span
+        >
+        <span @click="logout()" v-else class="register-btn">Logout</span>
       </div>
-      <!-- <div class="col-2 text-end" v-else>
-        <span class="mx-1">Logout</span>
-        <img :src="getProfPic()" alt="profilepicture" />
-        <h5>{{ store.activeUser }}</h5>
-      </div> -->
       <!-- End User/register section -->
     </nav>
   </div>
@@ -79,6 +82,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import { store } from "../data/store.js";
+import router from "../router/router";
 import axios from "axios";
 export default {
   name: "HeaderComponent",
@@ -143,6 +147,15 @@ export default {
     };
   },
   methods: {
+    login() {
+      router.push({ path: "/login" });
+    },
+    logout() {
+      store.activeUser = "";
+      setTimeout(() => {
+        location.reload();
+      }, 200);
+    },
     getApiUserImg() {
       axios
         .get(store.playersUrls.summonerData + store.activeUser, {
@@ -151,7 +164,7 @@ export default {
           },
         })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           store.activeImgId = res.data.profileIconId;
           // console.log(store.activeImgId);
         });
@@ -164,14 +177,6 @@ export default {
           this.selected = 0;
         }
       }, 4000);
-    },
-    getProfPic() {
-      const url = store.playersUrls.summonerData + store.activeUser;
-      axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
-        return (
-          store.playersUrls.profilePicUrl + res.data.profileIconId + ".png"
-        );
-      });
     },
   },
   mounted() {
@@ -205,6 +210,15 @@ nav {
     transform: scale(1.1);
   }
 }
+.user {
+  display: flex;
+  align-items: center;
+  transition: 0.4s all ease;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
 .user-cont {
   width: 50px;
   height: 50px;
@@ -217,10 +231,6 @@ nav {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
   img {
     width: 100%;
   }
