@@ -206,6 +206,7 @@ export default {
   },
   mounted() {
     this.getChamps();
+    this.store.activeNav = 1;
   },
 };
 </script>

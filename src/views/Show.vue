@@ -52,6 +52,7 @@ export default {
   },
   mounted() {
     this.getSpecificChamp();
+    this.store.activeNav = 1;
   },
 };
 </script>
