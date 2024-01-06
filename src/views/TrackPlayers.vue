@@ -70,8 +70,15 @@ export default {
   methods: {
     searchSummoner() {
       if (this.search.trim().length > 0) {
-        const url = store.playersUrls.summonerData + this.search;
+        let url;
         store.searchedRegion = this.region;
+        if (store.searchedRegion === "euw1") {
+          url = store.playersUrls.summonerData + this.search;
+        } else if (store.searchedRegion === "kr") {
+          url = store.playersUrlsKr.summonerData + this.search;
+        } else if (store.searchedRegion === "na1") {
+          url = store.playersUrlsNa.summonerData + this.search;
+        }
         axios
           .get(url, { params: { api_key: store.apiKey } })
           .then((res) => {
