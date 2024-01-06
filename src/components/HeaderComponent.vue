@@ -189,8 +189,6 @@ nav {
   &:hover {
     cursor: pointer;
     transform: scale(1.1);
-    // border-right: 3px solid goldenrod;
-    // border-top: 3px solid goldenrod;
   }
 }
 .user-cont {
