@@ -80,6 +80,7 @@ export default {
             router.push({
               path: "/players/" + this.summonerName,
               params: {
+                region: this.region,
                 summonerName: this.summonerName,
               },
             });
