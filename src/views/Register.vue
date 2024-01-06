@@ -40,6 +40,19 @@
           name="summonerName"
         />
       </div>
+      <div class="form-group w-100">
+        <label for="summonerName">Select your Region</label>
+        <select
+          v-model="user.region"
+          class="form-control"
+          id="region"
+          name="region"
+        >
+          <option selected value="euw1">EUW</option>
+          <option value="na1">NA</option>
+          <option value="kr">KR</option>
+        </select>
+      </div>
       <!-- <div class="form-group">
         <label for="server">Server</label> <br />
         <select name="server" id="server">
@@ -67,6 +80,7 @@ export default {
         name: "",
         email: "",
         password: "",
+        region: "euw1",
       },
       showPassword: false,
     };
@@ -133,7 +147,8 @@ export default {
     align-items: center;
 
     .form-group {
-      input {
+      input,
+      select {
         background-color: rgb(255, 255, 255, 10%);
         border: none;
         display: block;
