@@ -588,6 +588,7 @@ export default {
       championsArray: [],
       allRanks: [],
       rankError: null,
+      region: this.$route.params.region,
     };
   },
   methods: {
@@ -598,28 +599,58 @@ export default {
     },
     changePage(name) {
       router.push({
-        path: "/players/" + name,
-        params: {
-          summonerName: name,
-        },
+        path: "/",
       });
       setTimeout(() => {
-        location.reload();
+        router.push({
+          path: "/players/" + name,
+          params: {
+            summonerName: name,
+          },
+        });
       }, 200);
     },
     getSummoner() {
-      const url = store.playersUrls.summonerData + this.summonerName;
-      axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
-        this.err = null;
-        this.summonerName = res.data.name;
-        this.puuid = res.data.puuid;
-        this.summonerId = res.data.id;
-        this.profilePic =
-          store.playersUrls.profilePicUrl + res.data.profileIconId + ".png";
-        this.summonerLevel = res.data.summonerLevel;
-        this.getRank();
-        this.getLastMatches();
-      });
+      if (store.searchedRegion === "euw1") {
+        const url = store.playersUrls.summonerData + this.summonerName;
+        axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
+          this.err = null;
+          this.summonerName = res.data.name;
+          this.puuid = res.data.puuid;
+          this.summonerId = res.data.id;
+          this.profilePic =
+            store.playersUrls.profilePicUrl + res.data.profileIconId + ".png";
+          this.summonerLevel = res.data.summonerLevel;
+          this.getRank();
+          this.getLastMatches();
+        });
+      } else if (store.searchedRegion === "kr") {
+        const url = store.playersUrlsKr.summonerData + this.summonerName;
+        axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
+          this.err = null;
+          this.summonerName = res.data.name;
+          this.puuid = res.data.puuid;
+          this.summonerId = res.data.id;
+          this.profilePic =
+            store.playersUrls.profilePicUrl + res.data.profileIconId + ".png";
+          this.summonerLevel = res.data.summonerLevel;
+          this.getRank();
+          this.getLastMatches();
+        });
+      } else if (store.searchedRegion === "na1") {
+        const url = store.playersUrlsNa.summonerData + this.summonerName;
+        axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
+          this.err = null;
+          this.summonerName = res.data.name;
+          this.puuid = res.data.puuid;
+          this.summonerId = res.data.id;
+          this.profilePic =
+            store.playersUrls.profilePicUrl + res.data.profileIconId + ".png";
+          this.summonerLevel = res.data.summonerLevel;
+          this.getRank();
+          this.getLastMatches();
+        });
+      }
     },
     getChampions() {
       const url = store.ChampionsUrls.allChamps;
@@ -990,6 +1021,7 @@ export default {
       this.getChampMastery();
     }, 1500);
     this.store.activeNav = 2;
+    console.log(this.$route.params);
   },
 };
 </script>

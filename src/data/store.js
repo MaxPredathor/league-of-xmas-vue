@@ -147,6 +147,7 @@ export const store = reactive({
     "https://ddragon.canisback.com/img/perk-images/Styles/" /* + idStrano_Name.png */,
   activeUser: "IIODERII",
   activeServer: "",
+  searchedRegion: "",
 });
 
 //https://static.developer.riotgames.com/docs/lol/queues.json

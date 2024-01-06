@@ -71,6 +71,7 @@ export default {
     searchSummoner() {
       if (this.search.trim().length > 0) {
         const url = store.playersUrls.summonerData + this.search;
+        store.searchedRegion = this.region;
         axios
           .get(url, { params: { api_key: store.apiKey } })
           .then((res) => {
@@ -81,7 +82,6 @@ export default {
               path: "/players/" + this.summonerName,
               params: {
                 region: this.region,
-                summonerName: this.summonerName,
               },
             });
           })
