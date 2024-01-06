@@ -1,49 +1,53 @@
 <template>
-  <div class="container god" @click="search = false">
+  <div class="container god position-relative" @click.stop="search = false">
     <h3>CHOOSE YOUR</h3>
     <h1>CHAMPION</h1>
     <p>
       With more than 160 champions, you’ll find the perfect match for your
       playstyle. Master one, or master them all.
     </p>
+    <div class="search position-relative" @click.stop="search = true">
+      <h4 v-if="!search">
+        <i class="fa-solid fa-magnifying-glass"></i> Search
+      </h4>
+      <input
+        v-else
+        type="text"
+        v-model="searchValue"
+        placeholder="Write here..."
+      />
+      <span id="close" v-if="search" @click.stop="search = false">
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+      <span
+        id="clear"
+        v-if="champsId !== ''"
+        @click.stop="filterChamps(null, null, '')"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </span>
+      <div class="search-dropdown" :class="{ 'd-block': search }">
+        <div
+          class="search-option"
+          v-for="champs in champions"
+          @click="filterChamps(null, null, champs.id)"
+          v-show="
+            champs.id.toLowerCase().includes(searchValue.toLowerCase()) ||
+            searchValue === ''
+          "
+        >
+          {{ champs.name }}
+        </div>
+      </div>
+    </div>
     <div class="polygon">
       <nav class="navbar navbar-expand-lg py-3">
-        <div></div>
         <div class="container-fluid">
           <div
             class="collapse navbar-collapse justify-content-between"
             id="navbarNav"
           >
-            <div class="search position-relative" @click.stop="search = true">
-              <h4 v-if="!search">
-                <i class="fa-solid fa-magnifying-glass"></i> Search
-              </h4>
-              <input v-else type="text" v-model="searchValue" />
-              <span id="close" v-if="search" @click.stop="search = false">
-                <i class="fa-solid fa-xmark"></i>
-              </span>
-              <span
-                id="clear"
-                v-if="champsId !== ''"
-                @click.stop="filterChamps(null, null, '')"
-              >
-                <i class="fa-solid fa-xmark"></i>
-              </span>
-              <div class="search-dropdown" :class="{ 'd-block': search }">
-                <div
-                  class="search-option"
-                  v-for="champs in champions"
-                  @click="filterChamps(null, null, champs.id)"
-                  v-show="
-                    champs.id
-                      .toLowerCase()
-                      .includes(searchValue.toLowerCase()) || searchValue === ''
-                  "
-                >
-                  {{ champs.name }}
-                </div>
-              </div>
-            </div>
+            <div id="placeholder"></div>
             <ul class="navbar-nav">
               <li class="nav-item">
                 <button
@@ -227,6 +231,13 @@ h1 {
   margin: 0;
   margin-bottom: 40px;
 }
+input {
+  font-family: $font-spiegel;
+
+  &::placeholder {
+    color: #7a7777;
+  }
+}
 h3 {
   transform: skew(-15deg);
   font-size: 40px;
@@ -251,43 +262,26 @@ li {
   color: goldenrod;
   font-size: 0.9em;
 }
-#close {
-  position: absolute;
-  top: 24%;
-  right: 4%;
-  font-size: 0.6em;
-  background-color: rgb(162, 158, 145);
-  border-radius: 50%;
-  padding: 0 4.5px;
-  overflow: hidden;
-  cursor: pointer;
-}
-#clear {
-  position: absolute;
-  top: 20%;
-  right: -30%;
-  font-size: 0.6em;
-  background-color: rgb(162, 158, 145);
-  border-radius: 50%;
-  padding: 0 4.5px;
-  overflow: hidden;
-  cursor: pointer;
-}
 .polygon {
-  clip-path: polygon(2% 0, 100% 0, 100% 77%, 98% 100%, 0 100%, 0 23%);
   background-color: #c1c1c1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70px;
   margin-bottom: 20px;
+  overflow: visible !important;
+  position: relative;
+  clip-path: polygon(2% 0, 100% 0, 100% 77%, 98% 100%, 0 100%, 0 23%);
 
   nav {
     font-size: 1.3em;
     width: 99.8%;
     height: 98%;
     background-color: white;
+    overflow: visible !important;
     clip-path: polygon(2% 0, 100% 0, 100% 77%, 98% 100%, 0 100%, 0 23%);
+    position: relative;
+    z-index: 10;
 
     button {
       &.active {
@@ -319,7 +313,6 @@ li {
     }
   }
 }
-
 .row {
   transition: all 0.3s linear;
 
@@ -330,21 +323,46 @@ li {
 
 .search {
   position: relative;
+  width: 250px;
+  top: 55px;
+  left: 10px;
+  z-index: 200;
+
+  #close {
+    position: absolute;
+    top: 24%;
+    left: 85%;
+    font-size: 0.6em;
+    background-color: rgb(162, 158, 145);
+    border-radius: 50%;
+    padding: 0 4.5px;
+    cursor: pointer;
+  }
+  #clear {
+    position: absolute;
+    top: 24%;
+    left: 45%;
+    font-size: 0.6em;
+    background-color: rgb(162, 158, 145);
+    border-radius: 50%;
+    padding: 0 4.5px;
+    cursor: pointer;
+  }
 
   .search-dropdown {
     display: none;
     height: 200px;
     overflow-y: scroll;
-    position: absolute;
-    z-index: 100;
+    z-index: 110;
     background-color: white;
-    width: 250px;
+    width: 82%;
     font-family: $font-spiegel;
     font-size: 0.9em;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    position: absolute !important;
 
     .search-option {
-      z-index: 101;
+      z-index: 111;
       width: 100%;
 
       &:hover {
