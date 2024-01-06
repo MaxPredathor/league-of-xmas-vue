@@ -163,8 +163,16 @@ export default {
       }, 200);
     },
     getApiUserImg() {
+      let url;
+      if (store.activeServer === "euw1") {
+        url = store.playersUrls.summonerData;
+      } else if (store.activeServer === "kr") {
+        url = store.playersUrlsKr.summonerData;
+      } else if (store.activeServer === "na1") {
+        url = store.playersUrlsNa.summonerData;
+      }
       axios
-        .get(store.playersUrls.summonerData + store.activeUser, {
+        .get(url + store.activeUser, {
           params: {
             api_key: store.apiKey,
           },
