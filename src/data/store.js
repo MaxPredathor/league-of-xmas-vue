@@ -32,6 +32,56 @@ export const store = reactive({
     // es https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/53VCVCEPaWpA6BMxXiHxPqe0sXfrxf40DtfvZ93KzMUnMaI?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
   },
 
+  playersUrlsNa: {
+    GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
+    //^^dopo lo slash ci va l'id del match e la api_key^^
+    //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    matchIdByPlayerPUUID:
+      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
+    //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
+    //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    summonerData:
+      "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/",
+    //^^dopo lo slash ci va il nome in game e restituisce id (che è l'encrypted summoner id), il PUUID, il livello e l'immagine profilo^^
+    //es https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Prædathor?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    profilePicUrl:
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/" /*+ iconId + .png*/,
+
+    championMastery:
+      "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/",
+    //^^dopo lo slash ci va il PUUID^^
+    //es https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    summonerRank:
+      "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/",
+    //^^dopo lo slash ci va l'encrypted summoner id^^
+    // es https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/53VCVCEPaWpA6BMxXiHxPqe0sXfrxf40DtfvZ93KzMUnMaI?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+  },
+
+  playersUrlsKr: {
+    GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
+    //^^dopo lo slash ci va l'id del match e la api_key^^
+    //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    matchIdByPlayerPUUID:
+      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
+    //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
+    //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    summonerData:
+      "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/",
+    //^^dopo lo slash ci va il nome in game e restituisce id (che è l'encrypted summoner id), il PUUID, il livello e l'immagine profilo^^
+    //es https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/Prædathor?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    profilePicUrl:
+      "https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/" /*+ iconId + .png*/,
+
+    championMastery:
+      "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/",
+    //^^dopo lo slash ci va il PUUID^^
+    //es https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    summonerRank:
+      "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/",
+    //^^dopo lo slash ci va l'encrypted summoner id^^
+    // es https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/53VCVCEPaWpA6BMxXiHxPqe0sXfrxf40DtfvZ93KzMUnMaI?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+  },
+
   ChampionsUrls: {
     allChamps:
       "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/en_US/champion.json",
