@@ -178,377 +178,388 @@
         <div class="content" style="width: 85%">
           <h1></h1>
           <div class="matches">
-            <div
-              v-for="(match, index) in sorted(matches)"
-              class="alert w-100 p-0 container border-0"
-              :class="{
-                'bg-win': win(match.participants),
-                'bg-loss': !win(match.participants),
-              }"
-            >
-              <div class="row w-100 p-3 m-0">
-                <div class="col">
-                  <h4 v-if="win(match.participants)">WIN</h4>
-                  <h4 v-else>LOSS</h4>
-                  <div>
-                    <strong>Duration:</strong>
-                    {{ Math.floor(match.gameDuration / 60) }} min.
+            <div v-for="(match, index) in sorted(matches)">
+              <div
+                class="alert w-100 p-0 container border-0"
+                :class="{
+                  'bg-win': win(match.participants),
+                  'bg-loss': !win(match.participants),
+                }"
+                v-if="gamemode(match.queueId) !== 'Unknown'"
+              >
+                <div class="row w-100 p-3 m-0">
+                  <div class="col">
+                    <h4 v-if="win(match.participants)">WIN</h4>
+                    <h4 v-else>LOSS</h4>
+                    <div>
+                      <strong>Duration:</strong>
+                      {{ Math.floor(match.gameDuration / 60) }} min.
+                    </div>
+                    <div>
+                      <strong class="fs-4">{{
+                        gamemode(match.queueId)
+                      }}</strong>
+                    </div>
                   </div>
-                  <div>
-                    <strong class="fs-4">{{ gamemode(match.queueId) }}</strong>
-                  </div>
-                </div>
-                <div class="col d-flex">
-                  <div class="champIcon">
-                    <img
-                      @click="
-                        championPage(you(match.participants).championName)
-                      "
-                      v-if="
-                        you(match.participants).championName !== 'FiddleSticks'
-                      "
-                      class="w-100 clickable"
-                      :src="
-                        store.ChampionsUrls.champIcon +
-                        you(match.participants).championName +
-                        '.png'
-                      "
-                      :alt="you(match.participants).championName"
-                    />
-                    <img
-                      @click="
-                        championPage(you(match.participants).championName)
-                      "
-                      v-else
-                      class="w-100 clickable"
-                      :src="
-                        store.ChampionsUrls.champIcon +
-                        capitalizeFirstLetter(
-                          you(match.participants).championName
-                        ) +
-                        '.png'
-                      "
-                      :alt="you(match.participants).championName"
-                    />
-                  </div>
-                  <div class="champIcon d-flex flex-wrap flex-column">
-                    <div class="w-50 p-1">
+                  <div class="col d-flex">
+                    <div class="champIcon">
                       <img
-                        class="w-100"
+                        @click="
+                          championPage(you(match.participants).championName)
+                        "
+                        v-if="
+                          you(match.participants).championName !==
+                          'FiddleSticks'
+                        "
+                        class="w-100 clickable"
                         :src="
-                          store.imageSpellUrl +
-                          store.spells[you(match.participants).summoner1Id]
-                            .key +
+                          store.ChampionsUrls.champIcon +
+                          you(match.participants).championName +
                           '.png'
                         "
-                        alt="spell 1"
+                        :alt="you(match.participants).championName"
                       />
-                    </div>
-                    <div class="w-50 p-1">
                       <img
-                        class="w-100"
+                        @click="
+                          championPage(you(match.participants).championName)
+                        "
+                        v-else
+                        class="w-100 clickable"
                         :src="
-                          store.imageSpellUrl +
-                          store.spells[you(match.participants).summoner2Id]
-                            .key +
+                          store.ChampionsUrls.champIcon +
+                          capitalizeFirstLetter(
+                            you(match.participants).championName
+                          ) +
                           '.png'
                         "
-                        alt="spell 2"
+                        :alt="you(match.participants).championName"
                       />
                     </div>
+                    <div class="champIcon d-flex flex-wrap flex-column">
+                      <div class="w-50 p-1">
+                        <img
+                          class="w-100"
+                          :src="
+                            store.imageSpellUrl +
+                            store.spells[you(match.participants).summoner1Id]
+                              .key +
+                            '.png'
+                          "
+                          alt="spell 1"
+                        />
+                      </div>
+                      <div class="w-50 p-1">
+                        <img
+                          class="w-100"
+                          :src="
+                            store.imageSpellUrl +
+                            store.spells[you(match.participants).summoner2Id]
+                              .key +
+                            '.png'
+                          "
+                          alt="spell 2"
+                        />
+                      </div>
+                      <div
+                        class="w-50"
+                        v-if="gamemode(match.queueId) !== 'Arena'"
+                      >
+                        <img
+                          class="w-100"
+                          :src="store.runeImage2 + getRunesKey(match, 'you')"
+                          alt="rune 1"
+                        />
+                      </div>
+                      <div
+                        class="w-50"
+                        v-if="gamemode(match.queueId) !== 'Arena'"
+                      >
+                        <img
+                          class="w-75 m-1 mt-2"
+                          :src="
+                            store.runeImage2 +
+                            getSecondaryRuneStyle(match, 'you')
+                          "
+                          alt="rune 2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <h4>
+                      <span class="text-white"
+                        >{{ you(match.participants).kills }} /
+                      </span>
+                      <span class="text-danger">{{
+                        you(match.participants).deaths
+                      }}</span>
+                      <span class="text-white">
+                        / {{ you(match.participants).assists }}
+                      </span>
+                    </h4>
+                    <div>
+                      <strong>{{
+                        you(match.participants).challenges.kda.toFixed(2)
+                      }}</strong>
+                      KDA
+                    </div>
+                    <div v-if="you(match.participants).visionScore">
+                      {{ you(match.participants).visionScore }} vision
+                    </div>
+                  </div>
+                  <div
+                    class="col d-flex flex-wrap flex-column items align-items-center p-0"
+                    style="height: 120px"
+                  >
                     <div
-                      class="w-50"
-                      v-if="gamemode(match.queueId) !== 'Arena'"
+                      style="min-width: 60px"
+                      class="p-1 h-50"
+                      v-for="num in 6"
                     >
+                      <img
+                        v-if="you(match.participants)['item' + (num - 1)]"
+                        class="h-100"
+                        :src="
+                          store.ItemsUrls.itemIcon +
+                          you(match.participants)['item' + (num - 1)] +
+                          '.png'
+                        "
+                        :alt="'item' + num"
+                      />
+                      <div v-else class="w-100 h-100 obj rounded-2"></div>
+                    </div>
+                    <div style="width: calc(100% / 3)" class="p-1 lume">
                       <img
                         class="w-100"
-                        :src="store.runeImage2 + getRunesKey(match, 'you')"
-                        alt="rune 1"
-                      />
-                    </div>
-                    <div
-                      class="w-50"
-                      v-if="gamemode(match.queueId) !== 'Arena'"
-                    >
-                      <img
-                        class="w-75 m-1 mt-2"
                         :src="
-                          store.runeImage2 + getSecondaryRuneStyle(match, 'you')
+                          store.ItemsUrls.itemIcon +
+                          you(match.participants).item6 +
+                          '.png'
                         "
-                        alt="rune 2"
+                        alt=""
                       />
                     </div>
                   </div>
-                </div>
-                <div class="col">
-                  <h4>
-                    <span class="text-white"
-                      >{{ you(match.participants).kills }} /
-                    </span>
-                    <span class="text-danger">{{
-                      you(match.participants).deaths
-                    }}</span>
-                    <span class="text-white">
-                      / {{ you(match.participants).assists }}
-                    </span>
-                  </h4>
-                  <div>
-                    <strong>{{
-                      you(match.participants).challenges.kda.toFixed(2)
-                    }}</strong>
-                    KDA
-                  </div>
-                  <div v-if="you(match.participants).visionScore">
-                    {{ you(match.participants).visionScore }} vision
-                  </div>
-                </div>
-                <div
-                  class="col d-flex flex-wrap flex-column items align-items-center p-0"
-                  style="height: 120px"
-                >
-                  <div
-                    style="min-width: 60px"
-                    class="p-1 h-50"
-                    v-for="num in 6"
-                  >
-                    <img
-                      v-if="you(match.participants)['item' + (num - 1)]"
-                      class="h-100"
-                      :src="
-                        store.ItemsUrls.itemIcon +
-                        you(match.participants)['item' + (num - 1)] +
-                        '.png'
+                  <div class="col d-flex justify-content-end align-items-end">
+                    <div
+                      @click="toggleShow(index)"
+                      @click.once="
+                        getOtherRanks(this.matches[index].participants)
                       "
-                      :alt="'item' + num"
-                    />
-                    <div v-else class="w-100 h-100 obj rounded-2"></div>
-                  </div>
-                  <div style="width: calc(100% / 3)" class="p-1 lume">
-                    <img
-                      class="w-100"
-                      :src="
-                        store.ItemsUrls.itemIcon +
-                        you(match.participants).item6 +
-                        '.png'
-                      "
-                      alt=""
-                    />
+                      class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer"
+                    >
+                      <i class="fa-solid fa-chevron-down" ref="chevron"></i>
+                    </div>
                   </div>
                 </div>
-                <div class="col d-flex justify-content-end align-items-end">
+                <div class="all-players p-0 w-100" ref="players">
                   <div
-                    @click="toggleShow(index)"
-                    @click.once="
-                      getOtherRanks(this.matches[index].participants)
-                    "
-                    class="d-flex justify-content-center align-items-center obj p-2 rounded-2 cursor-pointer"
-                  >
-                    <i class="fa-solid fa-chevron-down" ref="chevron"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="all-players p-0 w-100" ref="players">
-                <div
-                  v-for="player in match.participants"
-                  class="player p-1 w-100"
-                  :class="{
-                    'bg-loss-in': !player.win,
-                    'bg-win-in': player.win,
-                  }"
-                >
-                  <h3 class="win-lose dont-lol d-none px-2">
-                    {{ player.win ? "Winner Team" : "Loser Team" }}
-                  </h3>
-                  <div
-                    class="border rounded-3 p-2 container"
+                    v-for="player in match.participants"
+                    class="player p-1 w-100"
                     :class="{
-                      'border-danger': !player.win,
-                      'border-primary': player.win,
+                      'bg-loss-in': !player.win,
+                      'bg-win-in': player.win,
                     }"
                   >
-                    <div class="d-flex custom-gap align-items-start">
-                      <div class="specific-icon">
-                        <img
-                          @click="championPage(player.championName)"
-                          v-if="player.championName !== 'FiddleSticks'"
-                          :src="
-                            store.ChampionsUrls.champIcon +
-                            player.championName +
-                            '.png'
-                          "
-                          :alt="player.championName"
-                          class="h-100 w-100 clickable"
-                        />
-                        <img
-                          class="clickable"
-                          @click="championPage(player.championName)"
-                          v-else
-                          :src="
-                            store.ChampionsUrls.champIcon +
-                            capitalizeFirstLetter(player.championName) +
-                            '.png'
-                          "
-                          :alt="player.championName"
-                          style="width: 78px; height: 78px"
-                        />
-                        <div class="level">{{ player.champLevel }}</div>
-                      </div>
-                      <div
-                        class="specific-icon d-flex flex-wrap align-items-center flex-column g-0"
-                        ì
-                      >
-                        <div class="w-50 h-50 p-1">
+                    <h3 class="win-lose dont-lol d-none px-2">
+                      {{ player.win ? "Winner Team" : "Loser Team" }}
+                    </h3>
+                    <div
+                      class="border rounded-3 p-2 container"
+                      :class="{
+                        'border-danger': !player.win,
+                        'border-primary': player.win,
+                      }"
+                    >
+                      <div class="d-flex custom-gap align-items-start">
+                        <div class="specific-icon">
                           <img
-                            v-if="store.spells[player.summoner1Id]"
-                            class="w-100"
+                            @click="championPage(player.championName)"
+                            v-if="player.championName !== 'FiddleSticks'"
                             :src="
-                              store.imageSpellUrl +
-                              store.spells[player.summoner1Id].key +
+                              store.ChampionsUrls.champIcon +
+                              player.championName +
                               '.png'
                             "
-                            alt="spell 1"
+                            :alt="player.championName"
+                            class="h-100 w-100 clickable"
                           />
-                        </div>
-                        <div class="w-50 h-50 p-1">
                           <img
-                            v-if="store.spells[player.summoner2Id]"
-                            class="w-100"
-                            :src="
-                              store.imageSpellUrl +
-                              store.spells[player.summoner2Id].key +
-                              '.png'
-                            "
-                            alt="spell 2"
-                          />
-                        </div>
-                        <div
-                          class="w-50 h-50"
-                          v-if="gamemode(match.queueId) !== 'Arena'"
-                        >
-                          <img
-                            class="w-100"
-                            :src="
-                              store.runeImage2 +
-                              getRunesKey(match, player.summonerName)
-                            "
-                            alt="rune 1"
-                          />
-                        </div>
-                        <div
-                          class="w-50 h-50"
-                          v-if="gamemode(match.queueId) !== 'Arena'"
-                        >
-                          <img
-                            class="w-75 ms-1 mt-1"
-                            :src="
-                              store.runeImage2 +
-                              getSecondaryRuneStyle(match, player.summonerName)
-                            "
-                            alt="rune 2"
-                          />
-                        </div>
-                      </div>
-                      <div class="pe-2 col-2">
-                        <h5
-                          class="text-white font-lol clickable"
-                          @click="changePage(player.summonerName)"
-                        >
-                          {{ player.summonerName }}
-                        </h5>
-                        <span v-if="checkArrayWithName(player.summonerName)">
-                          <img
-                            class="w-25"
-                            :src="
-                              '/images/Ranked Emblems Latest/Rank=' +
-                              getRankedIconByTier(
-                                getRankWithName(player.summonerName)
-                              )
-                            "
-                            alt=""
-                          />
-                          {{ getRankWithName(player.summonerName) }}</span
-                        >
-                        <span
-                          v-else-if="!checkArrayWithName(player.summonerName)"
-                        >
-                          Unranked
-                        </span>
-                        <span v-else> {{ rankError }}</span>
-                      </div>
-                      <div class="px-2">
-                        <h5 class="text-white font-lol m-0 text-center">KDA</h5>
-                        <span class="d-block text-center fs-6 fw-light"
-                          >{{ player.kills }} / {{ player.deaths }} /
-                          {{ player.assists }}</span
-                        >
-                        <h6 class="text-center" v-if="player.challenges">
-                          KDA: {{ player.challenges.kda.toFixed(2) }}
-                        </h6>
-                      </div>
-                      <div>
-                        <h5 class="text-white font-lol m-0 text-center">
-                          Damage
-                        </h5>
-                        <span class="my-1 d-block text-center">{{
-                          player.totalDamageDealtToChampions
-                        }}</span>
-                        <div class="totalbar w-100 mt-2 rounded-pill">
-                          <div
-                            class="bar h-100 rounded-pill"
-                            :style="{ width: damage(player, match) }"
-                          ></div>
-                        </div>
-                      </div>
-                      <div>
-                        <h5 class="text-white font-lol">Gold</h5>
-                        <span class="text-center d-block"
-                          >{{ (player.goldEarned / 1000).toFixed(1) }}k</span
-                        >
-                      </div>
-                      <div>
-                        <h5 class="text-white font-lol">Minions</h5>
-                        <span class="text-center d-block">{{
-                          player.totalMinionsKilled
-                        }}</span>
-                      </div>
-                      <div>
-                        <h5 class="text-white font-lol">Vision</h5>
-                        <span class="text-center d-block">{{
-                          player.visionScore
-                        }}</span>
-                      </div>
-                      <div
-                        class="d-flex flex-wrap flex-column items align-items-center p-0 g-0"
-                        style="height: 74px"
-                      >
-                        <div class="h-50 pt-1 me-1" v-for="num in 6">
-                          <img
-                            v-if="player['item' + (num - 1)]"
-                            class="h-100"
-                            :src="
-                              store.ItemsUrls.itemIcon +
-                              player['item' + (num - 1)] +
-                              '.png'
-                            "
-                            :alt="'item' + num"
-                          />
-                          <div
+                            class="clickable"
+                            @click="championPage(player.championName)"
                             v-else
-                            class="h-100 obj rounded-2 pt-1 h-100"
-                            style="
-                              width: 33px !important;
-                              height: 33px !important;
-                            "
-                          ></div>
-                        </div>
-                        <div style="width: 35px" class="p-1 lume">
-                          <img
-                            class="w-100"
                             :src="
-                              store.ItemsUrls.itemIcon + player.item6 + '.png'
+                              store.ChampionsUrls.champIcon +
+                              capitalizeFirstLetter(player.championName) +
+                              '.png'
                             "
-                            alt=""
+                            :alt="player.championName"
+                            style="width: 78px; height: 78px"
                           />
+                          <div class="level">{{ player.champLevel }}</div>
+                        </div>
+                        <div
+                          class="specific-icon d-flex flex-wrap align-items-center flex-column g-0"
+                          ì
+                        >
+                          <div class="w-50 h-50 p-1">
+                            <img
+                              v-if="store.spells[player.summoner1Id]"
+                              class="w-100"
+                              :src="
+                                store.imageSpellUrl +
+                                store.spells[player.summoner1Id].key +
+                                '.png'
+                              "
+                              alt="spell 1"
+                            />
+                          </div>
+                          <div class="w-50 h-50 p-1">
+                            <img
+                              v-if="store.spells[player.summoner2Id]"
+                              class="w-100"
+                              :src="
+                                store.imageSpellUrl +
+                                store.spells[player.summoner2Id].key +
+                                '.png'
+                              "
+                              alt="spell 2"
+                            />
+                          </div>
+                          <div
+                            class="w-50 h-50"
+                            v-if="gamemode(match.queueId) !== 'Arena'"
+                          >
+                            <img
+                              class="w-100"
+                              :src="
+                                store.runeImage2 +
+                                getRunesKey(match, player.summonerName)
+                              "
+                              alt="rune 1"
+                            />
+                          </div>
+                          <div
+                            class="w-50 h-50"
+                            v-if="gamemode(match.queueId) !== 'Arena'"
+                          >
+                            <img
+                              class="w-75 ms-1 mt-1"
+                              :src="
+                                store.runeImage2 +
+                                getSecondaryRuneStyle(
+                                  match,
+                                  player.summonerName
+                                )
+                              "
+                              alt="rune 2"
+                            />
+                          </div>
+                        </div>
+                        <div class="pe-2 col-2">
+                          <h5
+                            class="text-white font-lol clickable"
+                            @click="changePage(player.summonerName)"
+                          >
+                            {{ player.summonerName }}
+                          </h5>
+                          <span v-if="checkArrayWithName(player.summonerName)">
+                            <img
+                              class="w-25"
+                              :src="
+                                '/images/Ranked Emblems Latest/Rank=' +
+                                getRankedIconByTier(
+                                  getRankWithName(player.summonerName)
+                                )
+                              "
+                              alt=""
+                            />
+                            {{ getRankWithName(player.summonerName) }}</span
+                          >
+                          <span
+                            v-else-if="!checkArrayWithName(player.summonerName)"
+                          >
+                            Unranked
+                          </span>
+                          <span v-else> {{ rankError }}</span>
+                        </div>
+                        <div class="px-2">
+                          <h5 class="text-white font-lol m-0 text-center">
+                            KDA
+                          </h5>
+                          <span class="d-block text-center fs-6 fw-light"
+                            >{{ player.kills }} / {{ player.deaths }} /
+                            {{ player.assists }}</span
+                          >
+                          <h6 class="text-center" v-if="player.challenges">
+                            KDA: {{ player.challenges.kda.toFixed(2) }}
+                          </h6>
+                        </div>
+                        <div>
+                          <h5 class="text-white font-lol m-0 text-center">
+                            Damage
+                          </h5>
+                          <span class="my-1 d-block text-center">{{
+                            player.totalDamageDealtToChampions
+                          }}</span>
+                          <div class="totalbar w-100 mt-2 rounded-pill">
+                            <div
+                              class="bar h-100 rounded-pill"
+                              :style="{ width: damage(player, match) }"
+                            ></div>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 class="text-white font-lol">Gold</h5>
+                          <span class="text-center d-block"
+                            >{{ (player.goldEarned / 1000).toFixed(1) }}k</span
+                          >
+                        </div>
+                        <div>
+                          <h5 class="text-white font-lol">Minions</h5>
+                          <span class="text-center d-block">{{
+                            player.totalMinionsKilled
+                          }}</span>
+                        </div>
+                        <div>
+                          <h5 class="text-white font-lol">Vision</h5>
+                          <span class="text-center d-block">{{
+                            player.visionScore
+                          }}</span>
+                        </div>
+                        <div
+                          class="d-flex flex-wrap flex-column items align-items-center p-0 g-0"
+                          style="height: 74px"
+                        >
+                          <div class="h-50 pt-1 me-1" v-for="num in 6">
+                            <img
+                              v-if="player['item' + (num - 1)]"
+                              class="h-100"
+                              :src="
+                                store.ItemsUrls.itemIcon +
+                                player['item' + (num - 1)] +
+                                '.png'
+                              "
+                              :alt="'item' + num"
+                            />
+                            <div
+                              v-else
+                              class="h-100 obj rounded-2 pt-1 h-100"
+                              style="
+                                width: 33px !important;
+                                height: 33px !important;
+                              "
+                            ></div>
+                          </div>
+                          <div style="width: 35px" class="p-1 lume">
+                            <img
+                              class="w-100"
+                              :src="
+                                store.ItemsUrls.itemIcon + player.item6 + '.png'
+                              "
+                              alt=""
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
