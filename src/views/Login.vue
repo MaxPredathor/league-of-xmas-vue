@@ -107,7 +107,7 @@ export default {
   width: 100%;
   display: grid;
   place-items: center;
-  background-image: url(../public/images/Lol-wallpaper/11.png);
+  background-image: url(../images/Lol-wallpaper/11.png);
   background-size: cover;
 
   .my-form {
