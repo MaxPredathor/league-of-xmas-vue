@@ -51,9 +51,20 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-2 text-end" v-if="!store.activeUser">
-        <span class="mx-1">Guest/User</span>
-        <span class="mx-1">Register</span>
+      <div class="col-2 d-flex align-items-center justify-content-around">
+        <div class="user-cont">
+          <i
+            v-if="this.store.activeUser === ''"
+            :class="this.userUnlogged.fa"
+          ></i>
+          <img
+            v-else
+            :src="this.baseImgUrl + store.activeImgId + '.png'"
+            alt="Image User"
+          />
+        </div>
+        <span class="register-btn">Login</span>
+
       </div>
       <div class="col-2 text-end" v-else>
         <span class="mx-1">Logout</span>
@@ -68,6 +79,7 @@
 <script>
 import { RouterLink } from "vue-router";
 import { store } from "../data/store.js";
+import axios from "axios";
 export default {
   name: "HeaderComponent",
   data() {
@@ -105,6 +117,10 @@ export default {
           target: "_blank",
         },
       ],
+      userUnlogged: {
+        name: "Unlogged",
+        fa: "fa-solid fa-user-secret",
+      },
       champsPng: [
         {
           idImg: 1,
@@ -122,10 +138,24 @@ export default {
           img: "/images/champs/yasuo.png",
         },
       ],
+      baseImgUrl: store.playersUrls.profilePicUrl,
       selected: 0,
     };
   },
   methods: {
+    getApiUser() {
+      axios
+        .get(store.playersUrls.summonerData + store.activeUser, {
+          params: {
+            api_key: store.apiKey,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          store.activeImgId = res.data.profileIconId;
+          console.log(store.activeImgId);
+        });
+    },
     setActive() {
       setInterval(() => {
         if (this.selected < this.champsPng.length - 1) {
@@ -146,17 +176,59 @@ export default {
   },
   mounted() {
     this.setActive();
+    this.getApiUser();
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/_variables.scss" as *;
+nav {
+  font-family: $font-LOL;
+}
 .logo-cont-second {
   width: 50px;
   height: 40px;
   img {
     width: 100%;
+  }
+}
+.register-btn {
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid goldenrod;
+  border-left: 3px solid goldenrod;
+  border-top: 3px solid transparent;
+  padding: 1px 10px;
+  transition: 0.4s all ease;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+.user-cont {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  border: 3px solid goldenrod;
+  overflow: hidden;
+  transition: all 0.7s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  img {
+    width: 100%;
+  }
+  i {
+    color: black;
+    font-size: 50px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
   }
 }
 .active {
