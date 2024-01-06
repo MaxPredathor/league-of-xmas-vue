@@ -76,6 +76,7 @@ export default {
             if (data.status === true) {
               router.push({ path: "/" });
               store.activeUser = data.name;
+              store.activeServer = data.region;
               //console.log(store.activeUser);
             } else {
               this.loginFailed =

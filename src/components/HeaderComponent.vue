@@ -53,7 +53,7 @@
       <!-- Start User/register section -->
       <div class="col-3 d-flex align-items-center justify-content-evenly">
         <div class="gap-2 user">
-          <div class="user-cont">
+          <div class="user-cont" @click="pushIfLogged()">
             <i
               v-if="this.store.activeUser === ''"
               :class="this.userUnlogged.fa"
@@ -147,6 +147,12 @@ export default {
     };
   },
   methods: {
+    pushIfLogged() {
+      if (this.store.activeUser !== "") {
+        store.searchedRegion = store.activeServer;
+        router.push({ path: "/players/" + store.activeUser });
+      }
+    },
     login() {
       router.push({ path: "/login" });
     },
