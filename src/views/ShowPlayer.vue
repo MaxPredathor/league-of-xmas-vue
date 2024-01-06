@@ -1090,7 +1090,7 @@ export default {
     }
 
     .all-players {
-      height: 0px;
+      max-height: 0px;
       overflow: hidden;
       transition: all 0.7s ease;
 
@@ -1103,14 +1103,15 @@ export default {
       }
 
       &.opened {
-        height: 1173px;
+        max-height: 1500px;
         margin-top: 15px;
       }
 
       .bg-win-in {
         background-color: $color-game-win;
 
-        h4 {
+        h4,
+        h3 {
           font-family: $font-LOL;
           font-weight: bold;
           color: #2a73fa;
@@ -1133,7 +1134,8 @@ export default {
       .bg-loss-in {
         background-color: $color-game-loss;
 
-        h4 {
+        h4,
+        h3 {
           font-family: $font-LOL;
           font-weight: bold;
           color: #ff4e4c;
