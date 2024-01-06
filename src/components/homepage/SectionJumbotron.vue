@@ -5,6 +5,7 @@
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
     }"
+    :grabCursor="true"
     :loop="true"
     :modules="modules"
     class="mySwiper"
