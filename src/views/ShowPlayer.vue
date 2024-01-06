@@ -599,7 +599,7 @@ export default {
     },
     changePage(name) {
       router.push({
-        path: "/",
+        path: "/players",
       });
       setTimeout(() => {
         router.push({
