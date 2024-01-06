@@ -33,11 +33,12 @@ export const store = reactive({
   },
 
   playersUrlsNa: {
-    GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
+    GameDataByMatchId:
+      "https://americas.api.riotgames.com/lol/match/v5/matches/",
     //^^dopo lo slash ci va l'id del match e la api_key^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     matchIdByPlayerPUUID:
-      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
+      "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
     //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
     //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     summonerData:
@@ -58,13 +59,13 @@ export const store = reactive({
   },
 
   playersUrlsKr: {
-    GameDataByMatchId: "https://europe.api.riotgames.com/lol/match/v5/matches/",
+    GameDataByMatchId: "https://asia.api.riotgames.com/lol/match/v5/matches/",
     //^^dopo lo slash ci va l'id del match e la api_key^^
-    //es https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    //es https://asia.api.riotgames.com/lol/match/v5/matches/EUW1_6738168682?api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     matchIdByPlayerPUUID:
-      "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
+      "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/" /* + puuid + /ids */,
     //^^dopo lo slash ci va il PUUID, qui come params oltre alla key ci va da dove vuoi partire (start) e quanti match si vuole (count)^^
-    //es https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
+    //es https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/Mq8LTtJH_VBkHVMAgOGXIsZqNEe5dYQ4qeZ9xIs6OCB2Gi0QoOnnLBEVnHAxowyw5EhOVZyNawIURA/ids?start=0&count=20&api_key=RGAPI-3e9408fd-0a93-4011-be37-2961623a36fa
     summonerData:
       "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/",
     //^^dopo lo slash ci va il nome in game e restituisce id (che è l'encrypted summoner id), il PUUID, il livello e l'immagine profilo^^
