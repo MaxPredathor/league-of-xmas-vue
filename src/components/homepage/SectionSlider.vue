@@ -102,6 +102,7 @@ h1 {
   -webkit-text-stroke-color: goldenrod;
   color: white;
   text-shadow: black 8px 0 10px;
+  font-family: $font-LOL;
 }
 .swiper {
   width: 100%;

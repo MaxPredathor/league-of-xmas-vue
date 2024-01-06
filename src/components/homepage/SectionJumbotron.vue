@@ -78,13 +78,6 @@ export default {
   width: 100%;
   height: 60vh;
 }
-
-// .swiper-slide {
-//   display: flex;
-//   justify-content: center;
-//   align-items: start;
-// }
-
 .swiper-slide img {
   display: block;
   width: 100%;

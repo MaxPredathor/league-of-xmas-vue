@@ -169,6 +169,9 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/_variables.scss" as *;
+nav {
+  font-family: $font-LOL;
+}
 .logo-cont-second {
   width: 50px;
   height: 40px;

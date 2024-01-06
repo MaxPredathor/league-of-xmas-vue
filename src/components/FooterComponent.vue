@@ -96,6 +96,9 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
+p {
+  font-family: $font-spiegel;
+}
 div {
   .hyper-cont {
     width: 30px;

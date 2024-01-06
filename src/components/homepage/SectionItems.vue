@@ -98,17 +98,9 @@ export default {
   name: "SectionChampions",
   setup() {
     const swiper = useSwiper();
-    // const onSwiper = (swiper) => {
-    //   console.log(swiper);
-    // };
-    // const onSlideChange = () => {
-    //   console.log("slide change");
-    // };
     return {
       modules: [EffectCube, Navigation, Autoplay],
       swiper,
-      // onSwiper,
-      // onSlideChange,
     };
   },
   data() {
@@ -160,6 +152,14 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../assets/style/partials/variables" as *;
+h1,
+h2,
+h3 {
+  font-family: $font-LOL;
+}
+p {
+  font-family: $font-spiegel;
+}
 h1 {
   z-index: 998;
   right: 50%;
