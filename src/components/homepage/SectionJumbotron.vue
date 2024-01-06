@@ -18,7 +18,7 @@
           <p class="fs-3">{{ item.description }}</p>
         </div>
       </div>
-      <video autoplay loop v-else>
+      <video class="w-100" autoplay loop v-else>
         <source
           type="video/webm"
           src="https://static.bigbrain.gg/assets/ugg/pages/desktop-app/ugg-app-landing.webm"
