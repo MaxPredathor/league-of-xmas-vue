@@ -51,9 +51,14 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-2 text-end">
+      <div class="col-2 text-end" v-if="!store.activeUser">
         <span class="mx-1">Guest/User</span>
         <span class="mx-1">Register</span>
+      </div>
+      <div class="col-2 text-end" v-else>
+        <span class="mx-1">Logout</span>
+        <img :src="getProfPic()" alt="profilepicture" />
+        <h5>{{ store.activeUser }}</h5>
       </div>
       <!-- End User/register section -->
     </nav>
@@ -129,6 +134,14 @@ export default {
           this.selected = 0;
         }
       }, 4000);
+    },
+    getProfPic() {
+      const url = store.playersUrls.summonerData + store.activeUser;
+      axios.get(url, { params: { api_key: store.apiKey } }).then((res) => {
+        return (
+          store.playersUrls.profilePicUrl + res.data.profileIconId + ".png"
+        );
+      });
     },
   },
   mounted() {
