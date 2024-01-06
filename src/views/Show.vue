@@ -1,8 +1,10 @@
 <template>
-  <Overview :obj="champion" :champName="champId" />
-  <ChampStat :obj="champion" :champName="champId" />
-  <Skins :obj="champion" :champName="champId" />
-  <VideoLol />
+  <div class="god">
+    <Overview :obj="champion" :champName="champId" />
+    <ChampStat :obj="champion" :champName="champId" />
+    <Skins :obj="champion" :champName="champId" />
+    <VideoLol />
+  </div>
 </template>
 
 <script>
@@ -50,8 +52,13 @@ export default {
   },
   mounted() {
     this.getSpecificChamp();
+    this.store.activeNav = 1;
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.god {
+  padding-top: 100px;
+}
+</style>

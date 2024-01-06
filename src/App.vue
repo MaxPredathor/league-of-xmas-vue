@@ -1,11 +1,11 @@
 <template>
-  <header>
+  <header v-if="showHeader">
     <HeaderComponent />
   </header>
   <main>
     <router-view></router-view>
   </main>
-  <footer>
+  <footer v-if="showFooter">
     <FooterComponent />
   </footer>
 </template>
@@ -22,6 +22,12 @@ export default {
     Champion,
     HeaderComponent,
     FooterComponent,
+  },
+  data() {
+    return {
+      showFooter: true,
+      showHeader: true,
+    };
   },
 };
 </script>

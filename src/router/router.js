@@ -4,6 +4,8 @@ import Champions from "../views/Champions.vue";
 import TrackPlayers from "../views/TrackPlayers.vue";
 import ShowPlayer from "../views/ShowPlayer.vue";
 import Show from "../views/Show.vue";
+import Register from "../views/Register.vue";
+import Login from "../views/Login.vue";
 
 const routes = [
   {
@@ -31,6 +33,16 @@ const routes = [
     name: "Show",
     props: true,
     component: Show,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
 ];
 
