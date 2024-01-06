@@ -12,6 +12,7 @@
       <h1 class="text-center m-0 text-white pb-4">Search a summoner</h1>
       <h2 class="text-center m-0 text-white pb-4 fs-3">Select the region</h2>
       <select
+        v-model="region"
         name="tag"
         id="tag"
         class="form-select m-auto mb-4"
@@ -63,12 +64,21 @@ export default {
       profilePic: "",
       summonerLevel: 0,
       err: null,
+      region: "euw1",
     };
   },
   methods: {
     searchSummoner() {
       if (this.search.trim().length > 0) {
-        const url = store.playersUrls.summonerData + this.search;
+        let url;
+        store.searchedRegion = this.region;
+        if (store.searchedRegion === "euw1") {
+          url = store.playersUrls.summonerData + this.search;
+        } else if (store.searchedRegion === "kr") {
+          url = store.playersUrlsKr.summonerData + this.search;
+        } else if (store.searchedRegion === "na1") {
+          url = store.playersUrlsNa.summonerData + this.search;
+        }
         axios
           .get(url, { params: { api_key: store.apiKey } })
           .then((res) => {
@@ -78,7 +88,7 @@ export default {
             router.push({
               path: "/players/" + this.summonerName,
               params: {
-                summonerName: this.summonerName,
+                region: this.region,
               },
             });
           })
