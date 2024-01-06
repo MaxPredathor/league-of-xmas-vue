@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <nav class="row justify-content-between align-items-center py-3">
+  <div class="container-fluid px-5">
+    <nav class="row w-100 justify-content-between align-items-center py-3">
       <!-- Start Logo section -->
 
-      <div class="col-2 d-flex gap-2 align-items-center">
+      <div class="col-3 d-flex gap-2 align-items-center">
         <div class="position-relative logo-cont-first">
           <router-link :to="{ name: 'Home' }" @click="store.activeNav = 0">
             <a href="#" class="position-absolute before">
@@ -17,7 +17,7 @@
       </div>
       <!-- End Logo section -->
       <!-- Start Navbar routes -->
-      <div class="col-8 text-center">
+      <div class="col-6 text-center">
         <ul class="d-flex align-items-center m-0 p-0">
           <div class="pe-4">
             <img
@@ -51,7 +51,7 @@
       </div>
       <!-- Start Navbar routes -->
       <!-- Start User/register section -->
-      <div class="col-2 d-flex align-items-center justify-content-around">
+      <div class="col-3 d-flex align-items-center justify-content-around">
         <div class="user-cont">
           <i
             v-if="this.store.activeUser === ''"
@@ -63,6 +63,7 @@
             alt="Image User"
           />
         </div>
+        <span>MMMMMMMMMMMMMMMM</span>
         <span class="register-btn">Login</span>
       </div>
       <!-- <div class="col-2 text-end" v-else>
