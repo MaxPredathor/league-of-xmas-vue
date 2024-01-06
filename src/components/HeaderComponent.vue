@@ -3,7 +3,7 @@
     <nav class="row w-100 justify-content-between align-items-center py-3">
       <!-- Start Logo section -->
 
-      <div class="col-3 d-flex gap-2 align-items-center">
+      <div class="col-2 d-flex gap-2 align-items-center">
         <div class="position-relative logo-cont-first">
           <router-link :to="{ name: 'Home' }" @click="store.activeNav = 0">
             <a href="#" class="position-absolute before">
@@ -17,8 +17,8 @@
       </div>
       <!-- End Logo section -->
       <!-- Start Navbar routes -->
-      <div class="col-7 text-center">
-        <ul class="d-flex align-items-center m-0 p-0">
+      <div class="col-8 text-center">
+        <ul class="d-flex align-items-center justify-content-center m-0 p-0">
           <div class="pe-4">
             <img
               v-for="(el, index) in champsPng"
