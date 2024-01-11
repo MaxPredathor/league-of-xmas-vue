@@ -37,7 +37,9 @@
           <i v-else class="fa-regular fa-eye-slash eye"></i>
         </span>
       </div>
-      <button type="submit" class="btn btn-primary my-2">Submit</button>
+      <button type="submit" value="Save" class="my-btn-hover my-btn my-2">
+        Submit
+      </button>
     </form>
   </div>
 </template>
@@ -98,6 +100,46 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/style/partials/variables" as *;
+.my-btn-hover {
+  width: 140px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.my-btn-hover:hover {
+  background-position: 100% 0;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.my-btn-hover:focus {
+  outline: none;
+}
+
+.my-btn-hover.my-btn {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
 .eye {
   cursor: pointer;
   position: absolute;

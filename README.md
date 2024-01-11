@@ -86,7 +86,7 @@ If you want to also access the login/register features, please have a look at [t
 
 - [Massimiliano Gilli](https://github.com/MaxPredathor)
 - [Oder Risi](https://github.com/IIODERII)
-- [Iaoco De Palatis](https://github.com/iaio998)
+- [Iacopo De Palatis](https://github.com/iaio998)
 - [Vinicius De Miranda](https://github.com/Vinffs)
 - [Matteo Tuveri](https://github.com/MatteoTuveri)
 
