@@ -357,8 +357,14 @@
                     v-for="player in match.participants"
                     class="player p-1 w-100"
                     :class="{
-                      'bg-loss-in': !player.win,
-                      'bg-win-in': player.win,
+                      'bg-loss-in-5':
+                        !player.win && match.participants.length === 10,
+                      'bg-win-in-5':
+                        player.win && match.participants.length === 10,
+                      'bg-loss-in-else':
+                        !player.win && match.participants.length < 10,
+                      'bg-win-in-else':
+                        player.win && match.participants.length < 10,
                     }"
                   >
                     <h3 class="win-lose dont-lol d-none px-2">
@@ -1269,8 +1275,61 @@ export default {
         margin-top: 15px;
       }
 
-      .bg-win-in {
+      .bg-win-in-5 {
         background-color: $color-game-win;
+
+        &.player {
+          padding: 3px;
+
+          &:nth-child(6) {
+            margin-top: 10px;
+          }
+
+          &:first-child h3,
+          &:nth-child(6) h3 {
+            display: block !important;
+            font-family: $font-LOL;
+            padding: 10px 0;
+          }
+        }
+
+        h4,
+        h3 {
+          font-family: $font-LOL;
+          font-weight: bold;
+          color: #2a73fa;
+        }
+
+        .obj {
+          background-color: #2a73fa;
+        }
+
+        .totalbar {
+          background-color: #2a4796;
+          height: 5px;
+
+          .bar {
+            background-color: #2a73fa;
+          }
+        }
+      }
+      .bg-win-in-else {
+        background-color: $color-game-win;
+
+        &.player {
+          padding: 3px;
+
+          &:nth-child(5) {
+            margin-top: 10px;
+          }
+
+          &:first-child h3,
+          &:nth-child(5) h3 {
+            display: block !important;
+            font-family: $font-LOL;
+            padding: 10px 0;
+          }
+        }
 
         h4,
         h3 {
@@ -1293,8 +1352,23 @@ export default {
         }
       }
 
-      .bg-loss-in {
+      .bg-loss-in-5 {
         background-color: $color-game-loss;
+
+        &.player {
+          padding: 3px;
+
+          &:nth-child(6) {
+            margin-top: 10px;
+          }
+
+          &:first-child h3,
+          &:nth-child(6) h3 {
+            display: block !important;
+            font-family: $font-LOL;
+            padding: 10px 0;
+          }
+        }
 
         h4,
         h3 {
@@ -1316,19 +1390,42 @@ export default {
           }
         }
       }
+      .bg-loss-in-else {
+        background-color: $color-game-loss;
 
-      .player {
-        padding: 3px;
+        &.player {
+          padding: 3px;
 
-        &:nth-child(6) {
-          margin-top: 10px;
+          &:nth-child(5) {
+            margin-top: 10px;
+          }
+
+          &:first-child h3,
+          &:nth-child(5) h3 {
+            display: block !important;
+            font-family: $font-LOL;
+            padding: 10px 0;
+          }
         }
 
-        &:first-child h3,
-        &:nth-child(6) h3 {
-          display: block !important;
+        h4,
+        h3 {
           font-family: $font-LOL;
-          padding: 10px 0;
+          font-weight: bold;
+          color: #ff4e4c;
+        }
+
+        .obj {
+          background-color: #ff4e4c;
+        }
+
+        .totalbar {
+          background-color: #53263e;
+          height: 5px;
+
+          .bar {
+            background-color: #ff4e4c;
+          }
         }
       }
 
